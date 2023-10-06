@@ -1,20 +1,25 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
+import com.arcrobotics.ftclib.controller.PIDFController;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.common.Robot;
 
 @Config
 @TeleOp
 public class StandardTeleOp extends LinearOpMode {
 
-    public static final double LOW_SPEED = 0.325;
-    public static final double MEDIUM_SPEED = 0.7;
-    public static final double HIGH_SPEED = 1.0;
-    public static final double ROTATION_WEIGHT = 0.5;
+    public static double LOW_SPEED = 0.325;
+    public static double MEDIUM_SPEED = 0.7;
+    public static double HIGH_SPEED = 1.0;
+    public static double ROTATION_WEIGHT = 0.5;
 
     Gamepad previousDriver;
     Gamepad previousOperator;
@@ -22,6 +27,16 @@ public class StandardTeleOp extends LinearOpMode {
     Gamepad operator;
 
     Robot robot;
+
+    public static double kp = 4;
+    public static double ki = 0;
+    public static double kd = 0;
+    public static double kf = 0;
+    public static int setPoint = 0;
+
+    PIDFController pidfController = new PIDFController(kp, ki, kd, kf);
+
+    DcMotorEx pidMotor;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -31,15 +46,37 @@ public class StandardTeleOp extends LinearOpMode {
         driver = new Gamepad();
         operator = new Gamepad();
 
-        robot.init();
+        //robot.init(hardwareMap);
+
+        pidMotor = hardwareMap.get(DcMotorEx.class, "m");
+        pidMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        FtcDashboard dashboard = FtcDashboard.getInstance();
+        Telemetry dashboardTelemetry = dashboard.getTelemetry();
 
         waitForStart();
 
         while (opModeIsActive()) {
-            driverControl();
-            operatorControl();
-            routineTasks();
-            updateTelemetry();
+//            driverControl();
+//            operatorControl();
+//            routineTasks();
+//            updateTelemetry();
+
+            pidfController.setSetPoint(setPoint);
+
+            pidfController.setP(kp);
+            pidfController.setI(ki);
+            pidfController.setD(kd);
+            pidfController.setF(kf);
+
+            pidMotor.setVelocity(pidfController.calculate(pidMotor.getCurrentPosition()));
+
+            dashboardTelemetry.addData("velo", pidMotor.getVelocity());
+            dashboardTelemetry.addData("setpoint", setPoint);
+            dashboardTelemetry.addData("pos", pidMotor.getCurrentPosition());
+
+            dashboardTelemetry.update();
+
         }
     }
 

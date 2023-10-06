@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.common.vision;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -10,20 +11,12 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 public class PropCamera {
 
-    HardwareMap hardwareMap;
-    Telemetry telemetry;
-
     PropDetector propDetector;
 
-    public PropCamera(HardwareMap hardwareMap, Telemetry telemetry) {
-        this.hardwareMap = hardwareMap;
-        this.telemetry = telemetry;
-    }
-
-    public void init() {
+    public PropCamera(HardwareMap hardwareMap, Telemetry telemetry, String alliance) {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         OpenCvCamera camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "propCamera"), cameraMonitorViewId);
-        propDetector = new PropDetector(telemetry);
+        propDetector = new PropDetector(telemetry, alliance);
 
         camera.setPipeline(propDetector);
         camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
@@ -32,6 +25,7 @@ public class PropCamera {
             public void onOpened()
             {
                 camera.startStreaming(640,360, OpenCvCameraRotation.UPRIGHT);
+                FtcDashboard.getInstance().startCameraStream(camera, 30);
             }
 
             @Override

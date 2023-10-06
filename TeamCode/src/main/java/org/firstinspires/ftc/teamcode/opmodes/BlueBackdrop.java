@@ -14,19 +14,20 @@ import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 @Autonomous
 public class BlueBackdrop extends LinearOpMode {
 
+    MecanumDrive drive;
+    PropCamera camera;
+
     Pose2d startPose = new Pose2d(0, 0, 0);
 
     @Override
     public void runOpMode() throws InterruptedException {
-        MecanumDrive drive = new MecanumDrive(hardwareMap, startPose);
-        PropCamera camera = new PropCamera(hardwareMap, telemetry);
+        drive = new MecanumDrive(hardwareMap, startPose);
+        camera = new PropCamera(hardwareMap, telemetry, "Blue");
 
 //        Action act1 = drive.actionBuilder(drive.pose)
 //                .splineTo(new Vector2d(30, 30), Math.PI / 2)
 //                .splineTo(new Vector2d(60, 0), Math.PI)
 //                .build();
-
-        camera.init();
 
         waitForStart();
 

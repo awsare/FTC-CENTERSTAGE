@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.common.vision;
 
+import com.acmerobotics.dashboard.config.Config;
+
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -8,21 +10,35 @@ import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 import org.openftc.easyopencv.OpenCvPipeline;
 
+@Config
 public class PropDetector extends OpenCvPipeline {
 
-    final int leftX = 100;
-    final int leftY = 200;
+    public static int leftX = 80;
+    public static int leftY = 110;
 
-    final int centerX = 275;
-    final int centerY = 225;
+    public static int centerX = 335;
+    public static int centerY = 90;
 
-    final int rightX = 505;
-    final int rightY = 230;
+    public static int rightX = 555;
+    public static int rightY = 100;
 
-    final int boxSize = 40;
+    public static int boxSize = 45;
 
-    Scalar lowBlue = new Scalar(80, 210, 210);
-    Scalar highBlue = new Scalar(200, 255, 255);
+    public static int lowRedH = 170;
+    public static int lowRedS = 210;
+    public static int lowRedV = 210;
+
+    public static int highRedH = 190;
+    public static int highRedS = 255;
+    public static int highRedV = 255;
+
+    public static int lowBlueH = 110;
+    public static int lowBlueS = 100;
+    public static int lowBlueV = 100;
+
+    public static int highBlueH = 190;
+    public static int highBlueS = 150;
+    public static int highBlueV = 190;
 
     Mat mat = new Mat();
     Mat left = new Mat();
@@ -31,10 +47,13 @@ public class PropDetector extends OpenCvPipeline {
 
     Telemetry telemetry;
 
+    public static String alliance = "red";
+
     int randomization;
 
-    public PropDetector(Telemetry telemetry) {
+    public PropDetector(Telemetry telemetry, String alliance) {
         this.telemetry = telemetry;
+        this.alliance = alliance;
     }
 
     @Override
@@ -47,51 +66,27 @@ public class PropDetector extends OpenCvPipeline {
 
         Imgproc.cvtColor(mat, mat, Imgproc.COLOR_RGB2HSV);
 
-        Core.inRange(mat, lowBlue, highBlue, mat);
+        if (alliance.equals("Red")) {
+            Core.inRange(mat, new Scalar(lowRedH, lowRedS, lowRedV), new Scalar(highRedH, highRedS, highRedV), mat);
+        } else {
+            Core.inRange(mat, new Scalar(lowBlueH, lowBlueS, lowBlueV), new Scalar(highBlueH, highBlueS, highBlueV), mat);
+        }
 
         left = mat.submat(leftY, leftY + boxSize, leftX, leftX + boxSize);
         center = mat.submat(centerY, centerY + boxSize, centerX, centerX + boxSize);
         right = mat.submat(rightY, rightY + boxSize, rightX, rightX + boxSize);
 
-        Imgproc.rectangle(mat, new Rect(leftX, leftY, boxSize, boxSize), new Scalar(255, 255, 255), 3);
-        Imgproc.rectangle(mat, new Rect(centerX, centerY, boxSize, boxSize), new Scalar(255, 255, 255), 3);
-        Imgproc.rectangle(mat, new Rect(rightX, rightY, boxSize, boxSize), new Scalar(255, 255, 255), 3);
-
         double leftAverage = Core.sumElems(left).val[0] / Math.pow(boxSize, 2) / 255.0;
         double centerAverage = Core.sumElems(center).val[0] / Math.pow(boxSize, 2) / 255.0;
         double rightAverage = Core.sumElems(right).val[0] / Math.pow(boxSize, 2) / 255.0;
 
-//        double leftTotal = 0;
-//        for (int row = 0; row < boxSize; row++) {
-//            for (int col = 0; col < boxSize; col++) {
-//                double[] pixel = left.get(row, col);
-//                leftTotal += pixel[0];
-//            }
-//        }
-//
-//        double centerTotal = 0;
-//        for (int row = 0; row < boxSize; row++) {
-//            for (int col = 0; col < boxSize; col++) {
-//                double[] pixel = center.get(row, col);
-//                centerTotal += pixel[0];
-//            }
-//        }
-//
-//        double rightTotal = 0;
-//        for (int row = 0; row < boxSize; row++) {
-//            for (int col = 0; col < boxSize; col++) {
-//                double[] pixel = right.get(row, col);
-//                rightTotal += pixel[0];
-//            }
-//        }
+        Imgproc.rectangle(mat, new Rect(leftX, leftY, boxSize, boxSize), new Scalar(255, 255, 255), 3);
+        Imgproc.rectangle(mat, new Rect(centerX, centerY, boxSize, boxSize), new Scalar(255, 255, 255), 3);
+        Imgproc.rectangle(mat, new Rect(rightX, rightY, boxSize, boxSize), new Scalar(255, 255, 255), 3);
 
         left.release();
         center.release();
         right.release();
-
-//        double leftAverage = (leftTotal / (double)(boxSize * boxSize));
-//        double centerAverage = (centerTotal / (double)(boxSize * boxSize));
-//        double rightAverage = (rightTotal / (double)(boxSize * boxSize));
 
         telemetry.addData("left %", leftAverage);
         telemetry.addData("center %", centerAverage);

@@ -16,7 +16,6 @@ import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
-@Config
 public final class TwoDeadWheelLocalizer implements Localizer {
     public static class Params {
         public double PAR_Y_TICKS = 0.0;
