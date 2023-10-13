@@ -8,9 +8,12 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.common.Robot;
+import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
+import org.firstinspires.ftc.teamcode.roadrunner.ThreeDeadWheelLocalizer;
 
 @Config
 @TeleOp
@@ -21,62 +24,56 @@ public class StandardTeleOp extends LinearOpMode {
     public static double HIGH_SPEED = 1.0;
     public static double ROTATION_WEIGHT = 0.5;
 
+    public static double RETRACT = 0.25;
+    public static double RETRACT_LOWERED = 0.0;
+    public static double SCORE = 1.0;
+    public static double SCORE_LIFTED = 0.75;
+
+    public enum ArmStates {
+        RETRACT,
+        RETRACT_LOWERED,
+        SCORE,
+        SCORE_LIFTED
+    };
+
+    public static ArmStates armState;
+
     Gamepad previousDriver;
     Gamepad previousOperator;
     Gamepad driver;
     Gamepad operator;
 
+    ElapsedTime elapsedTime;
+
     Robot robot;
-
-    public static double kp = 4;
-    public static double ki = 0;
-    public static double kd = 0;
-    public static double kf = 0;
-    public static int setPoint = 0;
-
-    PIDFController pidfController = new PIDFController(kp, ki, kd, kf);
-
-    DcMotorEx pidMotor;
+    ThreeDeadWheelLocalizer localizer;
 
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() {
 
         previousDriver = new Gamepad();
         previousOperator = new Gamepad();
         driver = new Gamepad();
         operator = new Gamepad();
 
-        //robot.init(hardwareMap);
+        robot = new Robot();
+        robot.init(hardwareMap);
 
-        pidMotor = hardwareMap.get(DcMotorEx.class, "m");
-        pidMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        //localizer = new ThreeDeadWheelLocalizer(hardwareMap, MecanumDrive.PARAMS.inPerTick);
 
-        FtcDashboard dashboard = FtcDashboard.getInstance();
-        Telemetry dashboardTelemetry = dashboard.getTelemetry();
+        armState = ArmStates.RETRACT;
+
+        elapsedTime = new ElapsedTime();
 
         waitForStart();
 
+        elapsedTime.reset();
+
         while (opModeIsActive()) {
-//            driverControl();
+            driverControl();
 //            operatorControl();
-//            routineTasks();
+            routineTasks();
 //            updateTelemetry();
-
-            pidfController.setSetPoint(setPoint);
-
-            pidfController.setP(kp);
-            pidfController.setI(ki);
-            pidfController.setD(kd);
-            pidfController.setF(kf);
-
-            pidMotor.setVelocity(pidfController.calculate(pidMotor.getCurrentPosition()));
-
-            dashboardTelemetry.addData("velo", pidMotor.getVelocity());
-            dashboardTelemetry.addData("setpoint", setPoint);
-            dashboardTelemetry.addData("pos", pidMotor.getCurrentPosition());
-
-            dashboardTelemetry.update();
-
         }
     }
 
@@ -91,6 +88,11 @@ public class StandardTeleOp extends LinearOpMode {
         double x = (r != 0) ? driver.left_stick_x * (1 - ROTATION_WEIGHT) : driver.left_stick_x;
         double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(r), 1);
 
+//        double heading = localizer.
+//
+//        double rotX = x * Math.cos(-botHeading) - y * Math.sin(-botHeading);
+//        double rotY = x * Math.sin(-botHeading) + y * Math.cos(-botHeading);
+
         robot.setDrivePowers(
             speed * ((y + x + r) / denominator),
             speed * ((y - x + r) / denominator),
@@ -100,7 +102,24 @@ public class StandardTeleOp extends LinearOpMode {
     }
 
     private void operatorControl() {
+        switch (armState) {
+            case SCORE_LIFTED:
+                robot.setTestServo(SCORE_LIFTED);
 
+                break;
+            case SCORE:
+                robot.setTestServo(SCORE);
+
+                break;
+            case RETRACT:
+                robot.setTestServo(RETRACT);
+
+                break;
+            case RETRACT_LOWERED:
+                robot.setTestServo(RETRACT_LOWERED);
+
+                break;
+        }
     }
 
     private void routineTasks() {
@@ -108,6 +127,9 @@ public class StandardTeleOp extends LinearOpMode {
         previousOperator.copy(operator);
         driver.copy(gamepad1);
         operator.copy(gamepad2);
+
+        //localizer.update();
+        robot.update();
     }
 
     private void updateTelemetry() {

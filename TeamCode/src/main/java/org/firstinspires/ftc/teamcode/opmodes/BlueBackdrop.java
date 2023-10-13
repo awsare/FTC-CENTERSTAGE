@@ -20,7 +20,7 @@ public class BlueBackdrop extends LinearOpMode {
     Pose2d startPose = new Pose2d(0, 0, 0);
 
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() {
         drive = new MecanumDrive(hardwareMap, startPose);
         camera = new PropCamera(hardwareMap, telemetry, "Blue");
 
