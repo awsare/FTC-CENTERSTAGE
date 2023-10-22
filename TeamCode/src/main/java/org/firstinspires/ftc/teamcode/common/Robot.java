@@ -2,60 +2,65 @@ package org.firstinspires.ftc.teamcode.common;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
-import com.arcrobotics.ftclib.controller.PIDFController;
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 @Config
 public class Robot {
 
-    DcMotorEx leftFront, leftBack, rightBack, rightFront, DRFBLeft, DRFBRight, intake, launcher;
+    DcMotorEx leftFront, leftBack, rightBack, rightFront, DRFBLeft, DRFBRight, intake/*, launcher*/;
+    Servo baseLeft, baseRight, topLeft, topRight, wrist, claw;
 
-    Servo testServo;
-
-    PIDFController DRFBPIDF = new PIDFController(0, 0, 0, 0);
-    PIDFController intakePIDF = new PIDFController(0, 0, 0, 0);
-    PIDFController launcherPIDF = new PIDFController(0, 0, 0, 0);
+    public IMU imu;
 
     Telemetry dashboardTelemetry;
+    Telemetry hubTelemetry;
 
-    public static double kp = 4;
-    public static double ki = 0;
-    public static double kd = 0;
-    public static double kf = 0;
-    public static int setPoint = 0;
-    PIDFController pidfController = new PIDFController(kp, ki, kd, kf);
-    DcMotorEx pidMotor;
-
-    public void init(HardwareMap hardwareMap) {
+    public void init(HardwareMap hardwareMap, Telemetry telemetry) {
         leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
         leftBack = hardwareMap.get(DcMotorEx.class, "leftBack");
         rightBack = hardwareMap.get(DcMotorEx.class, "rightBack");
         rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
-//        DRFBLeft = hardwareMap.get(DcMotorEx.class, "DRFBLeft");
-//        DRFBRight = hardwareMap.get(DcMotorEx.class, "DRFBRight");
-//        intake = hardwareMap.get(DcMotorEx.class, "intake");
-//        launcher = hardwareMap.get(DcMotorEx.class, "launcher");
+        DRFBLeft = hardwareMap.get(DcMotorEx.class, "DRFBLeft");
+        DRFBRight = hardwareMap.get(DcMotorEx.class, "DRFBRight");
+        intake = hardwareMap.get(DcMotorEx.class, "intake");
 
-//        pidMotor = hardwareMap.get(DcMotorEx.class, "m");
-//        pidMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        baseLeft = hardwareMap.get(Servo.class, "baseLeft");
+        baseRight = hardwareMap.get(Servo.class, "baseRight");
+        topLeft = hardwareMap.get(Servo.class, "topLeft");
+        topRight = hardwareMap.get(Servo.class, "topRight");
+        wrist = hardwareMap.get(Servo.class, "wrist");
+        claw = hardwareMap.get(Servo.class, "claw");
+
+        imu = hardwareMap.get(IMU.class, "imu");
+        imu.initialize(
+                new IMU.Parameters(
+                    new RevHubOrientationOnRobot(
+                            RevHubOrientationOnRobot.LogoFacingDirection.LEFT,
+                            RevHubOrientationOnRobot.UsbFacingDirection.UP)
+        ));
 
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        DRFBRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        DRFBLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        DRFBRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         dashboardTelemetry = FtcDashboard.getInstance().getTelemetry();
-
-        //testServo = hardwareMap.get(Servo.class, "testServo");
+        hubTelemetry = telemetry;
     }
 
     public void setDrivePowers(double leftFront, double leftBack, double rightBack, double rightFront) {
@@ -65,27 +70,27 @@ public class Robot {
         this.rightFront.setPower(rightFront);
     }
 
-    public void update() {
-//        pidfController.setSetPoint(setPoint);
-//
-//        pidfController.setP(kp);
-//        pidfController.setI(ki);
-//        pidfController.setD(kd);
-//        pidfController.setF(kf);
-//
-//        pidMotor.setVelocity(pidfController.calculate(pidMotor.getCurrentPosition()));
-//
-//        dashboardTelemetry.addData("velocity", pidMotor.getVelocity());
-//        dashboardTelemetry.addData("setpoint", setPoint);
-//        dashboardTelemetry.addData("position", pidMotor.getCurrentPosition());
-//        dashboardTelemetry.update();
+    public void powerIntake(double power) {
+        intake.setPower(power);
     }
 
-    public void setTestServo(double pos) {
-        testServo.setPosition(pos);
+    public void powerDRFB(double power) {
+        DRFBLeft.setPower(power);
+        DRFBRight.setPower(power);
     }
 
-    public double getTestServo() {
-        return testServo.getPosition();
+    public int getDRFBPosition() {
+        return DRFBRight.getCurrentPosition();
     }
+
+    public double getHeading() {
+        return imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
+    }
+
+    public void resetIMUYaw() {
+        imu.resetYaw();
+    }
+
+    public void setRetracted() {}
+
 }

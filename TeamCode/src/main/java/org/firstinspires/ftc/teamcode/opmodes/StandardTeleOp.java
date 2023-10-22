@@ -1,19 +1,12 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
-import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
-import com.arcrobotics.ftclib.controller.PIDFController;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.common.Robot;
-import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
-import org.firstinspires.ftc.teamcode.roadrunner.ThreeDeadWheelLocalizer;
 
 @Config
 @TeleOp
@@ -24,16 +17,13 @@ public class StandardTeleOp extends LinearOpMode {
     public static double HIGH_SPEED = 1.0;
     public static double ROTATION_WEIGHT = 0.5;
 
-    public static double RETRACT = 0.25;
-    public static double RETRACT_LOWERED = 0.0;
-    public static double SCORE = 1.0;
-    public static double SCORE_LIFTED = 0.75;
+    boolean hang = false;
 
     public enum ArmStates {
-        RETRACT,
-        RETRACT_LOWERED,
-        SCORE,
-        SCORE_LIFTED
+        RETRACTED_STATE,
+        RETRACTED_LOWERED_STATE,
+        SCORING_STATE,
+        SCORING_LIFTED_STATE
     };
 
     public static ArmStates armState;
@@ -44,9 +34,9 @@ public class StandardTeleOp extends LinearOpMode {
     Gamepad operator;
 
     ElapsedTime elapsedTime;
+    ElapsedTime loopTime;
 
     Robot robot;
-    ThreeDeadWheelLocalizer localizer;
 
     @Override
     public void runOpMode() {
@@ -57,27 +47,39 @@ public class StandardTeleOp extends LinearOpMode {
         operator = new Gamepad();
 
         robot = new Robot();
-        robot.init(hardwareMap);
+        robot.init(hardwareMap, telemetry);
 
-        //localizer = new ThreeDeadWheelLocalizer(hardwareMap, MecanumDrive.PARAMS.inPerTick);
-
-        armState = ArmStates.RETRACT;
+        armState = ArmStates.RETRACTED_STATE;
 
         elapsedTime = new ElapsedTime();
+        loopTime = new ElapsedTime();
 
         waitForStart();
 
         elapsedTime.reset();
 
         while (opModeIsActive()) {
+            loopTime.reset();
+
             driverControl();
-//            operatorControl();
+            operatorControl();
             routineTasks();
-//            updateTelemetry();
+
+            telemetry.addData("DR4B Position", robot.getDRFBPosition());
+            telemetry.addData("Arm State", armState.toString());
+            telemetry.addData("Heading", robot.getHeading());
+            telemetry.addData("Looptime", loopTime.time());
+
+            updateTelemetry();
         }
     }
 
     private void driverControl() {
+
+        if (driver.options && !previousDriver.options) {
+            robot.resetIMUYaw();
+        }
+
         double speed = MEDIUM_SPEED;
         double change = driver.right_trigger - driver.left_trigger;
 
@@ -88,10 +90,10 @@ public class StandardTeleOp extends LinearOpMode {
         double x = (r != 0) ? driver.left_stick_x * (1 - ROTATION_WEIGHT) : driver.left_stick_x;
         double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(r), 1);
 
-//        double heading = localizer.
-//
-//        double rotX = x * Math.cos(-botHeading) - y * Math.sin(-botHeading);
-//        double rotY = x * Math.sin(-botHeading) + y * Math.cos(-botHeading);
+        double heading = robot.getHeading();
+
+        x = x * Math.cos(-heading) - y * Math.sin(-heading);
+        y = x * Math.sin(-heading) + y * Math.cos(-heading);
 
         robot.setDrivePowers(
             speed * ((y + x + r) / denominator),
@@ -102,24 +104,43 @@ public class StandardTeleOp extends LinearOpMode {
     }
 
     private void operatorControl() {
+
+        if (operator.options && !previousOperator.options) {
+            hang = !hang;
+        }
+
+        if (hang) {
+            robot.powerDRFB(0.4);
+            return;
+        }
+
+        robot.powerIntake(operator.right_trigger - operator.left_trigger);
+
         switch (armState) {
-            case SCORE_LIFTED:
-                robot.setTestServo(SCORE_LIFTED);
+            case RETRACTED_STATE:
+                robot.setRetracted();
 
                 break;
-            case SCORE:
-                robot.setTestServo(SCORE);
+            case RETRACTED_LOWERED_STATE:
 
                 break;
-            case RETRACT:
-                robot.setTestServo(RETRACT);
+            case SCORING_STATE:
 
                 break;
-            case RETRACT_LOWERED:
-                robot.setTestServo(RETRACT_LOWERED);
+            case SCORING_LIFTED_STATE:
 
                 break;
         }
+
+        double power = -operator.left_stick_y;
+
+        if (robot.getDRFBPosition() > 1200 && power > 0) {
+            power = 0;
+        } else if (robot.getDRFBPosition() < -20 && power < 0) {
+            power = 0;
+        }
+
+        robot.powerDRFB(power);
     }
 
     private void routineTasks() {
@@ -127,13 +148,10 @@ public class StandardTeleOp extends LinearOpMode {
         previousOperator.copy(operator);
         driver.copy(gamepad1);
         operator.copy(gamepad2);
-
-        //localizer.update();
-        robot.update();
     }
 
     private void updateTelemetry() {
-
+        telemetry.update();
     }
 
 }
