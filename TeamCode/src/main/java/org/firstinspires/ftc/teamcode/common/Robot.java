@@ -19,10 +19,26 @@ public class Robot {
     DcMotorEx leftFront, leftBack, rightBack, rightFront, DRFBLeft, DRFBRight, intake/*, launcher*/;
     Servo baseLeft, baseRight, topLeft, topRight, wrist, claw;
 
-    public IMU imu;
+    IMU imu;
 
     Telemetry dashboardTelemetry;
     Telemetry hubTelemetry;
+
+    public static double RETRACTED_BASE = 0;
+    public static double RETRACTED_TOP = 0;
+    public static double RETRACTED_WRIST = 0;
+
+    public static double RETRACTED_LOWERED_BASE = 0;
+    public static double RETRACTED_LOWERED_TOP = 0;
+    public static double RETRACTED_LOWERED_WRIST = 0;
+
+    public static double SCORING_BASE = 0;
+    public static double SCORING_TOP = 0;
+    public static double SCORING_WRIST = 0;
+
+    public static double SCORING_LIFTED_BASE = 0;
+    public static double SCORING_LIFTED_TOP = 0;
+    public static double SCORING_LIFTED_WRIST = 0;
 
     public void init(HardwareMap hardwareMap, Telemetry telemetry) {
         leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
@@ -74,6 +90,24 @@ public class Robot {
         intake.setPower(power);
     }
 
+    public void moveBase(double position) {
+        baseLeft.setPosition(position);
+        baseRight.setPosition(1 - position);
+    }
+
+    public void moveTop(double position) {
+        topLeft.setPosition(position);
+        topRight.setPosition(1 - position);
+    }
+
+    public void moveWrist(double position) {
+        wrist.setPosition(position);
+    }
+
+    public void moveClaw(double position) {
+        claw.setPosition(position);
+    }
+
     public void powerDRFB(double power) {
         DRFBLeft.setPower(power);
         DRFBRight.setPower(power);
@@ -91,6 +125,27 @@ public class Robot {
         imu.resetYaw();
     }
 
-    public void setRetracted() {}
+    public void setRetracted() {
+        moveBase(RETRACTED_BASE);
+        moveTop(RETRACTED_TOP);
+        moveWrist(RETRACTED_WRIST);
+    }
 
+    public void setRetractedLowered() {
+        moveBase(RETRACTED_LOWERED_BASE);
+        moveTop(RETRACTED_LOWERED_TOP);
+        moveWrist(RETRACTED_LOWERED_WRIST);
+    }
+
+    public void setScoring() {
+        moveBase(SCORING_BASE);
+        moveTop(SCORING_TOP);
+        moveWrist(SCORING_WRIST);
+    }
+
+    public void setScoringLifted() {
+        moveBase(SCORING_LIFTED_BASE);
+        moveTop(SCORING_LIFTED_TOP);
+        moveWrist(SCORING_LIFTED_WRIST);
+    }
 }

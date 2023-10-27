@@ -17,6 +17,11 @@ public class StandardTeleOp extends LinearOpMode {
     public static double HIGH_SPEED = 1.0;
     public static double ROTATION_WEIGHT = 0.5;
 
+    public static double CLAW_OPEN = 0.3;
+    public static double CLAW_CLOSED = 0.4;
+
+    public static double intakePower;
+
     boolean hang = false;
 
     public enum ArmStates {
@@ -33,7 +38,7 @@ public class StandardTeleOp extends LinearOpMode {
     Gamepad driver;
     Gamepad operator;
 
-    ElapsedTime elapsedTime;
+    ElapsedTime stateTime;
     ElapsedTime loopTime;
 
     Robot robot;
@@ -51,18 +56,24 @@ public class StandardTeleOp extends LinearOpMode {
 
         armState = ArmStates.RETRACTED_STATE;
 
-        elapsedTime = new ElapsedTime();
+        stateTime = new ElapsedTime();
         loopTime = new ElapsedTime();
 
         waitForStart();
 
-        elapsedTime.reset();
+        stateTime.reset();
 
         while (opModeIsActive()) {
             loopTime.reset();
 
-            driverControl();
+            //driverControl();
             operatorControl();
+
+//            robot.moveBase(basePosition);
+//            robot.moveTop(topPosition);
+//            robot.moveWrist(wristPosition);
+//            robot.moveClaw(clawPosition);
+
             routineTasks();
 
             telemetry.addData("DR4B Position", robot.getDRFBPosition());
@@ -110,24 +121,58 @@ public class StandardTeleOp extends LinearOpMode {
         }
 
         if (hang) {
-            robot.powerDRFB(0.4);
+            robot.powerDRFB(-0.4);
             return;
         }
 
-        robot.powerIntake(operator.right_trigger - operator.left_trigger);
+        robot.powerIntake(intakePower);
 
         switch (armState) {
             case RETRACTED_STATE:
                 robot.setRetracted();
 
+                if (operator.b && !previousOperator.b) {
+                    armState = ArmStates.SCORING_STATE;
+                }
+
+                if (operator.a && !previousOperator.a) {
+                    armState = ArmStates.RETRACTED_LOWERED_STATE;
+                    robot.moveClaw(CLAW_OPEN);
+
+                    stateTime.reset();
+                }
+
                 break;
             case RETRACTED_LOWERED_STATE:
+                robot.setRetractedLowered();
+
+                if (stateTime.time() > 0.75) {
+                    robot.moveClaw(CLAW_CLOSED);
+                    armState = ArmStates.RETRACTED_STATE;
+                }
 
                 break;
             case SCORING_STATE:
+                robot.setScoring();
+
+                if (operator.a && !previousOperator.a) {
+                    armState = ArmStates.RETRACTED_STATE;
+                }
+
+                if (operator.b && !previousOperator.b) {
+                    armState = ArmStates.SCORING_LIFTED_STATE;
+                    robot.moveClaw(CLAW_OPEN);
+
+                    stateTime.reset();
+                }
 
                 break;
             case SCORING_LIFTED_STATE:
+                robot.setScoringLifted();
+
+                if (stateTime.time() > 0.5) {
+                    armState = ArmStates.RETRACTED_STATE;
+                }
 
                 break;
         }
