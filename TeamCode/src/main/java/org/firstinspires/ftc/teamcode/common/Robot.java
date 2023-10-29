@@ -35,21 +35,21 @@ public class Robot {
     public static double RETRACTED_LOWERED_TOP = 0.2;
     public static double RETRACTED_LOWERED_WRIST = 0.15;
 
-    public static double SCORING_BASE = 0.6;
-    public static double SCORING_TOP = 0.9;
-    public static double SCORING_WRIST = 0.175;
+    public static double SCORING_BASE = 0.5;
+    public static double SCORING_TOP = 1;
+    public static double SCORING_WRIST = 0.125;
 
-    public static double SCORING_LIFTED_BASE = 0.6;
-    public static double SCORING_LIFTED_TOP = .825;
-    public static double SCORING_LIFTED_WRIST = 0.175;
+    public static double SCORING_LIFTED_BASE = 0.5;
+    public static double SCORING_LIFTED_TOP = 1;
+    public static double SCORING_LIFTED_WRIST = 0.1;
 
-    public static double GROUND_BASE = 0.5;
-    public static double GROUND_TOP = 0.7;
+    public static double GROUND_BASE = .5;
+    public static double GROUND_TOP = 0.725;
     public static double GROUND_WRIST = 0.175;
 
-    public static double GROUND_LOWERED_BASE = .48;
-    public static double GROUND_LOWERED_TOP = .635;
-    public static double GROUND_LOWERED_WRIST = .23;
+    public static double GROUND_LOWERED_BASE = .5;
+    public static double GROUND_LOWERED_TOP = .725;
+    public static double GROUND_LOWERED_WRIST = .175;
 
     public void init(HardwareMap hardwareMap, Telemetry telemetry) {
         leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
