@@ -12,10 +12,11 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 public class PropCamera {
 
     PropDetector propDetector;
+    OpenCvCamera camera;
 
     public PropCamera(HardwareMap hardwareMap, Telemetry telemetry, String alliance) {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        OpenCvCamera camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "propCamera"), cameraMonitorViewId);
+        camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "propCamera"), cameraMonitorViewId);
         propDetector = new PropDetector(telemetry, alliance);
 
         camera.setPipeline(propDetector);
@@ -38,5 +39,9 @@ public class PropCamera {
 
     public int getRandomization() {
         return propDetector.getRandomization();
+    }
+
+    public void stopStreaming() {
+        camera.stopStreaming();
     }
 }

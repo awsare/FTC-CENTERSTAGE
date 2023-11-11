@@ -2,16 +2,13 @@ package org.firstinspires.ftc.teamcode.common;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
-import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 @Config
 public class Robot {
@@ -19,46 +16,56 @@ public class Robot {
     DcMotorEx leftFront, leftBack, rightBack, rightFront, DRFBLeft, DRFBRight, intake/*, launcher*/;
     Servo baseLeft, baseRight, topLeft, topRight, wrist, claw, intakeAngle;
 
-    IMU imu;
-
     Telemetry dashboardTelemetry;
     Telemetry hubTelemetry;
 
-    public static double RETRACTED_BASE = 1.0;
-    public static double RETRACTED_TOP = 0.3;
-    public static double RETRACTED_WRIST = 0.05;
+    public static double RETRACTED_BASE = 0.65;
+    public static double RETRACTED_TOP = 0.2;
+    public static double RETRACTED_WRIST = 0.1;
 
-    public static double RETRACTED_UP_TOP = 0.55;
-    public static double RETRACTED_UP_WRIST = 0.1;
+    public static double RETRACTED_UP_BASE = 0.575;
+    public static double RETRACTED_UP_TOP = 0.3;
+    public static double RETRACTED_UP_WRIST = 0.05;
 
-    public static double RETRACTED_LOWERED_BASE = 1.0;
-    public static double RETRACTED_LOWERED_TOP = 0.2;
-    public static double RETRACTED_LOWERED_WRIST = 0.15;
+    public static double RETRACTED_LOWERED_BASE = 0.72;
+    public static double RETRACTED_LOWERED_TOP = 0.225;
+    public static double RETRACTED_LOWERED_WRIST = 0.05;
 
-    public static double SCORING_BASE = 0.5;
-    public static double SCORING_TOP = 1;
+    public static double SCORING_BASE = 0.3;
+    public static double SCORING_TOP = 0.85;
     public static double SCORING_WRIST = 0.125;
 
-    public static double SCORING_LIFTED_BASE = 0.5;
-    public static double SCORING_LIFTED_TOP = 1;
-    public static double SCORING_LIFTED_WRIST = 0.1;
+    public static double SCORING_LIFTED_BASE = 0.3;
+    public static double SCORING_LIFTED_TOP = 0.85;
+    public static double SCORING_LIFTED_WRIST = 0.125;
 
-    public static double GROUND_BASE = .5;
+    public static double GROUND_BASE = 0.5;
     public static double GROUND_TOP = 0.725;
     public static double GROUND_WRIST = 0.175;
 
-    public static double GROUND_LOWERED_BASE = .5;
-    public static double GROUND_LOWERED_TOP = .725;
-    public static double GROUND_LOWERED_WRIST = .175;
+    public static double GROUND_LOWERED_BASE = 0.5;
+    public static double GROUND_LOWERED_TOP = 0.725;
+    public static double GROUND_LOWERED_WRIST = 0.175;
 
-    public void init(HardwareMap hardwareMap, Telemetry telemetry) {
-        leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
-        leftBack = hardwareMap.get(DcMotorEx.class, "leftBack");
-        rightBack = hardwareMap.get(DcMotorEx.class, "rightBack");
-        rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
+    public void init(HardwareMap hardwareMap, Telemetry telemetry, boolean drive) {
+        if (drive) {
+            leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
+            leftBack = hardwareMap.get(DcMotorEx.class, "leftBack");
+            rightBack = hardwareMap.get(DcMotorEx.class, "rightBack");
+            rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
+
+            rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
+            rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+
+            leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        }
+
         DRFBLeft = hardwareMap.get(DcMotorEx.class, "DRFBLeft");
         DRFBRight = hardwareMap.get(DcMotorEx.class, "DRFBRight");
-        //intake = hardwareMap.get(DcMotorEx.class, "intake");
+        intake = hardwareMap.get(DcMotorEx.class, "intake");
 
         baseLeft = hardwareMap.get(Servo.class, "baseLeft");
         baseRight = hardwareMap.get(Servo.class, "baseRight");
@@ -66,24 +73,10 @@ public class Robot {
         topRight = hardwareMap.get(Servo.class, "topRight");
         wrist = hardwareMap.get(Servo.class, "wrist");
         claw = hardwareMap.get(Servo.class, "claw");
-        //intakeAngle = hardwareMap.get(Servo.class, "intakeAngle");
+        intakeAngle = hardwareMap.get(Servo.class, "intakeAngle");
 
-        imu = hardwareMap.get(IMU.class, "imu");
-        imu.initialize(
-                new IMU.Parameters(
-                    new RevHubOrientationOnRobot(
-                            RevHubOrientationOnRobot.LogoFacingDirection.LEFT,
-                            RevHubOrientationOnRobot.UsbFacingDirection.UP)
-        ));
-
-        rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
         DRFBRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         DRFBLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         DRFBRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -102,10 +95,17 @@ public class Robot {
         intake.setPower(power);
     }
 
-    public void setIntakePosition(double position) {
-        intakeAngle.setPosition(position);
+    public void setIntakeAngle(double angle) {
+        intakeAngle.setPosition(angle);
     }
 
+    public void setIntakePosition(int position) {
+        intake.setTargetPosition(position);
+    }
+
+    public int getIntakePosition() {
+        return intake.getCurrentPosition();
+    }
 
     public void moveBase(double position) {
         baseLeft.setPosition(position);
@@ -134,14 +134,6 @@ public class Robot {
         return DRFBRight.getCurrentPosition();
     }
 
-    public double getHeading() {
-        return imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
-    }
-
-    public void resetIMUYaw() {
-        imu.resetYaw();
-    }
-
     public void setRetracted() {
         moveBase(RETRACTED_BASE);
         moveTop(RETRACTED_TOP);
@@ -149,6 +141,7 @@ public class Robot {
     }
 
     public void setRetractedUp() {
+        moveBase(RETRACTED_UP_BASE);
         moveTop(RETRACTED_UP_TOP);
         moveWrist(RETRACTED_UP_WRIST);
     }

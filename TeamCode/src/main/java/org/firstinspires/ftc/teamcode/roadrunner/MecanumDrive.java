@@ -51,26 +51,26 @@ public final class MecanumDrive {
         // drive model parameters
         public double inPerTick = 80.0 / 139866.25;
         public double lateralInPerTick = 0.0003629499340474559;
-        public double trackWidthTicks = 25101.607532868686;
+        public double trackWidthTicks = 22843.562084396628;
 
         // feedforward parameters (in tick units)
-        public double kS = 1.1043112798957169;
-        public double kV = 0.00008817418450107574;
+        public double kS = 0.9937524389633077;
+        public double kV = 0.00008469386060797537;
         public double kA = 0;
 
         // path profile parameters (in inches)
-        public double maxWheelVel = 50;
+        public double maxWheelVel = 40;
         public double minProfileAccel = -30;
         public double maxProfileAccel = 50;
 
         // turn profile parameters (in radians)
-        public double maxAngVel = Math.PI; // shared with path
+        public double maxAngVel = 0.6 * Math.PI; // shared with path
         public double maxAngAccel = Math.PI;
 
         // path controller gains
-        public double axialGain = 0.0;
-        public double lateralGain = 0.0;
-        public double headingGain = 0.0; // shared with turn
+        public double axialGain = 0;
+        public double lateralGain = 0;
+        public double headingGain = 4.0; // shared with turn
 
         public double axialVelGain = 0.0;
         public double lateralVelGain = 0.0;
@@ -216,6 +216,14 @@ public final class MecanumDrive {
         leftBack.setPower(wheelVels.leftBack.get(0) / maxPowerMag);
         rightBack.setPower(wheelVels.rightBack.get(0) / maxPowerMag);
         rightFront.setPower(wheelVels.rightFront.get(0) / maxPowerMag);
+    }
+
+    // CUSTOM
+    public void directSetDrivePowers(double leftFront, double leftBack, double rightBack, double rightFront) {
+        this.leftFront.setPower(leftFront);
+        this.leftBack.setPower(leftBack);
+        this.rightBack.setPower(rightBack);
+        this.rightFront.setPower(rightFront);
     }
 
     public final class FollowTrajectoryAction implements Action {
