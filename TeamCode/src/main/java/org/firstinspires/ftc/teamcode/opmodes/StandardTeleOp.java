@@ -207,7 +207,7 @@ public class StandardTeleOp extends LinearOpMode {
             case SCORING_LIFTED_STATE:
                 robot.setScoringLifted();
 
-                if (stateTime.time() > 0.5) {
+                if (stateTime.time() > 2.0) {
                     robot.moveClaw(CLAW_OPEN);
                     armState = ArmStates.SCORING_STATE;
                 }

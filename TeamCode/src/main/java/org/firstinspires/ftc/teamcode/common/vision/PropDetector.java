@@ -31,7 +31,7 @@ public class PropDetector extends OpenCvPipeline {
     public static int rightXBlue = 555;
     public static int rightYBlue = 280;
 
-    public static int boxSize = 45;
+    public static int boxSize = 55;
 
     public static int lowRedH = 0;
     public static int lowRedS = 120;

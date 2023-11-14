@@ -36,7 +36,7 @@ public class RedBackdrop extends LinearOpMode {
 
         Action scorePurpleZero = drive.actionBuilder(drive.pose)
                 .strafeToConstantHeading(new Vector2d(20, -39))
-                .turnTo(Math.toRadians(180))
+                .turnTo(Math.toRadians(0))
                 .strafeToConstantHeading(new Vector2d(3, -39))
                 .strafeToConstantHeading(new Vector2d(47, -39))
                 .build();
@@ -63,12 +63,17 @@ public class RedBackdrop extends LinearOpMode {
 
         camera.stopStreaming();
 
-        robot.setIntakeAngle(StandardTeleOp.INTAKE_DOWN);
-        sleep(1000);
+        telemetry.addData("Randomization", randomization);
+        telemetry.update();
 
-        robot.powerIntake(-0.3);
-        sleep(300);
-        robot.powerIntake(0);
+        robot.setIntakeAngle(StandardTeleOp.INTAKE_UP);
+        sleep(1000);
+//        robot.setIntakeAngle(StandardTeleOp.INTAKE_DOWN);
+//        sleep(1000);
+//
+//        robot.powerIntake(-0.3);
+//        sleep(300);
+//        robot.powerIntake(0);
 
         if (randomization == 0) {
             Actions.runBlocking(scorePurpleZero);

@@ -63,12 +63,18 @@ public class BlueBackdrop extends LinearOpMode {
 
         camera.stopStreaming();
 
-        robot.setIntakeAngle(StandardTeleOp.INTAKE_DOWN);
+        telemetry.addData("Randomization", randomization);
+        telemetry.update();
+
+        robot.setIntakeAngle(StandardTeleOp.INTAKE_UP);
         sleep(1000);
 
-        robot.powerIntake(-0.3);
-        sleep(300);
-        robot.powerIntake(0);
+//        robot.setIntakeAngle(StandardTeleOp.INTAKE_DOWN);
+//        sleep(1000);
+//
+//        robot.powerIntake(-0.3);
+//        sleep(300);
+//        robot.powerIntake(0);
 
         if (randomization == 0) {
             Actions.runBlocking(scorePurpleZero);
