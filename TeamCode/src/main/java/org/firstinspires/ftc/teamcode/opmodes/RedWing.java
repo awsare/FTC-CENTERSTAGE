@@ -10,7 +10,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.common.Robot;
-import org.firstinspires.ftc.teamcode.common.vision.PropCamera;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
 @Config
@@ -26,7 +25,7 @@ public class RedWing extends LinearOpMode {
     public void runOpMode() {
         drive = new MecanumDrive(hardwareMap, startPose);
         robot = new Robot();
-        robot.init(hardwareMap, telemetry, false);
+        robot.init(hardwareMap, false);
 
         Action toBackstage = drive.actionBuilder(drive.pose)
                 .strafeToConstantHeading(new Vector2d(-37, -17))

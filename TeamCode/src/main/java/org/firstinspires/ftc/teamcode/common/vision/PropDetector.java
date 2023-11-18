@@ -56,7 +56,7 @@ public class PropDetector extends OpenCvPipeline {
 
     Telemetry telemetry;
 
-    public static String alliance = "red";
+    String alliance = "red";
 
     int randomization;
 

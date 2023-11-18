@@ -18,7 +18,7 @@ public class StandardTeleOp extends LinearOpMode {
     public static double ROTATION_WEIGHT = 0.5;
 
     public static double CLAW_OPEN = 0.3;
-    public static double CLAW_SCORE_OPEN = 0.2;
+    public static double CLAW_SCORE_OPEN = 0.25;
     public static double CLAW_CLOSED = 0.4;
 
     public static double INTAKE_UP = 0.2;
@@ -27,12 +27,10 @@ public class StandardTeleOp extends LinearOpMode {
 
     public static double INTAKE_POWER = 0.5;
 
-    public static double DRFB_UP_REDUCTION = 0.5;
-    public static double DRFB_DOWN_REDUCTION = 0.05;
+    public static double DRFB_UP_REDUCTION = 1.0;
+    public static double DRFB_DOWN_REDUCTION = 0.01;
 
-    double heading;
-
-    public enum ArmStates {
+    enum ArmStates {
         RETRACTED_STATE,
         RETRACTED_LOWERED_STATE,
         SCORING_STATE,
@@ -41,7 +39,7 @@ public class StandardTeleOp extends LinearOpMode {
         GROUND_LOWERED_STATE
     };
 
-    public static ArmStates armState;
+    ArmStates armState;
 
     Gamepad previousDriver;
     Gamepad previousOperator;
@@ -58,13 +56,14 @@ public class StandardTeleOp extends LinearOpMode {
     @Override
     public void runOpMode() {
 
+        robot = new Robot();
+        robot.init(hardwareMap, true);
+        robot.moveClaw(CLAW_CLOSED);
+
         previousDriver = new Gamepad();
         previousOperator = new Gamepad();
         driver = new Gamepad();
         operator = new Gamepad();
-
-        robot = new Robot();
-        robot.init(hardwareMap, telemetry, true);
 
         armState = ArmStates.RETRACTED_STATE;
 
@@ -72,8 +71,6 @@ public class StandardTeleOp extends LinearOpMode {
         secondStateTime = new ElapsedTime();
         loopTime = new ElapsedTime();
         matchTime = new ElapsedTime();
-
-        robot.moveClaw(CLAW_CLOSED);
 
         waitForStart();
 
@@ -93,7 +90,6 @@ public class StandardTeleOp extends LinearOpMode {
     }
 
     private void driverControl() {
-
         double speed = MEDIUM_SPEED;
         double change = driver.right_trigger - driver.left_trigger;
 
@@ -117,12 +113,40 @@ public class StandardTeleOp extends LinearOpMode {
     }
 
     private void operatorControl() {
-
         if (operator.share) {
             DRFB_DOWN_REDUCTION = 1.0;
             robot.setIntakeAngle(INTAKE_HIGH_UP);
         }
 
+        if (operator.x && !previousOperator.x) {
+            robot.moveClaw(CLAW_OPEN);
+        }
+
+        if (operator.dpad_left && !previousOperator.dpad_left) {
+            robot.moveClaw(CLAW_CLOSED);
+        }
+
+        intakeControl();
+        armControl();
+        //DRFBControl();
+    }
+
+    private void routineTasks() {
+        previousDriver.copy(driver);
+        previousOperator.copy(operator);
+        driver.copy(gamepad1);
+        operator.copy(gamepad2);
+    }
+
+    private void updateTelemetry() {
+        telemetry.addData("DR4B Position", robot.getDRFBPosition());
+        telemetry.addData("Arm State", armState.toString());
+        telemetry.addData("Loop Time", Math.round(loopTime.time() * 1000));
+
+        telemetry.update();
+    }
+
+    private void intakeControl() {
         if (operator.dpad_up) {
             robot.setIntakeAngle(INTAKE_UP);
         } else if (operator.dpad_down) {
@@ -136,11 +160,9 @@ public class StandardTeleOp extends LinearOpMode {
         } else {
             robot.powerIntake(0);
         }
+    }
 
-        if (operator.x && !previousOperator.x) {
-            robot.moveClaw(CLAW_OPEN);
-        }
-
+    private void armControl() {
         switch (armState) {
             case RETRACTED_STATE:
                 robot.setRetracted();
@@ -161,6 +183,7 @@ public class StandardTeleOp extends LinearOpMode {
                 if (operator.a && !previousOperator.a) {
                     armState = ArmStates.RETRACTED_LOWERED_STATE;
                     robot.moveClaw(CLAW_OPEN);
+                    robot.setIntakeAngle(INTAKE_UP);
 
                     secondStateTime.reset();
                     stateTime.reset();
@@ -168,7 +191,7 @@ public class StandardTeleOp extends LinearOpMode {
 
                 break;
             case RETRACTED_LOWERED_STATE:
-                if (secondStateTime.time() < 0.25) {
+                if (secondStateTime.time() < 0.1) {
                     stateTime.reset();
                     break;
                 }
@@ -182,7 +205,7 @@ public class StandardTeleOp extends LinearOpMode {
 
                 break;
             case SCORING_STATE:
-                if (stateTime.time() < 0.5) {
+                if (stateTime.time() < 0.25) {
                     break;
                 }
 
@@ -207,7 +230,7 @@ public class StandardTeleOp extends LinearOpMode {
             case SCORING_LIFTED_STATE:
                 robot.setScoringLifted();
 
-                if (stateTime.time() > 2.0) {
+                if (stateTime.time() > 1.0) {
                     robot.moveClaw(CLAW_OPEN);
                     armState = ArmStates.SCORING_STATE;
                 }
@@ -226,7 +249,7 @@ public class StandardTeleOp extends LinearOpMode {
 
                 if (operator.y && !previousOperator.y) {
                     armState = ArmStates.GROUND_LOWERED_STATE;
-                    robot.moveClaw(CLAW_OPEN);
+                    //robot.moveClaw(CLAW_OPEN);
 
                     stateTime.reset();
                 }
@@ -235,14 +258,16 @@ public class StandardTeleOp extends LinearOpMode {
             case GROUND_LOWERED_STATE:
                 robot.setGroundLowered();
 
-                if (stateTime.time() > 0.5) {
+                if (stateTime.time() > 4.0) {
                     robot.moveClaw(CLAW_CLOSED);
                     armState = ArmStates.GROUND_STATE;
                 }
 
                 break;
         }
+    }
 
+    private void DRFBControl() {
         double power = -operator.left_stick_y;
 
         if (robot.getDRFBPosition() > 1200 && power > 0) {
@@ -259,21 +284,4 @@ public class StandardTeleOp extends LinearOpMode {
             robot.powerDRFB(0);
         }
     }
-
-    private void routineTasks() {
-        previousDriver.copy(driver);
-        previousOperator.copy(operator);
-        driver.copy(gamepad1);
-        operator.copy(gamepad2);
-    }
-
-    private void updateTelemetry() {
-        telemetry.addData("DR4B Position", robot.getDRFBPosition());
-        telemetry.addData("Arm State", armState.toString());
-        telemetry.addData("Loop Time", Math.round(loopTime.time() * 1000));
-        telemetry.addData("Match Time", Math.round(matchTime.seconds()));
-
-        telemetry.update();
-    }
-
 }

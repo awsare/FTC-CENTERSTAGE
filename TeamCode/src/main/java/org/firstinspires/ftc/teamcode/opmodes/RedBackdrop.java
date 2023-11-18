@@ -30,7 +30,7 @@ public class RedBackdrop extends LinearOpMode {
         drive = new MecanumDrive(hardwareMap, startPose);
 
         robot = new Robot();
-        robot.init(hardwareMap, telemetry, false);
+        robot.init(hardwareMap, false);
 
         camera = new PropCamera(hardwareMap, telemetry, "Red");
 
