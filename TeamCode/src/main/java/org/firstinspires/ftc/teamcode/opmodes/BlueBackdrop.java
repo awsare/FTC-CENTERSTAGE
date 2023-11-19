@@ -66,7 +66,7 @@ public class BlueBackdrop extends LinearOpMode {
         telemetry.addData("Randomization", randomization);
         telemetry.update();
 
-        robot.setIntakeAngle(StandardTeleOp.INTAKE_UP);
+        robot.setIntakeAngle(StandardTeleOp.INTAKE.INTAKE_UP);
         sleep(1000);
 
 //        robot.setIntakeAngle(StandardTeleOp.INTAKE_DOWN);
@@ -84,7 +84,7 @@ public class BlueBackdrop extends LinearOpMode {
             Actions.runBlocking(scorePurpleTwo);
         }
 
-        robot.setIntakeAngle(StandardTeleOp.INTAKE_UP);
+        robot.setIntakeAngle(StandardTeleOp.INTAKE.INTAKE_UP);
 
         sleep(1000);
     }

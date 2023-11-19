@@ -36,7 +36,7 @@ public class RedWing extends LinearOpMode {
                 .build();
         waitForStart();
 
-        robot.setIntakeAngle(StandardTeleOp.INTAKE_UP);
+        robot.setIntakeAngle(StandardTeleOp.INTAKE.INTAKE_UP);
         robot.setRetracted();
 
         Actions.runBlocking(toBackstage);
