@@ -13,25 +13,21 @@ import org.firstinspires.ftc.teamcode.common.Robot;
 public class StandardTeleOp extends LinearOpMode {
 
     public static class DRIVING {
-        public static double LOW_SPEED = 0.375;
-        public static double MEDIUM_SPEED = 0.7;
-        public static double HIGH_SPEED = 1.0;
-        public static double ROTATION_WEIGHT = 0.5;
+        public double LOW_SPEED = 0.375;
+        public double MEDIUM_SPEED = 0.7;
+        public double HIGH_SPEED = 1.0;
+        public double ROTATION_WEIGHT = 0.5;
     }
 
-    public static class CLAW {
-        public static double CLAW_OPEN = 0.3;
-        public static double CLAW_SCORE_OPEN = 0.25;
-        public static double CLAW_CLOSED = 0.4;
-    }
+    DRIVING driving = new DRIVING();
 
-    public static class INTAKE {
+    //public static class INTAKE {
         public static double INTAKE_UP = 0.2;
-        public static double INTAKE_STACK_UP = 0.3;
+        public static double INTAKE_STACK_UP = 0.5;
         public static double INTAKE_HANG_UP = 0.1;
-        public static double INTAKE_DOWN = 0.45;
-        public static double INTAKE_POWER = 0.5;
-    }
+        public static double INTAKE_DOWN = 0.6;
+        public static double INTAKE_POWER = 0.6;
+    //}
 
     public static class DRFB {
         public static double DRFB_UP_REDUCTION = 1.0;
@@ -58,16 +54,17 @@ public class StandardTeleOp extends LinearOpMode {
     ElapsedTime stateTime;
     ElapsedTime secondStateTime;
     ElapsedTime loopTime;
-    ElapsedTime matchTime;
 
     Robot robot;
+
+    boolean inverseDrive = false;
 
     @Override
     public void runOpMode() {
 
         robot = new Robot();
         robot.init(hardwareMap, true);
-        robot.moveClaw(CLAW.CLAW_CLOSED);
+        robot.setClawClosed();
 
         previousDriver = new Gamepad();
         previousOperator = new Gamepad();
@@ -79,13 +76,11 @@ public class StandardTeleOp extends LinearOpMode {
         stateTime = new ElapsedTime();
         secondStateTime = new ElapsedTime();
         loopTime = new ElapsedTime();
-        matchTime = new ElapsedTime();
 
         waitForStart();
 
         stateTime.reset();
         secondStateTime.reset();
-        matchTime.reset();
 
         while (opModeIsActive()) {
             loopTime.reset();
@@ -99,19 +94,30 @@ public class StandardTeleOp extends LinearOpMode {
     }
 
     private void driverControl() {
-        double speed = DRIVING.MEDIUM_SPEED;
+        double speed = driving.MEDIUM_SPEED;
         double change = driver.right_trigger - driver.left_trigger;
 
-        speed += change * ((change > 0) ? DRIVING.HIGH_SPEED - DRIVING.MEDIUM_SPEED : DRIVING.MEDIUM_SPEED - DRIVING.LOW_SPEED);
+        speed += change * ((change > 0) ? driving.HIGH_SPEED - driving.MEDIUM_SPEED : driving.MEDIUM_SPEED - driving.LOW_SPEED);
 
         double r = driver.right_stick_x;
-        double y = (r != 0) ? -driver.left_stick_y * (1 - DRIVING.ROTATION_WEIGHT) : -driver.left_stick_y;
-        double x = (r != 0) ? driver.left_stick_x * (1 - DRIVING.ROTATION_WEIGHT) : driver.left_stick_x;
+        double y = (r != 0) ? -driver.left_stick_y * (1 - driving.ROTATION_WEIGHT) : -driver.left_stick_y;
+        double x = (r != 0) ? driver.left_stick_x * (1 - driving.ROTATION_WEIGHT) : driver.left_stick_x;
 
 //        x = x * Math.cos(heading) - y * Math.sin(heading);
 //        y = x * Math.sin(heading) + y * Math.cos(heading);
 
         double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(r), 1);
+
+        if (driver.right_bumper) {
+            inverseDrive = true;
+        } else {
+            inverseDrive = false;
+        }
+
+        if (inverseDrive) {
+            x = -x;
+            y = -y;
+        }
 
         robot.setDrivePowers(
             speed * ((y + x + r) / denominator),
@@ -124,15 +130,15 @@ public class StandardTeleOp extends LinearOpMode {
     private void operatorControl() {
         if (operator.share) {
             DRFB.DRFB_DOWN_REDUCTION = 1.0;
-            robot.setIntakeAngle(INTAKE.INTAKE_HANG_UP);
+            robot.setIntakeAngle(INTAKE_HANG_UP);
         }
 
         if (operator.x && !previousOperator.x) {
-            robot.moveClaw(CLAW.CLAW_OPEN);
+            robot.setClawOpen();
         }
 
         if (operator.dpad_left && !previousOperator.dpad_left) {
-            robot.moveClaw(CLAW.CLAW_CLOSED);
+            robot.setClawClosed();
         }
 
         intakeControl();
@@ -157,17 +163,17 @@ public class StandardTeleOp extends LinearOpMode {
 
     private void intakeControl() {
         if (operator.dpad_up) {
-            robot.setIntakeAngle(INTAKE.INTAKE_UP);
+            robot.setIntakeAngle(INTAKE_UP);
         } else if (operator.dpad_down) {
-            robot.setIntakeAngle(INTAKE.INTAKE_DOWN);
+            robot.setIntakeAngle(INTAKE_DOWN);
         } else if (operator.dpad_left) {
-            robot.setIntakeAngle(INTAKE.INTAKE_STACK_UP);
+            robot.setIntakeAngle(INTAKE_STACK_UP);
         }
 
         if (operator.right_trigger > 0.1) {
-            robot.powerIntake(-INTAKE.INTAKE_POWER);
+            robot.powerIntake(-INTAKE_POWER);
         } else if (operator.left_trigger > 0.1) {
-            robot.powerIntake(INTAKE.INTAKE_POWER);
+            robot.powerIntake(INTAKE_POWER);
         } else {
             robot.powerIntake(0);
         }
@@ -188,13 +194,13 @@ public class StandardTeleOp extends LinearOpMode {
 
                 if (operator.y && !previousOperator.y) {
                     armState = ArmStates.GROUND_STATE;
-                    robot.moveClaw(CLAW.CLAW_OPEN);
+                    robot.setClawOpen();
                 }
 
                 if (operator.a && !previousOperator.a) {
                     armState = ArmStates.RETRACTED_LOWERED_STATE;
-                    robot.moveClaw(CLAW.CLAW_OPEN);
-                    robot.setIntakeAngle(INTAKE.INTAKE_UP);
+                    robot.setClawOpen();
+                    robot.setIntakeAngle(INTAKE_UP);
 
                     secondStateTime.reset();
                     stateTime.reset();
@@ -202,7 +208,7 @@ public class StandardTeleOp extends LinearOpMode {
 
                 break;
             case RETRACTED_LOWERED_STATE:
-                if (secondStateTime.time() < 0.1) {
+                if (secondStateTime.time() < 0.25) {
                     stateTime.reset();
                     break;
                 }
@@ -210,17 +216,21 @@ public class StandardTeleOp extends LinearOpMode {
                 robot.setRetractedLowered();
 
                 if (stateTime.time() > 0.5) {
-                    robot.moveClaw(CLAW.CLAW_CLOSED);
+                    robot.setClawClosed();
                     armState = ArmStates.RETRACTED_STATE;
                 }
 
                 break;
             case SCORING_STATE:
-                if (stateTime.time() < 0.25) {
+                if (stateTime.time() < 0.35) {
                     break;
                 }
 
-                robot.setScoring();
+                if (operator.right_stick_x < -0.1) {
+                    robot.setFarScoring();
+                } else {
+                    robot.setScoring();
+                }
 
                 if (operator.a && !previousOperator.a) {
                     armState = ArmStates.RETRACTED_STATE;
@@ -232,17 +242,25 @@ public class StandardTeleOp extends LinearOpMode {
 
                 if (operator.b && !previousOperator.b) {
                     armState = ArmStates.SCORING_LIFTED_STATE;
-                    robot.moveClaw(CLAW.CLAW_SCORE_OPEN);
+                    robot.setClawScoreOpen();
 
                     stateTime.reset();
                 }
 
                 break;
             case SCORING_LIFTED_STATE:
-                robot.setScoringLifted();
+                if (operator.right_stick_x < -0.1) {
+                    robot.setFarScoringLifted();
+                } else {
+                    robot.setScoringLifted();
+                }
+
+                if (operator.a && !previousOperator.a) {
+                    armState = ArmStates.RETRACTED_STATE;
+                }
 
                 if (stateTime.time() > 1.0) {
-                    robot.moveClaw(CLAW.CLAW_OPEN);
+                    robot.setClawOpen();
                     armState = ArmStates.SCORING_STATE;
                 }
 
@@ -270,7 +288,7 @@ public class StandardTeleOp extends LinearOpMode {
                 robot.setGroundLowered();
 
                 if (stateTime.time() > 4.0) {
-                    robot.moveClaw(CLAW.CLAW_CLOSED);
+                    robot.setClawClosed();
                     armState = ArmStates.GROUND_STATE;
                 }
 
@@ -283,7 +301,7 @@ public class StandardTeleOp extends LinearOpMode {
 
         if (robot.getDRFBPosition() > 1200 && power > 0) {
             power = 0;
-        } else if (robot.getDRFBPosition() < -20 && power < 0) {
+        } else if (robot.getDRFBPosition() < -10 && power < 0) {
             power = 0;
         }
 
@@ -292,7 +310,11 @@ public class StandardTeleOp extends LinearOpMode {
         } else if (power < 0) {
             robot.powerDRFB(power * DRFB.DRFB_DOWN_REDUCTION);
         } else {
-            robot.powerDRFB(DRFB.DRFB_GRAVITY);
+            if (robot.getDRFBPosition() < 100) {
+                robot.powerDRFB(0);
+            } else {
+                robot.powerDRFB(DRFB.DRFB_GRAVITY);
+            }
         }
     }
 }

@@ -49,28 +49,28 @@ import java.util.List;
 public final class MecanumDrive {
     public static class Params {
         // drive model parameters
-        public double inPerTick = 80.0 / 139866.25;
-        public double lateralInPerTick = 0.0003629499340474559;
-        public double trackWidthTicks = 22843.562084396628;
+        public double inPerTick = 0.0005715460604;
+        public double lateralInPerTick = 0.0003766205623811575;
+        public double trackWidthTicks = 22430.39361847722;
 
         // feedforward parameters (in tick units)
-        public double kS = 0.9937524389633077;
-        public double kV = 0.00008469386060797537;
+        public double kV = 0.00008759667488;
+        public double kS = 1.003830680793;
         public double kA = 0;
 
         // path profile parameters (in inches)
-        public double maxWheelVel = 40;
+        public double maxWheelVel = 30;
         public double minProfileAccel = -30;
-        public double maxProfileAccel = 50;
+        public double maxProfileAccel = 30;
 
         // turn profile parameters (in radians)
-        public double maxAngVel = 0.6 * Math.PI; // shared with path
+        public double maxAngVel = 0.5 * Math.PI; // shared with path
         public double maxAngAccel = Math.PI;
 
         // path controller gains
-        public double axialGain = 0;
-        public double lateralGain = 0;
-        public double headingGain = 4.0; // shared with turn
+        public double axialGain = 1.0;
+        public double lateralGain = 1.0;
+        public double headingGain = 5.0; // shared with turn
 
         public double axialVelGain = 0.0;
         public double lateralVelGain = 0.0;
@@ -122,7 +122,7 @@ public final class MecanumDrive {
             lastRightRearPos = rightRear.getPositionAndVelocity().position;
             lastRightFrontPos = rightFront.getPositionAndVelocity().position;
 
-            lastHeading = Rotation2d.exp(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
+            lastHeading = Rotation2d.exp(imu.getRobotYawPitchRollAngles().getRoll(AngleUnit.RADIANS));
         }
 
         @Override
@@ -132,7 +132,7 @@ public final class MecanumDrive {
             PositionVelocityPair rightRearPosVel = rightRear.getPositionAndVelocity();
             PositionVelocityPair rightFrontPosVel = rightFront.getPositionAndVelocity();
 
-            Rotation2d heading = Rotation2d.exp(imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
+            Rotation2d heading = Rotation2d.exp(imu.getRobotYawPitchRollAngles().getRoll(AngleUnit.RADIANS));
             double headingDelta = heading.minus(lastHeading);
 
             Twist2dDual<Time> twist = kinematics.forward(new MecanumKinematics.WheelIncrements<>(

@@ -14,14 +14,13 @@ import org.firstinspires.ftc.teamcode.common.vision.PropCamera;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
 @Config
-@Autonomous
 public class RedBackdrop extends LinearOpMode {
 
     MecanumDrive drive;
     Robot robot;
-    PropCamera camera;
+    //PropCamera camera;
 
-    double randomization;
+    double randomization = 2;
 
     Pose2d startPose = new Pose2d(12, -62, Math.toRadians(270));
 
@@ -32,7 +31,7 @@ public class RedBackdrop extends LinearOpMode {
         robot = new Robot();
         robot.init(hardwareMap, false);
 
-        camera = new PropCamera(hardwareMap, telemetry, "Red");
+        //camera = new PropCamera(hardwareMap, telemetry, "Red");
 
         Action scorePurpleZero = drive.actionBuilder(drive.pose)
                 .strafeToConstantHeading(new Vector2d(20, -39))
@@ -53,20 +52,20 @@ public class RedBackdrop extends LinearOpMode {
                 .strafeToConstantHeading(new Vector2d(55, -49))
                 .build();
 
-        while (opModeInInit()) {
-            randomization = camera.getRandomization();
-            telemetry.addData("Randomization", randomization);
-            telemetry.update();
-        }
+//        while (opModeInInit()) {
+//            randomization = camera.getRandomization();
+//            telemetry.addData("Randomization", randomization);
+//            telemetry.update();
+//        }
 
         waitForStart();
 
-        camera.stopStreaming();
+//        camera.stopStreaming();
 
         telemetry.addData("Randomization", randomization);
         telemetry.update();
 
-        robot.setIntakeAngle(StandardTeleOp.INTAKE.INTAKE_UP);
+        robot.setIntakeAngle(StandardTeleOp.INTAKE_UP);
         sleep(1000);
 //        robot.setIntakeAngle(StandardTeleOp.INTAKE_DOWN);
 //        sleep(1000);
@@ -83,7 +82,7 @@ public class RedBackdrop extends LinearOpMode {
             Actions.runBlocking(scorePurpleTwo);
         }
 
-        robot.setIntakeAngle(StandardTeleOp.INTAKE.INTAKE_UP);
+        robot.setIntakeAngle(StandardTeleOp.INTAKE_UP);
 
         sleep(1000);
     }
