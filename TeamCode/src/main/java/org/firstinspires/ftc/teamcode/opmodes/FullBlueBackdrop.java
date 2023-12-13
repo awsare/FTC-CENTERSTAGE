@@ -15,15 +15,17 @@ import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
 @Config
 @Autonomous
-public class FullRedBackdrop extends LinearOpMode {
+public class FullBlueBackdrop extends LinearOpMode {
 
     MecanumDrive drive;
     Robot robot;
     PropCamera camera;
 
-    int randomization = 0;
+    int randomization = 2;
 
-    Pose2d startPose = new Pose2d(14, -62, Math.PI / 2.0);
+    public static double HEADING = 5;
+
+    Pose2d startPose = new Pose2d(14, 62, -Math.PI / 2.0);
 
     @Override
     public void runOpMode() {
@@ -32,60 +34,60 @@ public class FullRedBackdrop extends LinearOpMode {
         robot = new Robot();
         robot.init(hardwareMap, false);
 
-        camera = new PropCamera(hardwareMap, telemetry, "Red");
+        camera = new PropCamera(hardwareMap, telemetry, "Blue");
 
         Action act1 = drive.actionBuilder(drive.pose)
-                .strafeToConstantHeading(new Vector2d(14, -58))
-                .strafeToConstantHeading(new Vector2d(35, -45))
-                .turnTo(Math.toRadians(-5))
+                .strafeToConstantHeading(new Vector2d(14, 58))
+                .strafeToConstantHeading(new Vector2d(35, 45))
+                .turnTo(Math.toRadians(HEADING))
                 .build();
 
-        Action goToYellowA = drive.actionBuilder(new Pose2d(35, -45, 0))
-                .strafeToConstantHeading(new Vector2d(35, -29))
-                .strafeToConstantHeading(new Vector2d(44.25, -29))
+        Action goToYellowA = drive.actionBuilder(new Pose2d(35, 45, 0))
+                .strafeToConstantHeading(new Vector2d(35, 42.5))
+                .strafeToConstantHeading(new Vector2d(44.25, 42.5))
                 .build();
 
-        Action backYellowA = drive.actionBuilder(new Pose2d(44.25, -29, 0))
-                .strafeToConstantHeading(new Vector2d(40, -29))
+        Action backYellowA = drive.actionBuilder(new Pose2d(44.25, 42.5, 0))
+                .strafeToConstantHeading(new Vector2d(40, 42.5))
                 .build();
 
-        Action goToYellowB = drive.actionBuilder(new Pose2d(35, -45, 0))
-                .strafeToConstantHeading(new Vector2d(35, -35))
-                .strafeToConstantHeading(new Vector2d(44.25, -35))
+        Action goToYellowB = drive.actionBuilder(new Pose2d(35, 45, 0))
+                .strafeToConstantHeading(new Vector2d(35, 37))
+                .strafeToConstantHeading(new Vector2d(44.25, 37))
                 .build();
 
-        Action backYellowB = drive.actionBuilder(new Pose2d(44.25, -35, 0))
-                .strafeToConstantHeading(new Vector2d(40, -35))
+        Action backYellowB = drive.actionBuilder(new Pose2d(44.25, 37, 0))
+                .strafeToConstantHeading(new Vector2d(40, 37))
                 .build();
 
-        Action goToYellowC = drive.actionBuilder(new Pose2d(35, -45, 0))
-                .strafeToConstantHeading(new Vector2d(35, -41.5))
-                .strafeToConstantHeading(new Vector2d(44.25, -41.5))
+        Action goToYellowC = drive.actionBuilder(new Pose2d(35, 45, 0))
+                .strafeToConstantHeading(new Vector2d(35, 31))
+                .strafeToConstantHeading(new Vector2d(44.25, 31))
                 .build();
 
-        Action backYellowC = drive.actionBuilder(new Pose2d(44.25, -41.5, 0))
-                .strafeToConstantHeading(new Vector2d(40, -41.5))
+        Action backYellowC = drive.actionBuilder(new Pose2d(44.25, 31, 0))
+                .strafeToConstantHeading(new Vector2d(40, 31))
                 .build();
 
-        Action purpleA = drive.actionBuilder(new Pose2d(44.25, -29, 0))
-                .strafeToConstantHeading(new Vector2d(18, -32.5))
-                .strafeToConstantHeading(new Vector2d(0.5, -32.5))
-                .strafeToConstantHeading(new Vector2d(18, -32.5))
-                .strafeToConstantHeading(new Vector2d(49, -14))
+        Action purpleA = drive.actionBuilder(new Pose2d(40, 42.5, 0))
+                .strafeToConstantHeading(new Vector2d(30, 27))
+                .strafeToConstantHeading(new Vector2d(23, 27))
+                .strafeToConstantHeading(new Vector2d(30, 27))
+                .strafeToConstantHeading(new Vector2d(53, 12))
                 .build();
 
-        Action purpleB = drive.actionBuilder(new Pose2d(40, -35, 0))
-                .strafeToConstantHeading(new Vector2d(20, -22))
-                .strafeToConstantHeading(new Vector2d(12, -22))
-                .strafeToConstantHeading(new Vector2d(20, -22))
-                .strafeToConstantHeading(new Vector2d(49, -14))
+        Action purpleB = drive.actionBuilder(new Pose2d(40, 37, 0))
+                .strafeToConstantHeading(new Vector2d(20, 24))
+                .strafeToConstantHeading(new Vector2d(12, 24))
+                .strafeToConstantHeading(new Vector2d(20, 24))
+                .strafeToConstantHeading(new Vector2d(53, 12))
                 .build();
 
-        Action purpleC = drive.actionBuilder(new Pose2d(40, -41.5, 0))
-                .strafeToConstantHeading(new Vector2d(30, -27))
-                .strafeToConstantHeading(new Vector2d(20, -27))
-                .strafeToConstantHeading(new Vector2d(30, -27))
-                .strafeToConstantHeading(new Vector2d(49, -14))
+        Action purpleC = drive.actionBuilder(new Pose2d(40, 31, 0))
+                .strafeToConstantHeading(new Vector2d(18, 34))
+                .strafeToConstantHeading(new Vector2d(2, 34))
+                .strafeToConstantHeading(new Vector2d(18, 34))
+                .strafeToConstantHeading(new Vector2d(53, 12))
                 .build();
 
         robot.setClawClosed();

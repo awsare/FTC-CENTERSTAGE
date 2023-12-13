@@ -13,23 +13,23 @@ import org.openftc.easyopencv.OpenCvPipeline;
 @Config
 public class PropDetector extends OpenCvPipeline {
 
-    public static int leftXRed = 80;
-    public static int leftYRed = 280;
+    public static int leftXRed = 30;
+    public static int leftYRed = 180;
 
-    public static int centerXRed = 335;
-    public static int centerYRed = 300;
+    public static int centerXRed = 245;
+    public static int centerYRed = 155;
 
-    public static int rightXRed = 555;
-    public static int rightYRed = 270;
+    public static int rightXRed = 480;
+    public static int rightYRed = 160;
 
-    public static int leftXBlue = 130;
-    public static int leftYBlue = 290;
+    public static int leftXBlue = 100;
+    public static int leftYBlue = 180;
 
-    public static int centerXBlue = 335;
-    public static int centerYBlue = 300;
+    public static int centerXBlue = 340;
+    public static int centerYBlue = 155;
 
-    public static int rightXBlue = 555;
-    public static int rightYBlue = 280;
+    public static int rightXBlue = 570;
+    public static int rightYBlue = 160;
 
     public static int boxSize = 55;
 

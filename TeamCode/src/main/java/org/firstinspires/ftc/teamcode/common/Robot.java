@@ -26,7 +26,7 @@ public class Robot {
     //}
 
     //public static class RETRACTED_LOWERED {
-        public static double RETRACTED_LOWERED_BASE = 0.95;
+        public static double RETRACTED_LOWERED_BASE = 0.935;
         public static double RETRACTED_LOWERED_TOP = 0.19;
         public static double RETRACTED_LOWERED_WRIST = 0.05;
     //}
