@@ -65,6 +65,7 @@ public class StandardTeleOp extends LinearOpMode {
         robot = new Robot();
         robot.init(hardwareMap, true);
         robot.setClawClosed();
+        robot.setLauncher();
 
         previousDriver = new Gamepad();
         previousOperator = new Gamepad();
@@ -125,6 +126,18 @@ public class StandardTeleOp extends LinearOpMode {
             speed * ((y + x - r) / denominator),
             speed * ((y - x - r) / denominator)
         );
+
+        if (driver.a && !previousDriver.a) {
+            robot.setCageDown();
+        }
+
+        if (driver.b && !previousDriver.b) {
+            robot.setCageUp();
+        }
+
+        if (driver.dpad_up) {
+            robot.shootLauncher();
+        }
     }
 
     private void operatorControl() {
@@ -226,11 +239,7 @@ public class StandardTeleOp extends LinearOpMode {
                     break;
                 }
 
-                if (operator.right_stick_x < -0.1) {
-                    robot.setFarScoring();
-                } else {
-                    robot.setScoring();
-                }
+                robot.setScoring();
 
                 if (operator.a && !previousOperator.a) {
                     armState = ArmStates.RETRACTED_STATE;
@@ -240,7 +249,7 @@ public class StandardTeleOp extends LinearOpMode {
                     armState = ArmStates.GROUND_STATE;
                 }
 
-                if (operator.b && !previousOperator.b) {
+                if (driver.dpad_down && !driver.dpad_down) {
                     armState = ArmStates.SCORING_LIFTED_STATE;
                     robot.setClawScoreOpen();
 
@@ -249,11 +258,7 @@ public class StandardTeleOp extends LinearOpMode {
 
                 break;
             case SCORING_LIFTED_STATE:
-                if (operator.right_stick_x < -0.1) {
-                    robot.setFarScoringLifted();
-                } else {
-                    robot.setScoringLifted();
-                }
+                robot.setScoringLifted();
 
                 if (operator.a && !previousOperator.a) {
                     armState = ArmStates.RETRACTED_STATE;
@@ -301,7 +306,7 @@ public class StandardTeleOp extends LinearOpMode {
 
         if (robot.getDRFBPosition() > 1200 && power > 0) {
             power = 0;
-        } else if (robot.getDRFBPosition() < -10 && power < 0) {
+        } else if (robot.getDRFBPosition() < -10 && power < 0 && !operator.left_bumper) {
             power = 0;
         }
 

@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class Robot {
 
     DcMotorEx leftFront, leftBack, rightBack, rightFront, DRFBLeft, DRFBRight, intake;
-    Servo baseLeft, baseRight, topLeft, topRight, wrist, claw, intakeAngle;
+    Servo baseLeft, baseRight, topLeft, topRight, wrist, claw, intakeAngle, cage, launcher;
 
     //public static class RETRACTED {
         public static double RETRACTED_BASE = 0.875;
@@ -43,14 +43,6 @@ public class Robot {
         public static double SCORING_LIFTED_WRIST = 0;
     //}
 
-    public static double FAR_SCORING_BASE = 0.55;
-    public static double FAR_SCORING_TOP = 0.96;
-    public static double FAR_SCORING_WRIST = 0.025;
-
-    public static double FAR_SCORING_LIFTED_BASE = 0.55;
-    public static double FAR_SCORING_LIFTED_TOP = 0.96;
-    public static double FAR_SCORING_LIFTED_WRIST = 0.025;
-
     //public static class GROUND {
         public static double GROUND_BASE = 0.5;
         public static double GROUND_TOP = 0.725;
@@ -68,6 +60,12 @@ public class Robot {
         public static double CLAW_SCORE_OPEN = 0.25;
         public static double CLAW_CLOSED = 0.4;
     //}
+
+    public static double CAGE_UP = 0.35;
+    public static double CAGE_DOWN = 0.2;
+
+    public static double LAUNCHER_SET = 0.9;
+    public static double LAUNCHER_SHOOT = 0.2;
 
     public void init(HardwareMap hardwareMap, boolean drive) {
         if (drive) {
@@ -96,6 +94,8 @@ public class Robot {
         wrist = hardwareMap.get(Servo.class, "wrist");
         claw = hardwareMap.get(Servo.class, "claw");
         intakeAngle = hardwareMap.get(Servo.class, "intakeAngle");
+        cage = hardwareMap.get(Servo.class, "cage");
+        launcher = hardwareMap.get(Servo.class, "launcher");
 
         DRFBRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -108,6 +108,22 @@ public class Robot {
         this.leftBack.setPower(leftBack);
         this.rightBack.setPower(rightBack);
         this.rightFront.setPower(rightFront);
+    }
+
+    public void setCageUp() {
+        cage.setPosition(CAGE_UP);
+    }
+
+    public void setCageDown() {
+        cage.setPosition(CAGE_DOWN);
+    }
+
+    public void setLauncher() {
+        launcher.setPosition(LAUNCHER_SET);
+    }
+
+    public void shootLauncher() {
+        launcher.setPosition(LAUNCHER_SHOOT);
     }
 
     public void powerIntake(double power) {
@@ -181,18 +197,6 @@ public class Robot {
         moveBase(SCORING_LIFTED_BASE);
         moveTop(SCORING_LIFTED_TOP);
         moveWrist(SCORING_LIFTED_WRIST);
-    }
-
-    public void setFarScoring() {
-        moveBase(FAR_SCORING_BASE);
-        moveTop(FAR_SCORING_TOP);
-        moveWrist(FAR_SCORING_WRIST);
-    }
-
-    public void setFarScoringLifted() {
-        moveBase(FAR_SCORING_LIFTED_BASE);
-        moveTop(FAR_SCORING_LIFTED_TOP);
-        moveWrist(FAR_SCORING_LIFTED_WRIST);
     }
 
     public void setGround() {

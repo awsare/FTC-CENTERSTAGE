@@ -13,7 +13,6 @@ import org.firstinspires.ftc.teamcode.common.Robot;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
 @Config
-@Autonomous
 public class RedWing extends LinearOpMode {
 
     MecanumDrive drive;
@@ -32,8 +31,8 @@ public class RedWing extends LinearOpMode {
                 .turnTo(Math.toRadians(180))
                 .strafeToConstantHeading(new Vector2d(50, -17))
                 .strafeToConstantHeading(new Vector2d(50, -32))
-
                 .build();
+
         waitForStart();
 
         robot.setIntakeAngle(StandardTeleOp.INTAKE_UP);

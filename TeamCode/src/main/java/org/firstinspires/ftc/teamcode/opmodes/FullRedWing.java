@@ -13,13 +13,12 @@ import org.firstinspires.ftc.teamcode.common.Robot;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
 @Config
-@Autonomous
-public class BlueWing extends LinearOpMode {
+public class FullRedWing extends LinearOpMode {
 
     MecanumDrive drive;
     Robot robot;
 
-    Pose2d startPose = new Pose2d(-37, 62, Math.toRadians(90));
+    Pose2d startPose = new Pose2d(-37, -62, Math.PI / 2.0);
 
     @Override
     public void runOpMode() {
@@ -27,18 +26,29 @@ public class BlueWing extends LinearOpMode {
         robot = new Robot();
         robot.init(hardwareMap, false);
 
-        Action toBackstage = drive.actionBuilder(drive.pose)
-                .strafeToConstantHeading(new Vector2d(-37, 17))
-                .turnTo(Math.toRadians(180))
-                .strafeToConstantHeading(new Vector2d(50, 17))
-                .strafeToConstantHeading(new Vector2d(50, 32))
+        Action toScore = drive.actionBuilder(drive.pose)
+                .strafeToConstantHeading(new Vector2d(-36, -37))
                 .build();
+
+        Action park = drive.actionBuilder(new Pose2d(-36, -37, Math.PI / 2.0))
+                .strafeToConstantHeading(new Vector2d(-36, -12))
+                .turnTo(0)
+                .strafeToConstantHeading(new Vector2d(50, -12))
+                .build();
+
+        robot.setClawClosed();
+        robot.moveBase(0.75);
 
         waitForStart();
 
-        robot.setIntakeAngle(StandardTeleOp.INTAKE_UP);
-        robot.setRetracted();
+        Actions.runBlocking(toScore);
 
-        Actions.runBlocking(toBackstage);
+        robot.setScoring();
+        robot.moveTop(0.7);
+        sleep(1500);
+        robot.setClawScoreOpen();
+        sleep(1000);
+        robot.setRetracted();
+        sleep(1000);
     }
 }

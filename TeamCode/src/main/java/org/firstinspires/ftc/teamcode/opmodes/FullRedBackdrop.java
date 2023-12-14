@@ -89,8 +89,9 @@ public class FullRedBackdrop extends LinearOpMode {
                 .build();
 
         robot.setClawClosed();
-        sleep(2000);
+        sleep(1000);
         robot.moveBase(0.7);
+        robot.setCageDown();
 
         while (opModeInInit()) {
             randomization = camera.getRandomization();
@@ -129,6 +130,7 @@ public class FullRedBackdrop extends LinearOpMode {
         }
 
         robot.setRetracted();
+        robot.setCageUp();
 
         if (randomization == 0) {
             Actions.runBlocking(purpleA);
