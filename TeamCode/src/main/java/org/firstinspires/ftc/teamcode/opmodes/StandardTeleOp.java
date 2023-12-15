@@ -25,7 +25,7 @@ public class StandardTeleOp extends LinearOpMode {
         public static double INTAKE_UP = 0.2;
         public static double INTAKE_STACK_UP = 0.5;
         public static double INTAKE_HANG_UP = 0.1;
-        public static double INTAKE_DOWN = 0.6;
+        public static double INTAKE_DOWN = 0.595;
         public static double INTAKE_POWER = 0.6;
     //}
 
@@ -249,7 +249,7 @@ public class StandardTeleOp extends LinearOpMode {
                     armState = ArmStates.GROUND_STATE;
                 }
 
-                if (driver.dpad_down && !driver.dpad_down) {
+                if (driver.dpad_down && !previousDriver.dpad_down) {
                     armState = ArmStates.SCORING_LIFTED_STATE;
                     robot.setClawScoreOpen();
 

@@ -57,12 +57,14 @@ public class PropDetector extends OpenCvPipeline {
     Telemetry telemetry;
 
     String alliance = "red";
+    String side = "right";
 
     int randomization;
 
-    public PropDetector(Telemetry telemetry, String alliance) {
+    public PropDetector(Telemetry telemetry, String alliance, String side) {
         this.telemetry = telemetry;
         this.alliance = alliance;
+        this.side = side;
     }
 
     @Override
@@ -81,7 +83,7 @@ public class PropDetector extends OpenCvPipeline {
             Core.inRange(mat, new Scalar(lowBlueH, lowBlueS, lowBlueV), new Scalar(highBlueH, highBlueS, highBlueV), mat);
         }
 
-        if (alliance.equals("Red")) {
+        if (side.equals("Right")) {
             left = mat.submat(leftYRed, leftYRed + boxSize, leftXRed, leftXRed + boxSize);
             center = mat.submat(centerYRed, centerYRed + boxSize, centerXRed, centerXRed + boxSize);
             right = mat.submat(rightYRed, rightYRed + boxSize, rightXRed, rightXRed + boxSize);
@@ -95,7 +97,7 @@ public class PropDetector extends OpenCvPipeline {
         double centerAverage = Core.sumElems(center).val[0] / Math.pow(boxSize, 2) / 255.0;
         double rightAverage = Core.sumElems(right).val[0] / Math.pow(boxSize, 2) / 255.0;
 
-        if (alliance.equals("Red")) {
+        if (alliance.equals("Right")) {
             Imgproc.rectangle(mat, new Rect(leftXRed, leftYRed, boxSize, boxSize), new Scalar(255, 255, 255), 3);
             Imgproc.rectangle(mat, new Rect(centerXRed, centerYRed, boxSize, boxSize), new Scalar(255, 255, 255), 3);
             Imgproc.rectangle(mat, new Rect(rightXRed, rightYRed, boxSize, boxSize), new Scalar(255, 255, 255), 3);

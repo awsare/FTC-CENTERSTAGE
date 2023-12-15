@@ -34,7 +34,7 @@ public class FullBlueBackdrop extends LinearOpMode {
         robot = new Robot();
         robot.init(hardwareMap, false);
 
-        camera = new PropCamera(hardwareMap, telemetry, "Blue");
+        camera = new PropCamera(hardwareMap, telemetry, "Blue", "Left");
 
         Action act1 = drive.actionBuilder(drive.pose)
                 .strafeToConstantHeading(new Vector2d(14, 58))
@@ -43,12 +43,12 @@ public class FullBlueBackdrop extends LinearOpMode {
                 .build();
 
         Action goToYellowA = drive.actionBuilder(new Pose2d(35, 45, 0))
-                .strafeToConstantHeading(new Vector2d(35, 42.5))
-                .strafeToConstantHeading(new Vector2d(44.25, 42.5))
+                .strafeToConstantHeading(new Vector2d(35, 42.9))
+                .strafeToConstantHeading(new Vector2d(44.25, 42.9))
                 .build();
 
-        Action backYellowA = drive.actionBuilder(new Pose2d(44.25, 42.5, 0))
-                .strafeToConstantHeading(new Vector2d(40, 42.5))
+        Action backYellowA = drive.actionBuilder(new Pose2d(44.25, 42.9, 0))
+                .strafeToConstantHeading(new Vector2d(40, 42.9))
                 .build();
 
         Action goToYellowB = drive.actionBuilder(new Pose2d(35, 45, 0))
@@ -69,9 +69,9 @@ public class FullBlueBackdrop extends LinearOpMode {
                 .strafeToConstantHeading(new Vector2d(40, 31))
                 .build();
 
-        Action purpleA = drive.actionBuilder(new Pose2d(40, 42.5, 0))
+        Action purpleA = drive.actionBuilder(new Pose2d(40, 42.9, 0))
                 .strafeToConstantHeading(new Vector2d(30, 27))
-                .strafeToConstantHeading(new Vector2d(23, 27))
+                .strafeToConstantHeading(new Vector2d(20, 27))
                 .strafeToConstantHeading(new Vector2d(30, 27))
                 .strafeToConstantHeading(new Vector2d(53, 12))
                 .build();

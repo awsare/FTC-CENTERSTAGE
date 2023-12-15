@@ -32,7 +32,7 @@ public class FullRedBackdrop extends LinearOpMode {
         robot = new Robot();
         robot.init(hardwareMap, false);
 
-        camera = new PropCamera(hardwareMap, telemetry, "Red");
+        camera = new PropCamera(hardwareMap, telemetry, "Red", "Right");
 
         Action act1 = drive.actionBuilder(drive.pose)
                 .strafeToConstantHeading(new Vector2d(14, -58))
@@ -59,7 +59,7 @@ public class FullRedBackdrop extends LinearOpMode {
                 .build();
 
         Action goToYellowC = drive.actionBuilder(new Pose2d(35, -45, 0))
-                .strafeToConstantHeading(new Vector2d(35, -41.5))
+                .strafeToConstantHeading(new Vector2d(37.5, -41.5))
                 .strafeToConstantHeading(new Vector2d(44.25, -41.5))
                 .build();
 
