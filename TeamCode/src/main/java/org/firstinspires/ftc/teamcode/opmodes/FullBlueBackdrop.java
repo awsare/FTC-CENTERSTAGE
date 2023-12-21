@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.common.vision.PropCamera;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
 @Config
-@Autonomous
+@Autonomous(name = "Blue Backdrop \uD83D\uDC0B", group = "blue")
 public class FullBlueBackdrop extends LinearOpMode {
 
     MecanumDrive drive;
@@ -71,7 +71,7 @@ public class FullBlueBackdrop extends LinearOpMode {
 
         Action purpleA = drive.actionBuilder(new Pose2d(40, 42.9, 0))
                 .strafeToConstantHeading(new Vector2d(30, 27))
-                .strafeToConstantHeading(new Vector2d(20, 27))
+                .strafeToConstantHeading(new Vector2d(23, 27))
                 .strafeToConstantHeading(new Vector2d(30, 27))
                 .strafeToConstantHeading(new Vector2d(53, 12))
                 .build();

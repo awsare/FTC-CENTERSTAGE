@@ -14,8 +14,8 @@ import org.firstinspires.ftc.teamcode.common.vision.PropCamera;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
 @Config
-@Autonomous(name = "Red Wing (Purple) \uD83E\uDD91", group = "red")
-public class FullRedWing extends LinearOpMode {
+@Autonomous(name = "Blue Wing (Purple) \uD83D\uDC0B", group = "blue")
+public class FullBlueWing extends LinearOpMode {
 
     MecanumDrive drive;
     Robot robot;
@@ -23,7 +23,7 @@ public class FullRedWing extends LinearOpMode {
 
     int randomization = 0;
 
-    Pose2d startPose = new Pose2d(-37, -62, Math.PI / 2.0);
+    Pose2d startPose = new Pose2d(-37, 62, -Math.PI / 2.0);
 
     @Override
     public void runOpMode() {
@@ -31,19 +31,19 @@ public class FullRedWing extends LinearOpMode {
         robot = new Robot();
         robot.init(hardwareMap, false);
 
-        camera = new PropCamera(hardwareMap, telemetry, "Red", "Left");
+        camera = new PropCamera(hardwareMap, telemetry, "Blue", "Right");
 
-        Action toScoreA = drive.actionBuilder(drive.pose)
-                .strafeToConstantHeading(new Vector2d(-47, -49))
+        Action toScoreC = drive.actionBuilder(drive.pose)
+                .strafeToConstantHeading(new Vector2d(-47, 45))
                 .build();
 
         Action toScoreB = drive.actionBuilder(drive.pose)
-                .strafeToConstantHeading(new Vector2d(-41, -42))
+                .strafeToConstantHeading(new Vector2d(-41, 41))
                 .build();
 
-        Action toScoreC = drive.actionBuilder(drive.pose)
-                .strafeToConstantHeading(new Vector2d(-35, -43))
-                .turnTo(Math.toRadians(30))
+        Action toScoreA = drive.actionBuilder(drive.pose)
+                .strafeToConstantHeading(new Vector2d(-33, 43))
+                .turnTo(Math.toRadians(-30))
                 .build();
 
         robot.setClawClosed();

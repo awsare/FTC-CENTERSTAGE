@@ -56,8 +56,8 @@ public class PropDetector extends OpenCvPipeline {
 
     Telemetry telemetry;
 
-    String alliance = "red";
-    String side = "right";
+    String alliance;
+    String side;
 
     int randomization;
 
@@ -97,7 +97,7 @@ public class PropDetector extends OpenCvPipeline {
         double centerAverage = Core.sumElems(center).val[0] / Math.pow(boxSize, 2) / 255.0;
         double rightAverage = Core.sumElems(right).val[0] / Math.pow(boxSize, 2) / 255.0;
 
-        if (alliance.equals("Right")) {
+        if (side.equals("Right")) {
             Imgproc.rectangle(mat, new Rect(leftXRed, leftYRed, boxSize, boxSize), new Scalar(255, 255, 255), 3);
             Imgproc.rectangle(mat, new Rect(centerXRed, centerYRed, boxSize, boxSize), new Scalar(255, 255, 255), 3);
             Imgproc.rectangle(mat, new Rect(rightXRed, rightYRed, boxSize, boxSize), new Scalar(255, 255, 255), 3);

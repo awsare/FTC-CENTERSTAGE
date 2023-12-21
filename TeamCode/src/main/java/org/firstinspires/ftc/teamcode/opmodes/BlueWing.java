@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.common.Robot;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
 @Config
-@Autonomous
+@Autonomous(name = "Blue Wing (Park) \uD83D\uDC0B", group = "blue")
 public class BlueWing extends LinearOpMode {
 
     MecanumDrive drive;

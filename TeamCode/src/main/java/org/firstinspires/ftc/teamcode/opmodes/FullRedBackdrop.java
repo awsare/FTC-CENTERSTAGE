@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.common.vision.PropCamera;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
 @Config
-@Autonomous
+@Autonomous(name = "Red Backdrop \uD83E\uDD91", group = "red")
 public class FullRedBackdrop extends LinearOpMode {
 
     MecanumDrive drive;
@@ -68,9 +68,9 @@ public class FullRedBackdrop extends LinearOpMode {
                 .build();
 
         Action purpleA = drive.actionBuilder(new Pose2d(44.25, -29, 0))
-                .strafeToConstantHeading(new Vector2d(18, -32.5))
-                .strafeToConstantHeading(new Vector2d(0.5, -32.5))
-                .strafeToConstantHeading(new Vector2d(18, -32.5))
+                .strafeToConstantHeading(new Vector2d(18, -32))
+                .strafeToConstantHeading(new Vector2d(2, -32))
+                .strafeToConstantHeading(new Vector2d(18, -32))
                 .strafeToConstantHeading(new Vector2d(49, -14))
                 .build();
 
@@ -78,12 +78,12 @@ public class FullRedBackdrop extends LinearOpMode {
                 .strafeToConstantHeading(new Vector2d(20, -22))
                 .strafeToConstantHeading(new Vector2d(12, -22))
                 .strafeToConstantHeading(new Vector2d(20, -22))
-                .strafeToConstantHeading(new Vector2d(49, -14))
+                .strafeToConstantHeading(new Vector2d(49, -12))
                 .build();
 
         Action purpleC = drive.actionBuilder(new Pose2d(40, -41.5, 0))
                 .strafeToConstantHeading(new Vector2d(30, -27))
-                .strafeToConstantHeading(new Vector2d(20, -27))
+                .strafeToConstantHeading(new Vector2d(23, -27))
                 .strafeToConstantHeading(new Vector2d(30, -27))
                 .strafeToConstantHeading(new Vector2d(49, -14))
                 .build();

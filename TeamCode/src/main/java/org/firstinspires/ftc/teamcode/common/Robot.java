@@ -62,7 +62,7 @@ public class Robot {
     //}
 
     public static double CAGE_UP = 0.35;
-    public static double CAGE_DOWN = 0.2;
+    public static double CAGE_DOWN = 0.125;
 
     public static double LAUNCHER_SET = 0.9;
     public static double LAUNCHER_SHOOT = 0.2;

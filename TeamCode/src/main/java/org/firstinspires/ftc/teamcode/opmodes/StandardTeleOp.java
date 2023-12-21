@@ -129,13 +129,14 @@ public class StandardTeleOp extends LinearOpMode {
 
         if (driver.a && !previousDriver.a) {
             robot.setCageDown();
+            robot.setIntakeAngle(INTAKE_UP);
         }
 
         if (driver.b && !previousDriver.b) {
             robot.setCageUp();
         }
 
-        if (driver.dpad_up) {
+        if (driver.dpad_up && driver.left_bumper) {
             robot.shootLauncher();
         }
     }
