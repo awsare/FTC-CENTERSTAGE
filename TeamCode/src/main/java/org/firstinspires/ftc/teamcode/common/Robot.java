@@ -13,53 +13,37 @@ public class Robot {
     DcMotorEx leftFront, leftBack, rightBack, rightFront, DRFBLeft, DRFBRight, intake;
     Servo baseLeft, baseRight, topLeft, topRight, wrist, claw, intakeAngle, cage, launcher;
 
-    //public static class RETRACTED {
-        public static double RETRACTED_BASE = 0.875;
-        public static double RETRACTED_TOP = 0.19;
-        public static double RETRACTED_WRIST = 0.1;
-    //}
+    public static double RETRACTED_BASE = 0.875;
+    public static double RETRACTED_TOP = 0.19;
+    public static double RETRACTED_WRIST = 0.1;
 
-    //public static class RETRACTED_UP {
-        public static double RETRACTED_UP_BASE = 0.54;
-        public static double RETRACTED_UP_TOP = 0.24;
-        public static double RETRACTED_UP_WRIST = 0.05;
-    //}
+    public static double RETRACTED_UP_BASE = 0.54;
+    public static double RETRACTED_UP_TOP = 0.24;
+    public static double RETRACTED_UP_WRIST = 0.05;
 
-    //public static class RETRACTED_LOWERED {
-        public static double RETRACTED_LOWERED_BASE = 0.935;
-        public static double RETRACTED_LOWERED_TOP = 0.19;
-        public static double RETRACTED_LOWERED_WRIST = 0.05;
-    //}
+    public static double RETRACTED_LOWERED_BASE = 0.935;
+    public static double RETRACTED_LOWERED_TOP = 0.19;
+    public static double RETRACTED_LOWERED_WRIST = 0.05;
 
-    //public static class SCORING {
-        public static double SCORING_BASE = 0.54;
-        public static double SCORING_TOP = 0.96;
-        public static double SCORING_WRIST = 0.025;
-    //}
+    public static double SCORING_BASE = 0.53;
+    public static double SCORING_TOP = 0.96;
+    public static double SCORING_WRIST = 0.025;
 
-    //public static class SCORING_LIFTED {
-        public static double SCORING_LIFTED_BASE = 0.54;
-        public static double SCORING_LIFTED_TOP = 1.0;
-        public static double SCORING_LIFTED_WRIST = 0;
-    //}
+    public static double SCORING_LIFTED_BASE = 0.53;
+    public static double SCORING_LIFTED_TOP = 1.0;
+    public static double SCORING_LIFTED_WRIST = 0;
 
-    //public static class GROUND {
-        public static double GROUND_BASE = 0.5;
-        public static double GROUND_TOP = 0.725;
-        public static double GROUND_WRIST = 0.175;
-    //}
+    public static double GROUND_BASE = 0.5;
+    public static double GROUND_TOP = 0.725;
+    public static double GROUND_WRIST = 0.175;
 
-    //public static class GROUND_LOWERED {
-        public static double GROUND_LOWERED_BASE = 0.5;
-        public static double GROUND_LOWERED_TOP = 0.725;
-        public static double GROUND_LOWERED_WRIST = 0.175;
-    //}
+    public static double GROUND_LOWERED_BASE = 0.5;
+    public static double GROUND_LOWERED_TOP = 0.725;
+    public static double GROUND_LOWERED_WRIST = 0.175;
 
-    //public static class CLAW {
-        public static double CLAW_OPEN = 0.3;
-        public static double CLAW_SCORE_OPEN = 0.25;
-        public static double CLAW_CLOSED = 0.4;
-    //}
+    public static double CLAW_OPEN = 0.3;
+    public static double CLAW_SCORE_OPEN = 0.25;
+    public static double CLAW_CLOSED = 0.4;
 
     public static double CAGE_UP = 0.35;
     public static double CAGE_DOWN = 0.125;
