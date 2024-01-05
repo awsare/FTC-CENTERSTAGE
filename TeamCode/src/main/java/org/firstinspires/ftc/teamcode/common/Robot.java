@@ -17,21 +17,21 @@ public class Robot {
     public static double RETRACTED_TOP = 0.19;
     public static double RETRACTED_WRIST = 0.1;
 
-    public static double RETRACTED_UP_BASE = 0.54;
-    public static double RETRACTED_UP_TOP = 0.24;
-    public static double RETRACTED_UP_WRIST = 0.05;
+    public static double RETRACTED_UP_BASE = 0.8;
+    public static double RETRACTED_UP_TOP = 0.19;
+    public static double RETRACTED_UP_WRIST = 0.1;
 
     public static double RETRACTED_LOWERED_BASE = 0.935;
     public static double RETRACTED_LOWERED_TOP = 0.19;
     public static double RETRACTED_LOWERED_WRIST = 0.05;
 
-    public static double SCORING_BASE = 0.53;
-    public static double SCORING_TOP = 0.96;
-    public static double SCORING_WRIST = 0.025;
+    public static double SCORING_BASE = 0.45;
+    public static double SCORING_TOP = 1.0;
+    public static double SCORING_WRIST = 0.07;
 
-    public static double SCORING_LIFTED_BASE = 0.53;
+    public static double SCORING_LIFTED_BASE = 0.45;
     public static double SCORING_LIFTED_TOP = 1.0;
-    public static double SCORING_LIFTED_WRIST = 0;
+    public static double SCORING_LIFTED_WRIST = 0.07;
 
     public static double GROUND_BASE = 0.5;
     public static double GROUND_TOP = 0.725;

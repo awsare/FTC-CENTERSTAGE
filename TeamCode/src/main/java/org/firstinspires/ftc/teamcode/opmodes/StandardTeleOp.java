@@ -228,7 +228,7 @@ public class StandardTeleOp extends LinearOpMode {
 
                 break;
             case SCORING_STATE:
-                if (stateTime.time() < 0.35) {
+                if (stateTime.time() < 1.0) {
                     break;
                 }
 
