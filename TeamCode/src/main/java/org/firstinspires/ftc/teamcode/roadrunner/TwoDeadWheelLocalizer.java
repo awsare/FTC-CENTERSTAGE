@@ -21,8 +21,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 @Config
 public final class TwoDeadWheelLocalizer implements Localizer {
     public static class Params {
-        public double parYTicks = -11644.035753566328; // y position of the parallel encoder (in tick units)
-        public double perpXTicks = 9643.08861435489; // x position of the perpendicular encoder (in tick units)
+        public double parYTicks = -11826.151720638543; // y position of the parallel encoder (in tick units)
+        public double perpXTicks = 9743.986529954236; // x position of the perpendicular encoder (in tick units)
     }
 
     public static Params PARAMS = new Params();

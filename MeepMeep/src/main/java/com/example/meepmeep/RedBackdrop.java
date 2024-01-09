@@ -20,17 +20,16 @@ public class RedBackdrop {
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 17)
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(62, 14, 0))
-                                .strafeTo(new Vector2d(58, 14))
-                                .strafeTo(new Vector2d(45, 35))
-                                .turn(Math.PI / 2.0)
-                                .strafeTo(new Vector2d(27.5, 35))
-                                .strafeTo(new Vector2d(27.25, 44.25))
-                                .strafeTo(new Vector2d(27.5, 40))
-                                .strafeTo(new Vector2d(34, 18))
-                                .strafeTo(new Vector2d(34, 0))
-                                .strafeTo(new Vector2d(34, 18))
-                                .strafeTo(new Vector2d(8, 53))
+                        drive.trajectorySequenceBuilder(new Pose2d(62, -32, 0))
+                                .strafeTo(new Vector2d(44, -50))
+                                .strafeTo(new Vector2d(6, -50))
+                                .strafeTo(new Vector2d(10, -35))
+                                .turn(Math.toRadians(-35))
+                                .turn(Math.toRadians(125))
+                                .strafeTo(new Vector2d(10, 40))
+                                .strafeTo(new Vector2d(29, 40))
+                                .strafeTo(new Vector2d(29, 42))
+                                .strafeTo(new Vector2d(29, 40))
                                 .build()
                 );
 
