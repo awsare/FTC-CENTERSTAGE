@@ -26,8 +26,8 @@ public class RedWing extends LinearOpMode {
     @Override
     public void runOpMode() {
         drive = new MecanumDrive(hardwareMap, startPose);
-        //robot = new Robot();
-        //robot.init(hardwareMap, false);
+        robot = new Robot();
+        robot.init(hardwareMap, false);
 
         Action toBackstage = drive.actionBuilder(drive.pose)
 //                .strafeToConstantHeading(new Vector2d(-37, -17))
@@ -38,11 +38,22 @@ public class RedWing extends LinearOpMode {
                 .strafeTo(new Vector2d(0, 0))
                 .build();
 
+        while (opModeInInit()) {
+            robot.setRetracted();
+        }
+
         waitForStart();
 
         //robot.setIntakeAngle(StandardTeleOp.INTAKE_UP);
         //robot.setRetracted();
 
-        Actions.runBlocking(toBackstage);
+        //Actions.runBlocking(toBackstage);
+
+        robot.setRetracted();
+        sleep(2000);
+        robot.setRetractedUp();
+        sleep(2000);
+        robot.setScoring();
+        sleep(2000);
     }
 }

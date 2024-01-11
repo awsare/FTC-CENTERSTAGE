@@ -49,17 +49,16 @@ public class NewFullRedBackdrop extends LinearOpMode {
 
         Action act32 = drive.actionBuilder(new Pose2d(23, -48, Math.toRadians(90)))
                 .strafeTo(new Vector2d(30, -48))
-                .strafeToLinearHeading(new Vector2d(44.25, -41.5), 0)
-                .strafeTo(new Vector2d(37, -41.5))
+                .strafeToLinearHeading(new Vector2d(37, -41.5), 0)
                 .build();
 
-        Action act33 = drive.actionBuilder(new Pose2d(37, -41.5, Math.toRadians(90)))
+        Action act33 = drive.actionBuilder(new Pose2d(37, -41.5, 0))
                 .strafeTo(new Vector2d(39, -41.5))
                 .build();
 
-        Action act34 = drive.actionBuilder(new Pose2d(39, -41.5, Math.toRadians(90)))
+        Action act34 = drive.actionBuilder(new Pose2d(39, -41.5, 0))
                 .strafeTo(new Vector2d(37, -41.5))
-                .strafeTo(new Vector2d(10, -41.5))
+                .strafeTo(new Vector2d(37, -10))
                 .build();
 
         robot.setClawClosed();
@@ -94,9 +93,9 @@ public class NewFullRedBackdrop extends LinearOpMode {
 
         Actions.runBlocking(act32);
 
-        robot.setDrivePowers(-0.3, -0.3, -0.3, -0.3);
-        sleep(200);
-        robot.setDrivePowers(0, 0, 0, 0);
+        drive.SETRAWDRIVEPOWERS(-0.3);
+        sleep(500);
+        drive.SETRAWDRIVEPOWERS(0);
 
         robot.setRetracted();
         sleep(1000);
@@ -107,9 +106,11 @@ public class NewFullRedBackdrop extends LinearOpMode {
         robot.setClawClosed();
         sleep(100);
         robot.setRetractedUp();
-        sleep(600);
-        robot.setScoring();
-        sleep(600);
+        sleep(1000);
+        robot.moveBase(0.54);
+        robot.moveTop(0.96);
+        robot.moveWrist(0.025);
+        sleep(1000);
 
         Actions.runBlocking(act33);
 

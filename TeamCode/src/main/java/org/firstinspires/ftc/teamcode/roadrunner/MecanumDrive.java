@@ -64,7 +64,7 @@ public final class MecanumDrive {
         // drive model parameters
         public double inPerTick = 0.0005715460604;
         public double lateralInPerTick = 0.0003710958185777492;
-        public double trackWidthTicks = 26119.08193564408;
+        public double trackWidthTicks = 14.536 / inPerTick; //26119.08193564408;
 
         // feedforward parameters (in tick units)
         public double kV = 0.0000735;
@@ -72,13 +72,13 @@ public final class MecanumDrive {
         public double kA = 0.00002;
 
         // path profile parameters (in inches)
-        public double maxWheelVel = 40;
-        public double minProfileAccel = -30;
-        public double maxProfileAccel = 30;
+        public double maxWheelVel = 35;
+        public double minProfileAccel = -25;
+        public double maxProfileAccel = 25;
 
         // turn profile parameters (in radians)
-        public double maxAngVel = Math.PI; // shared with path
-        public double maxAngAccel = Math.PI;
+        public double maxAngVel = Math.PI / 2; // shared with path
+        public double maxAngAccel = Math.PI / 2;
 
         // path controller gains
         public double axialGain = 5.0;
@@ -244,6 +244,14 @@ public final class MecanumDrive {
         leftBack.setPower(wheelVels.leftBack.get(0) / maxPowerMag);
         rightBack.setPower(wheelVels.rightBack.get(0) / maxPowerMag);
         rightFront.setPower(wheelVels.rightFront.get(0) / maxPowerMag);
+    }
+
+    // CUSTOM
+    public void SETRAWDRIVEPOWERS(double powers) {
+        leftFront.setPower(powers);
+        leftBack.setPower(powers);
+        rightFront.setPower(powers);
+        rightBack.setPower(powers);
     }
 
     public final class FollowTrajectoryAction implements Action {
