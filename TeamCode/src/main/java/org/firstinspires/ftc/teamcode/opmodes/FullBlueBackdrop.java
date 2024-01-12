@@ -119,7 +119,6 @@ public class FullBlueBackdrop extends LinearOpMode {
             Actions.runBlocking(goToYellowC);
         }
 
-        robot.setScoringLifted();
         robot.setClawScoreOpen();
         sleep(900);
 

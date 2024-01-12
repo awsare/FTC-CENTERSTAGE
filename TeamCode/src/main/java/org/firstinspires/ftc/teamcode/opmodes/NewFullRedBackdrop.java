@@ -24,7 +24,7 @@ public class NewFullRedBackdrop extends LinearOpMode {
 
     int randomization = 0;
 
-    Pose2d startPose = new Pose2d(14, -62, Math.PI / 2.0);
+    Pose2d startPose = new Pose2d(13, -62, Math.PI / 2.0);
 
     @Override
     public void runOpMode() {
@@ -33,55 +33,97 @@ public class NewFullRedBackdrop extends LinearOpMode {
         robot = new Robot();
         robot.init(hardwareMap, false);
 
-        //camera = new PropCamera(hardwareMap, telemetry, "Red", "Right");
+        camera = new PropCamera(hardwareMap, telemetry, "Red", "Right");
 
         Action act11 = drive.actionBuilder(drive.pose)
-                .strafeToLinearHeading(new Vector2d(12, -42), Math.toRadians(150))
+                .strafeToLinearHeading(new Vector2d(12, -41), Math.toRadians(150))
+                .build();
+
+        Action act12 = drive.actionBuilder(new Pose2d(12, -41, Math.toRadians(150)))
+                .strafeToLinearHeading(new Vector2d(47, -28), 0)
+                .build();
+
+        Action act13 = drive.actionBuilder(new Pose2d(47, -28, 0))
+                .strafeTo(new Vector2d(46, -28))
+                .build();
+
+        Action act14 = drive.actionBuilder(new Pose2d(46, -28, 0))
+                .strafeTo(new Vector2d(42, -28))
+                .build();
+
+        Action act15 = drive.actionBuilder(new Pose2d(42, -28, 0))
+                .strafeTo(new Vector2d(46, -62))
                 .build();
 
         Action act21 = drive.actionBuilder(drive.pose)
-                .strafeToLinearHeading(new Vector2d(18, -38), Math.toRadians(90))
+                .strafeTo(new Vector2d(15, -38))
+                .build();
+
+        Action act22 = drive.actionBuilder(new Pose2d(15, -38, Math.toRadians(90)))
+                .strafeToLinearHeading(new Vector2d(47, -36), 0)
+                .build();
+
+        Action act23 = drive.actionBuilder(new Pose2d(47, -36, 0))
+                .strafeTo(new Vector2d(46, -36))
+                .build();
+
+        Action act24 = drive.actionBuilder(new Pose2d(46, -36, 0))
+                .strafeTo(new Vector2d(42, -36))
+                .build();
+
+        Action act25 = drive.actionBuilder(new Pose2d(42, -36, 0))
+                .strafeTo(new Vector2d(46, -62))
                 .build();
 
         Action act31 = drive.actionBuilder(drive.pose)
-                .strafeToLinearHeading(new Vector2d(23, -48), Math.toRadians(90))
+                .strafeToLinearHeading(new Vector2d(22, -48), Math.toRadians(90))
                 .build();
 
-        Action act32 = drive.actionBuilder(new Pose2d(23, -48, Math.toRadians(90)))
+        Action act32 = drive.actionBuilder(new Pose2d(22, -48, Math.toRadians(90)))
                 .strafeTo(new Vector2d(30, -48))
-                .strafeToLinearHeading(new Vector2d(37, -41.5), 0)
+                .strafeToLinearHeading(new Vector2d(47, -41.5), 0)
                 .build();
 
-        Action act33 = drive.actionBuilder(new Pose2d(37, -41.5, 0))
-                .strafeTo(new Vector2d(39, -41.5))
+        // lowkey idk
+        Action act33 = drive.actionBuilder(new Pose2d(47, -41.5, 0))
+                .strafeTo(new Vector2d(46, -41.5))
                 .build();
 
-        Action act34 = drive.actionBuilder(new Pose2d(39, -41.5, 0))
-                .strafeTo(new Vector2d(37, -41.5))
-                .strafeTo(new Vector2d(37, -10))
+        Action act34 = drive.actionBuilder(new Pose2d(46, -41.5, 0))
+                .strafeTo(new Vector2d(42, -41.5))
                 .build();
 
+        Action act35 = drive.actionBuilder(new Pose2d(42, -41.5, 0))
+                .strafeTo(new Vector2d(46, -62))
+                .build();
+
+        robot.setCageDown();
         robot.setClawClosed();
         sleep(1000);
-        robot.moveBase(0.7);
-        robot.setCageDown();
+        robot.moveBase(0.5);
 
         while (opModeInInit()) {
-//            randomization = camera.getRandomization();
-//            telemetry.addData("Randomization", randomization);
-//            telemetry.update();
+            randomization = camera.getRandomization();
+            telemetry.addData("Randomization", randomization);
+            telemetry.update();
         }
 
         waitForStart();
 
-        //camera.stopStreaming();
+        camera.stopStreaming();
 
         telemetry.addData("Randomization", randomization);
         telemetry.update();
 
-        Actions.runBlocking(act31);
+        if (randomization == 0) {
+            Actions.runBlocking(act11);
+        } else if (randomization == 1) {
+            Actions.runBlocking(act21);
+        } else {
+            Actions.runBlocking(act31);
+        }
 
-        robot.moveBase(0.5);
+        robot.moveBase(0.15);
         robot.moveWrist(0.05);
         robot.moveTop(0.7);
         sleep(1500);
@@ -89,9 +131,16 @@ public class NewFullRedBackdrop extends LinearOpMode {
         sleep(1000);
         robot.setClawClosed();
         robot.setRetracted();
+        robot.moveBase(0.7);
         sleep(1000);
 
-        Actions.runBlocking(act32);
+        if (randomization == 0) {
+            Actions.runBlocking(act12);
+        } else if (randomization == 1) {
+            Actions.runBlocking(act22);
+        } else {
+            Actions.runBlocking(act32);
+        }
 
         drive.SETRAWDRIVEPOWERS(-0.3);
         sleep(500);
@@ -102,24 +151,44 @@ public class NewFullRedBackdrop extends LinearOpMode {
         robot.setClawOpen();
         sleep(100);
         robot.setRetractedLowered();
-        sleep(500);
+        sleep(700);
         robot.setClawClosed();
-        sleep(100);
+        sleep(200);
         robot.setRetractedUp();
-        sleep(1000);
-        robot.moveBase(0.54);
-        robot.moveTop(0.96);
+        sleep(900);
+        robot.moveBase(0.175);
+        robot.moveTop(0.95);
         robot.moveWrist(0.025);
-        sleep(1000);
+        sleep(1300);
 
-        Actions.runBlocking(act33);
+        if (randomization == 0) {
+            Actions.runBlocking(act13);
+        } else if (randomization == 1) {
+            Actions.runBlocking(act23);
+        } else {
+            Actions.runBlocking(act33);
+        }
 
         robot.setClawOpen();
-        sleep(500);
+        sleep(800);
 
-        Actions.runBlocking(act34);
+        if (randomization == 0) {
+            Actions.runBlocking(act14);
+        } else if (randomization == 1) {
+            Actions.runBlocking(act24);
+        } else {
+            Actions.runBlocking(act34);
+        }
 
         robot.setRetracted();
-        sleep(1000);
+        sleep(500);
+
+        if (randomization == 0) {
+            Actions.runBlocking(act15);
+        } else if (randomization == 1) {
+            Actions.runBlocking(act25);
+        } else {
+            Actions.runBlocking(act35);
+        }
     }
 }

@@ -13,33 +13,21 @@ public class Robot {
     DcMotorEx leftFront, leftBack, rightBack, rightFront, DRFBLeft, DRFBRight, intake;
     Servo baseLeft, baseRight, topLeft, topRight, wrist, claw, intakeAngle, cage, launcher;
 
-    public static double RETRACTED_BASE = 0.875;
+    public static double RETRACTED_BASE = 0.8;
     public static double RETRACTED_TOP = 0.19;
     public static double RETRACTED_WRIST = 0.1;
 
-    public static double RETRACTED_UP_BASE = 0.8;
+    public static double RETRACTED_UP_BASE = 0.7;
     public static double RETRACTED_UP_TOP = 0.19;
     public static double RETRACTED_UP_WRIST = 0.1;
 
-    public static double RETRACTED_LOWERED_BASE = 0.935;
+    public static double RETRACTED_LOWERED_BASE = 0.87;
     public static double RETRACTED_LOWERED_TOP = 0.19;
     public static double RETRACTED_LOWERED_WRIST = 0.05;
 
-    public static double SCORING_BASE = 0.45;
+    public static double SCORING_BASE = 0.0;
     public static double SCORING_TOP = 1.0;
     public static double SCORING_WRIST = 0.07;
-
-    public static double SCORING_LIFTED_BASE = 0.45;
-    public static double SCORING_LIFTED_TOP = 1.0;
-    public static double SCORING_LIFTED_WRIST = 0.07;
-
-    public static double GROUND_BASE = 0.5;
-    public static double GROUND_TOP = 0.725;
-    public static double GROUND_WRIST = 0.175;
-
-    public static double GROUND_LOWERED_BASE = 0.5;
-    public static double GROUND_LOWERED_TOP = 0.725;
-    public static double GROUND_LOWERED_WRIST = 0.175;
 
     public static double CLAW_OPEN = 0.3;
     public static double CLAW_SCORE_OPEN = 0.25;
@@ -177,21 +165,7 @@ public class Robot {
         moveWrist(SCORING_WRIST);
     }
 
-    public void setScoringLifted() {
-        moveBase(SCORING_LIFTED_BASE);
-        moveTop(SCORING_LIFTED_TOP);
-        moveWrist(SCORING_LIFTED_WRIST);
-    }
-
-    public void setGround() {
-        moveBase(GROUND_BASE);
-        moveTop(GROUND_TOP);
-        moveWrist(GROUND_WRIST);
-    }
-
-    public void setGroundLowered() {
-        moveBase(GROUND_LOWERED_BASE);
-        moveTop(GROUND_LOWERED_TOP);
-        moveWrist(GROUND_LOWERED_WRIST);
+    public void setScoringIn() {
+        moveBase(0.5);
     }
 }
