@@ -33,8 +33,8 @@ public class Robot {
     public static double CLAW_SCORE_OPEN = 0.25;
     public static double CLAW_CLOSED = 0.4;
 
-    public static double CAGE_UP = 0.35;
-    public static double CAGE_DOWN = 0.125;
+    public static double CAGE_UP = 0.575;
+    public static double CAGE_DOWN = 0.4;
 
     public static double LAUNCHER_SET = 0.9;
     public static double LAUNCHER_SHOOT = 0.2;

@@ -14,8 +14,8 @@ import org.firstinspires.ftc.teamcode.common.vision.PropCamera;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
 @Config
-@Autonomous(name = "Red Wing (Purple) \uD83E\uDD91", group = "red")
-public class FullRedWing extends LinearOpMode {
+@Autonomous(name = "New Blue Wing \uD83D\uDC0B", group = "blue")
+public class NewBlueWing extends LinearOpMode {
 
     MecanumDrive drive;
     Robot robot;
@@ -23,33 +23,33 @@ public class FullRedWing extends LinearOpMode {
 
     int randomization = 0;
 
-    Pose2d startPose = new Pose2d(-37, -62, Math.PI / 2.0);
+    Pose2d startPose = new Pose2d(13, -62, Math.PI / 2.0);
 
     @Override
     public void runOpMode() {
         drive = new MecanumDrive(hardwareMap, startPose);
+
         robot = new Robot();
         robot.init(hardwareMap, false);
 
-        camera = new PropCamera(hardwareMap, telemetry, "Red", "Left");
+        camera = new PropCamera(hardwareMap, telemetry, "Blue", "Right");
 
-        Action toScoreA = drive.actionBuilder(drive.pose)
-                .strafeToConstantHeading(new Vector2d(-47, -49))
+        Action act11 = drive.actionBuilder(drive.pose)
+                .strafeToLinearHeading(new Vector2d(12, -41), Math.toRadians(150))
                 .build();
 
-        Action toScoreB = drive.actionBuilder(drive.pose)
-                .strafeToConstantHeading(new Vector2d(-41, -42))
+        Action act21 = drive.actionBuilder(drive.pose)
+                .strafeTo(new Vector2d(15, -38))
                 .build();
 
-        Action toScoreC = drive.actionBuilder(drive.pose)
-                .strafeToConstantHeading(new Vector2d(-35, -43))
-                .turnTo(Math.toRadians(30))
+        Action act31 = drive.actionBuilder(drive.pose)
+                .strafeTo(new Vector2d(22, -48))
                 .build();
 
+        robot.setCageDown();
         robot.setClawClosed();
         sleep(1000);
-        robot.moveBase(0.7);
-        robot.setCageDown();
+        robot.moveBase(0.5);
 
         while (opModeInInit()) {
             randomization = camera.getRandomization();
@@ -59,16 +59,22 @@ public class FullRedWing extends LinearOpMode {
 
         waitForStart();
 
+        camera.stopStreaming();
+
+        telemetry.addData("Randomization", randomization);
+        telemetry.update();
+
         if (randomization == 0) {
-            Actions.runBlocking(toScoreA);
+            Actions.runBlocking(act11);
         } else if (randomization == 1) {
-            Actions.runBlocking(toScoreB);
+            Actions.runBlocking(act21);
         } else {
-            Actions.runBlocking(toScoreC);
+            Actions.runBlocking(act31);
         }
 
-        robot.setScoring();
-        robot.moveTop(0.7);
+        robot.moveBase(0.07);
+        robot.moveWrist(0.1);
+        robot.moveTop(0.66);
         sleep(1500);
         robot.setClawScoreOpen();
         sleep(1000);

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes;
+package org.firstinspires.ftc.teamcode.opmodes.old;
 
 
 import com.acmerobotics.dashboard.config.Config;
@@ -7,12 +7,14 @@ import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.common.Robot;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
 @Config
+@Disabled
 @Autonomous(name = "Red Wing (Park) \uD83E\uDD91", group = "red")
 public class RedWing extends LinearOpMode {
 
