@@ -55,6 +55,7 @@ public class StandardTeleOp extends LinearOpMode {
         robot.init(hardwareMap, true);
         robot.setClawClosed();
         robot.setLauncher();
+        robot.setCageUp();
 
         previousDriver = new Gamepad();
         previousOperator = new Gamepad();
