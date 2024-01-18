@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.common.vision.PropCamera;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
 @Config
-@Autonomous(name = "New Red Wing \uD83E\uDD91", group = "red")
+@Autonomous(name = "New Purple Red Wing \uD83E\uDD91", group = "red")
 public class NewRedWing extends LinearOpMode {
 
     MecanumDrive drive;

@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.common.Robot;
 
 @Config
-@TeleOp(name = "Driver Control \uD83C\uDFAE")
+@TeleOp(name = "TeleOp \uD83C\uDFAE")
 public class StandardTeleOp extends LinearOpMode {
 
     public double LOW_SPEED = 0.375;

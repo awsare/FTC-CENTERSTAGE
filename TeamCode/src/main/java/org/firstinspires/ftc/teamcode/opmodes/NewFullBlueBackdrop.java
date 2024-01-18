@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.common.vision.PropCamera;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
 @Config
-@Autonomous(name = "New Blue Backdrop \uD83D\uDC0B", group = "blue")
+@Autonomous(name = "New Full Blue Backdrop \uD83D\uDC0B", group = "blue")
 public class NewFullBlueBackdrop extends LinearOpMode {
 
     MecanumDrive drive;
