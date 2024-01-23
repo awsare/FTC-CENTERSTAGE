@@ -14,8 +14,8 @@ import org.firstinspires.ftc.teamcode.common.vision.PropCamera;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
 @Config
-@Autonomous(name = "New Full Blue Backdrop \uD83D\uDC0B", group = "blue")
-public class NewFullBlueBackdrop extends LinearOpMode {
+@Autonomous(name = "New Full Red Backdrop \uD83E\uDD91", group = "red")
+public class RedBackdrop extends LinearOpMode {
 
     MecanumDrive drive;
     Robot robot;
@@ -23,7 +23,7 @@ public class NewFullBlueBackdrop extends LinearOpMode {
 
     int randomization = 0;
 
-    Pose2d startPose = new Pose2d(13, 62, -Math.PI / 2.0);
+    Pose2d startPose = new Pose2d(13, -62, Math.PI / 2.0);
 
     @Override
     public void runOpMode() {
@@ -32,68 +32,68 @@ public class NewFullBlueBackdrop extends LinearOpMode {
         robot = new Robot();
         robot.init(hardwareMap, false);
 
-        camera = new PropCamera(hardwareMap, telemetry, "Blue", "Left");
+        camera = new PropCamera(hardwareMap, telemetry, "Red", "Right");
 
         Action act11 = drive.actionBuilder(drive.pose)
-                .strafeToLinearHeading(new Vector2d(12, 41), Math.toRadians(-150))
+                .strafeToLinearHeading(new Vector2d(12, -41), Math.toRadians(150))
                 .build();
 
-        Action act12 = drive.actionBuilder(new Pose2d(12, 41, Math.toRadians(-150)))
-                .strafeToLinearHeading(new Vector2d(47, 32), 0)
+        Action act12 = drive.actionBuilder(new Pose2d(12, -41, Math.toRadians(150)))
+                .strafeToLinearHeading(new Vector2d(47, -28), 0)
                 .build();
 
-        Action act13 = drive.actionBuilder(new Pose2d(47, 32, 0))
-                .strafeTo(new Vector2d(44, 32))
+        Action act13 = drive.actionBuilder(new Pose2d(47, -28, 0))
+                .strafeTo(new Vector2d(44, -28))
                 .build();
 
-        Action act14 = drive.actionBuilder(new Pose2d(44, 32, 0))
-                .strafeTo(new Vector2d(42, 32))
+        Action act14 = drive.actionBuilder(new Pose2d(44, -28, 0))
+                .strafeTo(new Vector2d(42, -28))
                 .build();
 
-        Action act15 = drive.actionBuilder(new Pose2d(42, 32, 0))
-                .strafeTo(new Vector2d(46, 62))
+        Action act15 = drive.actionBuilder(new Pose2d(42, -28, 0))
+                .strafeTo(new Vector2d(46, -62))
                 .build();
 
         Action act21 = drive.actionBuilder(drive.pose)
-                .strafeTo(new Vector2d(17, 38))
+                .strafeTo(new Vector2d(15, -38))
                 .build();
 
-        Action act22 = drive.actionBuilder(new Pose2d(17, 38, Math.toRadians(-90)))
-                .strafeToLinearHeading(new Vector2d(47, 40), 0)
+        Action act22 = drive.actionBuilder(new Pose2d(15, -38, Math.toRadians(90)))
+                .strafeToLinearHeading(new Vector2d(47, -36), 0)
                 .build();
 
-        Action act23 = drive.actionBuilder(new Pose2d(47, 40, 0))
-                .strafeTo(new Vector2d(44, 40))
+        Action act23 = drive.actionBuilder(new Pose2d(47, -36, 0))
+                .strafeTo(new Vector2d(44, -36))
                 .build();
 
-        Action act24 = drive.actionBuilder(new Pose2d(44, 40, 0))
-                .strafeTo(new Vector2d(42, 40))
+        Action act24 = drive.actionBuilder(new Pose2d(44, -36, 0))
+                .strafeTo(new Vector2d(42, -36))
                 .build();
 
-        Action act25 = drive.actionBuilder(new Pose2d(42, 40, 0))
-                .strafeTo(new Vector2d(46, 62))
+        Action act25 = drive.actionBuilder(new Pose2d(42, -36, 0))
+                .strafeTo(new Vector2d(46, -62))
                 .build();
 
         Action act31 = drive.actionBuilder(drive.pose)
-                .strafeTo(new Vector2d(23.5, 48))
+                .strafeTo(new Vector2d(22, -48))
                 .build();
 
-        Action act32 = drive.actionBuilder(new Pose2d(23.5, 48, Math.toRadians(-90)))
-                .strafeTo(new Vector2d(30, 48))
-                .strafeToLinearHeading(new Vector2d(47, 45), 0)
+        Action act32 = drive.actionBuilder(new Pose2d(22, -48, Math.toRadians(90)))
+                .strafeTo(new Vector2d(30, -48))
+                .strafeToLinearHeading(new Vector2d(47, -41.5), 0)
                 .build();
 
         // lowkey idk
-        Action act33 = drive.actionBuilder(new Pose2d(47, 45, 0))
-                .strafeTo(new Vector2d(44, 45))
+        Action act33 = drive.actionBuilder(new Pose2d(47, -41.5, 0))
+                .strafeTo(new Vector2d(44, -41.5))
                 .build();
 
-        Action act34 = drive.actionBuilder(new Pose2d(44, 45, 0))
-                .strafeTo(new Vector2d(42, 45))
+        Action act34 = drive.actionBuilder(new Pose2d(44, -41.5, 0))
+                .strafeTo(new Vector2d(42, -41.5))
                 .build();
 
-        Action act35 = drive.actionBuilder(new Pose2d(42, 45, 0))
-                .strafeTo(new Vector2d(46, 62))
+        Action act35 = drive.actionBuilder(new Pose2d(42, -41.5, 0))
+                .strafeTo(new Vector2d(46, -62))
                 .build();
 
         robot.setCageDown();
@@ -114,7 +114,7 @@ public class NewFullBlueBackdrop extends LinearOpMode {
         telemetry.addData("Randomization", randomization);
         telemetry.update();
 
-        if (randomization == 2) {
+        if (randomization == 0) {
             Actions.runBlocking(act11);
         } else if (randomization == 1) {
             Actions.runBlocking(act21);
@@ -133,7 +133,7 @@ public class NewFullBlueBackdrop extends LinearOpMode {
         robot.moveBase(0.7);
         sleep(1000);
 
-        if (randomization == 2) {
+        if (randomization == 0) {
             Actions.runBlocking(act12);
         } else if (randomization == 1) {
             Actions.runBlocking(act22);
@@ -160,7 +160,7 @@ public class NewFullBlueBackdrop extends LinearOpMode {
         robot.moveWrist(0.025);
         sleep(1300);
 
-        if (randomization == 2) {
+        if (randomization == 0) {
             Actions.runBlocking(act13);
         } else if (randomization == 1) {
             Actions.runBlocking(act23);
@@ -171,7 +171,7 @@ public class NewFullBlueBackdrop extends LinearOpMode {
         robot.setClawOpen();
         sleep(800);
 
-        if (randomization == 2) {
+        if (randomization == 0) {
             Actions.runBlocking(act14);
         } else if (randomization == 1) {
             Actions.runBlocking(act24);
@@ -182,7 +182,7 @@ public class NewFullBlueBackdrop extends LinearOpMode {
         robot.setRetracted();
         sleep(500);
 
-        if (randomization == 2) {
+        if (randomization == 0) {
             Actions.runBlocking(act15);
         } else if (randomization == 1) {
             Actions.runBlocking(act25);

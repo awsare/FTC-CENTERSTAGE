@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
 @Config
 @Autonomous(name = "New Purple Red Wing \uD83E\uDD91", group = "red")
-public class NewRedWing extends LinearOpMode {
+public class RedWing extends LinearOpMode {
 
     MecanumDrive drive;
     Robot robot;
@@ -23,7 +23,7 @@ public class NewRedWing extends LinearOpMode {
 
     int randomization = 0;
 
-    Pose2d startPose = new Pose2d(13, 62, -Math.PI / 2.0);
+    Pose2d startPose = new Pose2d(-37, 62, -Math.PI / 2.0);
 
     @Override
     public void runOpMode() {
@@ -35,15 +35,15 @@ public class NewRedWing extends LinearOpMode {
         camera = new PropCamera(hardwareMap, telemetry, "Red", "Left");
 
         Action act11 = drive.actionBuilder(drive.pose)
-                .strafeToLinearHeading(new Vector2d(12, 41), Math.toRadians(-150))
+                .strafeToLinearHeading(new Vector2d(-38, 41), Math.toRadians(-150))
                 .build();
 
         Action act21 = drive.actionBuilder(drive.pose)
-                .strafeTo(new Vector2d(17, 38))
+                .strafeTo(new Vector2d(-33, 38))
                 .build();
 
         Action act31 = drive.actionBuilder(drive.pose)
-                .strafeTo(new Vector2d(23.5, 48))
+                .strafeTo(new Vector2d(-26.5, 48))
                 .build();
 
         robot.setCageDown();
@@ -81,5 +81,7 @@ public class NewRedWing extends LinearOpMode {
         robot.setClawClosed();
         robot.setRetracted();
         sleep(1000);
+
+        // STOP FOR PURPLE HERE
     }
 }

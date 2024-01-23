@@ -31,7 +31,7 @@ public class StandardTeleOp extends LinearOpMode {
         RETRACTED_STATE,
         RETRACTED_LOWERED_STATE,
         SCORING_STATE,
-    };
+    }
 
     ArmStates armState;
 
