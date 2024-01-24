@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class Robot {
 
     DcMotorEx leftFront, leftBack, rightBack, rightFront, DRFBLeft, DRFBRight, intake;
-    Servo baseLeft, baseRight, topLeft, topRight, wrist, claw, intakeLeft, intakeRight, cage, launcher;
+    Servo baseLeft, baseRight, topLeft, topRight, wrist, claw, intakeLeft, intakeRight, launcher;
 
     public static double RETRACTED_BASE = 0.8;
     public static double RETRACTED_TOP = 0.19;
@@ -67,7 +67,6 @@ public class Robot {
         claw = hardwareMap.get(Servo.class, "claw");
         intakeLeft = hardwareMap.get(Servo.class, "intakeLeft");
         intakeRight = hardwareMap.get(Servo.class, "intakeRight");
-        cage = hardwareMap.get(Servo.class, "cage");
         launcher = hardwareMap.get(Servo.class, "launcher");
 
         DRFBRight.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -83,14 +82,6 @@ public class Robot {
         this.rightFront.setPower(rightFront);
     }
 
-    public void setCageUp() {
-        cage.setPosition(CAGE_UP);
-    }
-
-    public void setCageDown() {
-        cage.setPosition(CAGE_DOWN);
-    }
-
     public void setLauncher() {
         launcher.setPosition(LAUNCHER_SET);
     }
@@ -104,7 +95,8 @@ public class Robot {
     }
 
     public void setIntakeAngle(double angle) {
-        intakeAngle.setPosition(angle);
+        intakeLeft.setPosition(angle);
+        intakeRight.setPosition(angle);
     }
 
     public void moveBase(double position) {
