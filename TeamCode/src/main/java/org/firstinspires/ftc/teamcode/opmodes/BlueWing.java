@@ -46,7 +46,6 @@ public class BlueWing extends LinearOpMode {
                 .strafeTo(new Vector2d(22, -48))
                 .build();
 
-        robot.setCageDown();
         robot.setClawClosed();
         sleep(1000);
         robot.moveBase(0.5);

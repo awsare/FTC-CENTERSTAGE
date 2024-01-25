@@ -39,7 +39,6 @@ public class BlueWing extends LinearOpMode {
 
         waitForStart();
 
-        robot.setIntakeAngle(StandardTeleOp.INTAKE_UP);
         robot.setRetracted();
 
         Actions.runBlocking(toBackstage);

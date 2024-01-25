@@ -13,17 +13,17 @@ public class Robot {
     DcMotorEx leftFront, leftBack, rightBack, rightFront, DRFBLeft, DRFBRight, intake;
     Servo baseLeft, baseRight, topLeft, topRight, wrist, claw, intakeLeft, intakeRight, launcher;
 
-    public static double RETRACTED_BASE = 0.8;
-    public static double RETRACTED_TOP = 0.19;
-    public static double RETRACTED_WRIST = 0.1;
+    public static double RETRACTED_BASE = 0.7;
+    public static double RETRACTED_TOP = 0.25;
+    public static double RETRACTED_WRIST = 0.05;
 
-    public static double RETRACTED_UP_BASE = 0.7;
+    public static double RETRACTED_UP_BASE = 0.65;
     public static double RETRACTED_UP_TOP = 0.19;
     public static double RETRACTED_UP_WRIST = 0.1;
 
-    public static double RETRACTED_LOWERED_BASE = 0.87;
-    public static double RETRACTED_LOWERED_TOP = 0.19;
-    public static double RETRACTED_LOWERED_WRIST = 0.05;
+    public static double RETRACTED_LOWERED_BASE = 0.765;
+    public static double RETRACTED_LOWERED_TOP = 0.25;
+    public static double RETRACTED_LOWERED_WRIST = 0;
 
     public static double SCORING_BASE = 0.0;
     public static double SCORING_TOP = 1.0;
@@ -32,9 +32,6 @@ public class Robot {
     public static double CLAW_OPEN = 0.3;
     public static double CLAW_SCORE_OPEN = 0.25;
     public static double CLAW_CLOSED = 0.4;
-
-    public static double CAGE_UP = 1.0;
-    public static double CAGE_DOWN = 0.65;
 
     public static double LAUNCHER_SET = 0.9;
     public static double LAUNCHER_SHOOT = 0.2;
@@ -94,9 +91,9 @@ public class Robot {
         intake.setPower(power);
     }
 
-    public void setIntakeAngle(double angle) {
-        intakeLeft.setPosition(angle);
-        intakeRight.setPosition(angle);
+    public void setIntakeAngle(double angle1, double angle2) {
+        intakeLeft.setPosition(angle1);
+        intakeRight.setPosition(1 - angle2);
     }
 
     public void moveBase(double position) {

@@ -51,7 +51,6 @@ public class FullRedWing extends LinearOpMode {
         robot.setClawClosed();
         sleep(1000);
         robot.moveBase(0.7);
-        robot.setCageDown();
 
         while (opModeInInit()) {
             randomization = camera.getRandomization();

@@ -18,6 +18,7 @@ public class StandardTeleOp extends LinearOpMode {
     public static double ROTATION_WEIGHT = 0.5;
 
     public static double INTAKE_POWER = 0.6;
+    public static double OUTTAKE_POWER = 0.3;
 
     public static double DRFB_UP_REDUCTION = 0.7;
     public static double DRFB_DOWN_REDUCTION = 0.005;
@@ -44,7 +45,10 @@ public class StandardTeleOp extends LinearOpMode {
 
     boolean inverseDrive = false;
 
-    public static double intakeAngle;
+    public static double up1 = 0.55;
+    public static double up2 = 0.375;
+    public static double down1 = 0.48;
+    public static double down2 = 0.305;
 
     @Override
     public void runOpMode() {
@@ -120,7 +124,13 @@ public class StandardTeleOp extends LinearOpMode {
     }
 
     private void operatorControl() {
-        robot.setIntakeAngle(intakeAngle);
+        if (operator.dpad_up) {
+            robot.setIntakeAngle(up1, up2);
+        }
+
+        if (operator.dpad_down) {
+            robot.setIntakeAngle(down1, down2);
+        }
 
         if (operator.share) {
             DRFB_DOWN_REDUCTION = 1.0;
@@ -158,7 +168,7 @@ public class StandardTeleOp extends LinearOpMode {
         if (operator.right_trigger > 0.1) {
             robot.powerIntake(-INTAKE_POWER);
         } else if (operator.left_trigger > 0.1) {
-            robot.powerIntake(INTAKE_POWER);
+            robot.powerIntake(OUTTAKE_POWER);
         } else {
             robot.powerIntake(0);
         }
