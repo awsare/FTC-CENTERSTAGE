@@ -27,7 +27,7 @@ public class Robot {
 
     public static double SCORING_BASE = 0.0;
     public static double SCORING_TOP = 1.0;
-    public static double SCORING_WRIST = 0.07;
+    public static double SCORING_WRIST = 0.035;
 
     public static double CLAW_OPEN = 0.3;
     public static double CLAW_SCORE_OPEN = 0.25;

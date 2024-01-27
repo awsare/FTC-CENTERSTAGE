@@ -18,7 +18,7 @@ public class StandardTeleOp extends LinearOpMode {
     public static double ROTATION_WEIGHT = 0.5;
 
     public static double INTAKE_POWER = 0.6;
-    public static double OUTTAKE_POWER = 0.3;
+    public static double OUTTAKE_POWER = 0.5;
 
     public static double DRFB_UP_REDUCTION = 0.7;
     public static double DRFB_DOWN_REDUCTION = 0.005;
@@ -45,10 +45,10 @@ public class StandardTeleOp extends LinearOpMode {
 
     boolean inverseDrive = false;
 
-    public static double up1 = 0.55;
-    public static double up2 = 0.375;
-    public static double down1 = 0.48;
-    public static double down2 = 0.305;
+    public static double down1 = 0.68;
+    public static double down2 = 0.5;
+    public static double up1 = 0.6;
+    public static double up2 = 0.42;
 
     @Override
     public void runOpMode() {
@@ -118,29 +118,29 @@ public class StandardTeleOp extends LinearOpMode {
             speed * ((y - x - r) / denominator)
         );
 
-        if (driver.dpad_up && driver.left_bumper) {
+        if (driver.right_bumper && driver.left_bumper) {
             robot.shootLauncher();
+        }
+
+        if (driver.dpad_up) {
+            robot.setIntakeAngle(up1, up2);
+        }
+
+        if (driver.dpad_down) {
+            robot.setIntakeAngle(down1, down2);
         }
     }
 
     private void operatorControl() {
-        if (operator.dpad_up) {
-            robot.setIntakeAngle(up1, up2);
-        }
-
-        if (operator.dpad_down) {
-            robot.setIntakeAngle(down1, down2);
-        }
-
         if (operator.share) {
             DRFB_DOWN_REDUCTION = 1.0;
         }
 
-        if (operator.x && !previousOperator.x) {
+        if (operator.x) {
             robot.setClawOpen();
         }
 
-        if (operator.dpad_left && !previousOperator.dpad_left) {
+        if (operator.dpad_left) {
             robot.setClawClosed();
         }
 
