@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.common.vision.PropCamera;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
 @Config
-@Autonomous(name = "New Purple Red Wing \uD83E\uDD91", group = "red")
+@Autonomous(name = "New Red Wing \uD83E\uDD91", group = "red")
 public class RedWing extends LinearOpMode {
 
     MecanumDrive drive;
@@ -23,7 +23,7 @@ public class RedWing extends LinearOpMode {
 
     int randomization = 0;
 
-    Pose2d startPose = new Pose2d(-37, 62, -Math.PI / 2.0);
+    Pose2d startPose = new Pose2d(13, 62, -Math.PI / 2.0);
 
     @Override
     public void runOpMode() {
@@ -35,15 +35,15 @@ public class RedWing extends LinearOpMode {
         camera = new PropCamera(hardwareMap, telemetry, "Red", "Left");
 
         Action act11 = drive.actionBuilder(drive.pose)
-                .strafeToLinearHeading(new Vector2d(-38, 41), Math.toRadians(-150))
+                .strafeToLinearHeading(new Vector2d(12, 41), Math.toRadians(-150))
                 .build();
 
         Action act21 = drive.actionBuilder(drive.pose)
-                .strafeTo(new Vector2d(-33, 38))
+                .strafeTo(new Vector2d(17, 38))
                 .build();
 
         Action act31 = drive.actionBuilder(drive.pose)
-                .strafeTo(new Vector2d(-26.5, 48))
+                .strafeTo(new Vector2d(23.5, 48))
                 .build();
 
         robot.setClawClosed();
@@ -71,16 +71,14 @@ public class RedWing extends LinearOpMode {
             Actions.runBlocking(act31);
         }
 
-        robot.moveBase(0.07);
-        robot.moveWrist(0.1);
-        robot.moveTop(0.66);
+        robot.moveBase(0.1);
+        robot.moveTop(0.45);
+        robot.moveWrist(0.275);
         sleep(1500);
         robot.setClawScoreOpen();
         sleep(1000);
         robot.setClawClosed();
         robot.setRetracted();
         sleep(1000);
-
-        // STOP FOR PURPLE HERE
     }
 }

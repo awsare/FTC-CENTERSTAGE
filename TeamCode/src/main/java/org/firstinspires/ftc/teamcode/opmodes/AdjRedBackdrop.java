@@ -35,22 +35,22 @@ public class AdjRedBackdrop extends LinearOpMode {
         camera = new PropCamera(hardwareMap, telemetry, "Red", "Right");
 
         Action act11 = drive.actionBuilder(drive.pose)
-                .strafeToLinearHeading(new Vector2d(12, -41), Math.toRadians(150))
+                .strafeToLinearHeading(new Vector2d(10.5, -41), Math.toRadians(150))
                 .build();
 
-        Action act12 = drive.actionBuilder(new Pose2d(12, -41, Math.toRadians(150)))
-                .strafeToLinearHeading(new Vector2d(42, -29), 0)
+        Action act12 = drive.actionBuilder(new Pose2d(10.5, -41, Math.toRadians(150)))
+                .strafeToLinearHeading(new Vector2d(42, -30), 0)
                 .build();
 
-        Action act13 = drive.actionBuilder(new Pose2d(42, -29, 0))
-                .strafeTo(new Vector2d(45, -29))
+        Action act13 = drive.actionBuilder(new Pose2d(42, -30, 0))
+                .strafeTo(new Vector2d(45, -30))
                 .build();
 
-        Action act14 = drive.actionBuilder(new Pose2d(45, -29, 0))
-                .strafeTo(new Vector2d(42, -29))
+        Action act14 = drive.actionBuilder(new Pose2d(45, -30, 0))
+                .strafeTo(new Vector2d(42, -30))
                 .build();
 
-        Action act15 = drive.actionBuilder(new Pose2d(42, -29, 0))
+        Action act15 = drive.actionBuilder(new Pose2d(42, -30, 0))
                 .strafeTo(new Vector2d(46, -62))
                 .build();
 
@@ -131,7 +131,7 @@ public class AdjRedBackdrop extends LinearOpMode {
         sleep(1000);
         robot.setClawClosed();
         robot.setRetracted();
-        robot.moveBase(0.7);
+        robot.moveBase(0.55);
         sleep(1000);
 
         if (randomization == 0) {
@@ -145,18 +145,18 @@ public class AdjRedBackdrop extends LinearOpMode {
         robot.setRetracted();
         sleep(1000);
         robot.setClawOpen();
-        sleep(100);
+        sleep(250);
         robot.setRetractedLowered();
         sleep(700);
         robot.setClawClosed();
         sleep(200);
         robot.setRetractedUp();
-        sleep(900);
+        sleep(1500);
         robot.moveBase(0.14);
         robot.moveTop(0.7);
         robot.moveWrist(0.25);
         robot.setIntakeAngle(StandardTeleOp.up1, StandardTeleOp.up2);
-        sleep(1300);
+        sleep(2500);
 
         if (randomization == 0) {
             Actions.runBlocking(act13);

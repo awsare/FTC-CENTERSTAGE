@@ -35,23 +35,23 @@ public class AdjBlueBackdrop extends LinearOpMode {
         camera = new PropCamera(hardwareMap, telemetry, "Blue", "Left");
 
         Action act11 = drive.actionBuilder(drive.pose)
-                .strafeToLinearHeading(new Vector2d(12, 41), Math.toRadians(-150))
+                .strafeToLinearHeading(new Vector2d(10.5, 41), Math.toRadians(-150))
                 .build();
 
-        Action act12 = drive.actionBuilder(new Pose2d(12, 41, Math.toRadians(-150)))
-                .strafeToLinearHeading(new Vector2d(47, 32), 0)
+        Action act12 = drive.actionBuilder(new Pose2d(10.5, 41, Math.toRadians(-150)))
+                .strafeToLinearHeading(new Vector2d(37, 32), 0)
                 .build();
 
-        Action act13 = drive.actionBuilder(new Pose2d(47, 32, 0))
-                .strafeTo(new Vector2d(44, 32))
+        Action act13 = drive.actionBuilder(new Pose2d(37, 32, 0))
+                .strafeTo(new Vector2d(45.5, 33.5))
                 .build();
 
-        Action act14 = drive.actionBuilder(new Pose2d(44, 32, 0))
-                .strafeTo(new Vector2d(42, 32))
+        Action act14 = drive.actionBuilder(new Pose2d(45.5, 33.5, 0))
+                .strafeTo(new Vector2d(37, 33.5))
                 .build();
 
-        Action act15 = drive.actionBuilder(new Pose2d(42, 32, 0))
-                .strafeTo(new Vector2d(46, 62))
+        Action act15 = drive.actionBuilder(new Pose2d(37, 33.5, 0))
+                .strafeTo(new Vector2d(40, 62))
                 .build();
 
         Action act21 = drive.actionBuilder(drive.pose)
@@ -59,19 +59,19 @@ public class AdjBlueBackdrop extends LinearOpMode {
                 .build();
 
         Action act22 = drive.actionBuilder(new Pose2d(17, 38, Math.toRadians(-90)))
-                .strafeToLinearHeading(new Vector2d(42, 40), 0)
+                .strafeToLinearHeading(new Vector2d(41, 40), 0)
                 .build();
 
-        Action act23 = drive.actionBuilder(new Pose2d(42, 40, 0))
-                .strafeTo(new Vector2d(44, 40))
+        Action act23 = drive.actionBuilder(new Pose2d(41, 40, 0))
+                .strafeTo(new Vector2d(44.5, 40))
                 .build();
 
-        Action act24 = drive.actionBuilder(new Pose2d(44, 40, 0))
-                .strafeTo(new Vector2d(42, 40))
+        Action act24 = drive.actionBuilder(new Pose2d(44.5, 40, 0))
+                .strafeTo(new Vector2d(41, 40))
                 .build();
 
-        Action act25 = drive.actionBuilder(new Pose2d(42, 40, 0))
-                .strafeTo(new Vector2d(46, 62))
+        Action act25 = drive.actionBuilder(new Pose2d(41, 40, 0))
+                .strafeTo(new Vector2d(42, 62))
                 .build();
 
         Action act31 = drive.actionBuilder(drive.pose)
@@ -80,20 +80,20 @@ public class AdjBlueBackdrop extends LinearOpMode {
 
         Action act32 = drive.actionBuilder(new Pose2d(23.5, 48, Math.toRadians(-90)))
                 .strafeTo(new Vector2d(30, 48))
-                .strafeToLinearHeading(new Vector2d(47, 45), 0)
+                .strafeToLinearHeading(new Vector2d(37, 45), 0)
                 .build();
 
         // lowkey idk
-        Action act33 = drive.actionBuilder(new Pose2d(47, 45, 0))
-                .strafeTo(new Vector2d(44, 45))
+        Action act33 = drive.actionBuilder(new Pose2d(37, 45, 0))
+                .strafeTo(new Vector2d(45.5, 45))
                 .build();
 
-        Action act34 = drive.actionBuilder(new Pose2d(44, 45, 0))
-                .strafeTo(new Vector2d(42, 45))
+        Action act34 = drive.actionBuilder(new Pose2d(45.5, 45, 0))
+                .strafeTo(new Vector2d(37, 45))
                 .build();
 
-        Action act35 = drive.actionBuilder(new Pose2d(42, 45, 0))
-                .strafeTo(new Vector2d(46, 62))
+        Action act35 = drive.actionBuilder(new Pose2d(37, 45, 0))
+                .strafeTo(new Vector2d(40, 62))
                 .build();
 
         robot.setClawClosed();
@@ -129,9 +129,9 @@ public class AdjBlueBackdrop extends LinearOpMode {
         sleep(1500);
         robot.setClawScoreOpen();
         sleep(1000);
-        robot.setClawClosed();
         robot.setRetracted();
-        robot.moveBase(0.7);
+        robot.setClawClosed();
+        robot.moveBase(0.55);
         sleep(1000);
 
         if (randomization == 2) {
@@ -145,18 +145,20 @@ public class AdjBlueBackdrop extends LinearOpMode {
         robot.setRetracted();
         sleep(1000);
         robot.setClawOpen();
-        sleep(100);
+        sleep(250);
         robot.setRetractedLowered();
-        sleep(700);
+        sleep(1200);
         robot.setClawClosed();
-        sleep(200);
+        sleep(400);
         robot.setRetractedUp();
-        sleep(900);
-        robot.moveBase(0.14);
+        robot.moveBase(0.6);
+        sleep(1500);
         robot.moveTop(0.7);
         robot.moveWrist(0.25);
+        sleep(500);
+        robot.moveBase(0.14);
         robot.setIntakeAngle(StandardTeleOp.up1, StandardTeleOp.up2);
-        sleep(1300);
+        sleep(2500);
 
         if (randomization == 2) {
             Actions.runBlocking(act13);

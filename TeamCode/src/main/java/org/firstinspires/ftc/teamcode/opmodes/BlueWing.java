@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.common.vision.PropCamera;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
 @Config
-@Autonomous(name = "New Purple Blue Wing \uD83D\uDC0B", group = "blue")
+@Autonomous(name = "New Blue Wing \uD83D\uDC0B", group = "blue")
 public class BlueWing extends LinearOpMode {
 
     MecanumDrive drive;
@@ -35,7 +35,7 @@ public class BlueWing extends LinearOpMode {
         camera = new PropCamera(hardwareMap, telemetry, "Blue", "Right");
 
         Action act11 = drive.actionBuilder(drive.pose)
-                .strafeToLinearHeading(new Vector2d(12, -41), Math.toRadians(150))
+                .strafeToLinearHeading(new Vector2d(10.5, -41), Math.toRadians(150))
                 .build();
 
         Action act21 = drive.actionBuilder(drive.pose)
@@ -71,9 +71,9 @@ public class BlueWing extends LinearOpMode {
             Actions.runBlocking(act31);
         }
 
-        robot.moveBase(0.07);
-        robot.moveWrist(0.1);
-        robot.moveTop(0.66);
+        robot.moveBase(0.1);
+        robot.moveTop(0.45);
+        robot.moveWrist(0.275);
         sleep(1500);
         robot.setClawScoreOpen();
         sleep(1000);
