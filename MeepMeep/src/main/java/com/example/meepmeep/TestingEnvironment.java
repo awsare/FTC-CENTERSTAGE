@@ -12,18 +12,16 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class RedBackdrop {
+public class TestingEnvironment {
     public static void main(String[] args) {
         MeepMeep meepMeep = new MeepMeep(800);
 
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 17)
+                .setConstraints(35, 25, Math.PI / 1.5, Math.PI / 1.5, 14.536)
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(62, -37, Math.toRadians(180)))
-                                .strafeTo(new Vector2d(7, -37))
-                                .strafeTo(new Vector2d(11, -37))
-                                .turn(Math.toRadians(180))
+                        drive.trajectorySequenceBuilder(new Pose2d(-37, -62, Math.toRadians(90)))
+                                .lineToLinearHeading(new Pose2d(-38, -41, Math.toRadians(150)))
                                 .build()
                 );
 

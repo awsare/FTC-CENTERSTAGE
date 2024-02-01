@@ -118,15 +118,15 @@ public class StandardTeleOp extends LinearOpMode {
             speed * ((y - x - r) / denominator)
         );
 
-        if (driver.right_bumper && driver.left_bumper) {
+        if (driver.dpad_up && driver.triangle) {
             robot.shootLauncher();
         }
 
-        if (driver.dpad_up) {
+        if (driver.circle) {
             robot.setIntakeAngle(up1, up2);
         }
 
-        if (driver.dpad_down) {
+        if (driver.x) {
             robot.setIntakeAngle(down1, down2);
         }
     }
