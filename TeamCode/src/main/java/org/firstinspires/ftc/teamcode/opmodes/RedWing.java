@@ -14,16 +14,16 @@ import org.firstinspires.ftc.teamcode.common.vision.PropCamera;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
 @Config
-@Autonomous(name = "New Red Wing \uD83E\uDD91", group = "red")
+@Autonomous(name = "\uD83E\uDD91 Red Wing \uD83E\uDEBD", group = "red")
 public class RedWing extends LinearOpMode {
 
     MecanumDrive drive;
     Robot robot;
-    PropCamera camera;
+    //PropCamera camera;
 
-    int randomization = 0;
+    int randomization = 2;
 
-    Pose2d startPose = new Pose2d(13, 62, -Math.PI / 2.0);
+    Pose2d startPose = new Pose2d(-37, -61, Math.toRadians(90));
 
     @Override
     public void runOpMode() {
@@ -32,10 +32,21 @@ public class RedWing extends LinearOpMode {
         robot = new Robot();
         robot.init(hardwareMap, false);
 
-        camera = new PropCamera(hardwareMap, telemetry, "Red", "Left");
+        //camera = new PropCamera(hardwareMap, telemetry, "Red", "Left");
 
         Action act11 = drive.actionBuilder(drive.pose)
-                .strafeToLinearHeading(new Vector2d(12, 41), Math.toRadians(-150))
+                .strafeTo(new Vector2d(-47, -47))
+                .build();
+
+        Action act12 = drive.actionBuilder(new Pose2d(-47, -47, Math.toRadians(90)))
+                .strafeTo(new Vector2d(-47,-50))
+                .turn(Math.toRadians(-90))
+                .strafeTo(new Vector2d(-37, -61))
+                .strafeTo(new Vector2d(25, -61))
+                .strafeTo(new Vector2d(42, -28))
+//                .strafeTo(new Vector2d(45, -28))
+//                .strafeTo(new Vector2d(44, -28))
+                //.strafeTo(new Vector2d(48, -11))
                 .build();
 
         Action act21 = drive.actionBuilder(drive.pose)
@@ -47,18 +58,19 @@ public class RedWing extends LinearOpMode {
                 .build();
 
         robot.setClawClosed();
-        sleep(1000);
+        sleep(3000);
+        robot.setRetracted();
         robot.moveBase(0.5);
 
         while (opModeInInit()) {
-            randomization = camera.getRandomization();
+            //randomization = camera.getRandomization();
             telemetry.addData("Randomization", randomization);
             telemetry.update();
         }
 
         waitForStart();
 
-        camera.stopStreaming();
+        //camera.stopStreaming();
 
         telemetry.addData("Randomization", randomization);
         telemetry.update();
@@ -74,11 +86,39 @@ public class RedWing extends LinearOpMode {
         robot.moveBase(0.1);
         robot.moveTop(0.45);
         robot.moveWrist(0.275);
-        sleep(1500);
+        sleep(700);
         robot.setClawScoreOpen();
-        sleep(1000);
+        sleep(400);
         robot.setClawClosed();
+        sleep(200);
         robot.setRetracted();
-        sleep(1000);
+        sleep(800);
+        robot.setClawOpen();
+        sleep(250);
+        robot.setRetractedLowered();
+        sleep(500);
+        robot.setClawClosed();
+        sleep(400);
+        robot.setRetractedUp();
+        robot.setIntakeAngle(StandardTeleOp.up1, StandardTeleOp.up2);
+        sleep(300);
+
+        if (randomization == 2) {
+            Actions.runBlocking(act12);
+        } else if (randomization == 1) {
+            Actions.runBlocking(act21);
+        } else {
+            Actions.runBlocking(act31);
+        }
+
+        robot.setIntakeAngle(StandardTeleOp.down1, StandardTeleOp.down2);
+        sleep(300);
+        robot.moveBase(0.6);
+        sleep(1500);
+        robot.moveTop(0.7);
+        robot.moveWrist(0.25);
+        sleep(500);
+        robot.moveBase(0.14);
+        sleep(2500);
     }
 }

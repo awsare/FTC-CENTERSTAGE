@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes;
+package org.firstinspires.ftc.teamcode.opmodes.working;
 
 
 import com.acmerobotics.dashboard.config.Config;
@@ -7,6 +7,7 @@ import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.common.Robot;
@@ -14,8 +15,9 @@ import org.firstinspires.ftc.teamcode.common.vision.PropCamera;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
 @Config
-@Autonomous(name = "New Blue Wing \uD83D\uDC0B", group = "blue")
-public class BlueWing extends LinearOpMode {
+@Disabled
+@Autonomous(name = "New Red Wing \uD83E\uDD91", group = "red")
+public class RedWing extends LinearOpMode {
 
     MecanumDrive drive;
     Robot robot;
@@ -23,7 +25,7 @@ public class BlueWing extends LinearOpMode {
 
     int randomization = 0;
 
-    Pose2d startPose = new Pose2d(13, -62, Math.PI / 2.0);
+    Pose2d startPose = new Pose2d(13, 62, -Math.PI / 2.0);
 
     @Override
     public void runOpMode() {
@@ -32,18 +34,18 @@ public class BlueWing extends LinearOpMode {
         robot = new Robot();
         robot.init(hardwareMap, false);
 
-        camera = new PropCamera(hardwareMap, telemetry, "Blue", "Right");
+        camera = new PropCamera(hardwareMap, telemetry, "Red", "Left");
 
         Action act11 = drive.actionBuilder(drive.pose)
-                .strafeToLinearHeading(new Vector2d(10.5, -41), Math.toRadians(150))
+                .strafeToLinearHeading(new Vector2d(12, 41), Math.toRadians(-150))
                 .build();
 
         Action act21 = drive.actionBuilder(drive.pose)
-                .strafeTo(new Vector2d(15, -38))
+                .strafeTo(new Vector2d(17, 38))
                 .build();
 
         Action act31 = drive.actionBuilder(drive.pose)
-                .strafeTo(new Vector2d(22, -48))
+                .strafeTo(new Vector2d(23.5, 48))
                 .build();
 
         robot.setClawClosed();
@@ -63,7 +65,7 @@ public class BlueWing extends LinearOpMode {
         telemetry.addData("Randomization", randomization);
         telemetry.update();
 
-        if (randomization == 0) {
+        if (randomization == 2) {
             Actions.runBlocking(act11);
         } else if (randomization == 1) {
             Actions.runBlocking(act21);

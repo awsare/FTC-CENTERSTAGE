@@ -21,7 +21,15 @@ public class TestingEnvironment {
                 .setConstraints(35, 25, Math.PI / 1.5, Math.PI / 1.5, 14.536)
                 .followTrajectorySequence(drive ->
                         drive.trajectorySequenceBuilder(new Pose2d(-37, -62, Math.toRadians(90)))
-                                .lineToLinearHeading(new Pose2d(-38, -41, Math.toRadians(150)))
+                                .lineTo(new Vector2d(-47, -47))
+                                //.lineTo(new Vector2d(-40, -33))
+                                .turn(Math.toRadians(-90))
+                                .lineTo(new Vector2d(-37, -58.5))
+                                .lineTo(new Vector2d(25, -58.5))
+                                .lineTo(new Vector2d(44, -28))
+                                .lineTo(new Vector2d(45, -28))
+                                .lineTo(new Vector2d(44, -28))
+                                .lineTo(new Vector2d(48, -11))
                                 .build()
                 );
 
