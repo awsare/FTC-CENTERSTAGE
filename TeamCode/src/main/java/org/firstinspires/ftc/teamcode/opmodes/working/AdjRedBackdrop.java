@@ -125,7 +125,7 @@ public class AdjRedBackdrop extends LinearOpMode {
             Actions.runBlocking(act31);
         }
 
-        robot.setIntakeAngle(StandardTeleOp.down1, StandardTeleOp.down2);
+        robot.setIntakeDown();
         robot.moveBase(0.1);
         robot.moveTop(0.45);
         robot.moveWrist(0.275);
@@ -158,7 +158,7 @@ public class AdjRedBackdrop extends LinearOpMode {
         robot.moveBase(0.14);
         robot.moveTop(0.7);
         robot.moveWrist(0.25);
-        robot.setIntakeAngle(StandardTeleOp.up1, StandardTeleOp.up2);
+        robot.setIntakeUp();
         sleep(2500);
 
         if (randomization == 0) {

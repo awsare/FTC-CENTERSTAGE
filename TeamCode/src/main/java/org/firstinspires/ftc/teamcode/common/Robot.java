@@ -25,16 +25,29 @@ public class Robot {
     public static double RETRACTED_LOWERED_TOP = 0.25;
     public static double RETRACTED_LOWERED_WRIST = 0;
 
+    public static double HOLDING_BASE = 0.79;
+    public static double HOLDING_TOP = 0.25;
+    public static double HOLDING_WRIST = 0;
+
     public static double SCORING_BASE = 0.0;
     public static double SCORING_TOP = 1.0;
     public static double SCORING_WRIST = 0.035;
 
+    public static double SCORING_IN_BASE = 0.5;
+    public static double SCORING_IN_TOP = 1.0;
+    public static double SCORING_IN_WRIST = 0.035;
+
     public static double CLAW_OPEN = 0.3;
     public static double CLAW_SCORE_OPEN = 0.25;
+    public static double CLAW_WIDE = 0;
     public static double CLAW_CLOSED = 0.4;
 
-    public static double LAUNCHER_SET = 0.9;
-    public static double LAUNCHER_SHOOT = 0.2;
+    public static double INTAKE_UP = 0.62;
+    public static double INTAKE_DOWN = 0.68;
+    public static double INTAKE_SERVO_OFFSET = 0.18;
+
+    public static double LAUNCHER_SET = 0.4;
+    public static double LAUNCHER_SHOOT = 0.0;
 
     public void init(HardwareMap hardwareMap, boolean teleop) {
         if (teleop) {
@@ -91,11 +104,6 @@ public class Robot {
         intake.setPower(power);
     }
 
-    public void setIntakeAngle(double angle1, double angle2) {
-        intakeLeft.setPosition(angle1);
-        intakeRight.setPosition(1 - angle2);
-    }
-
     public void moveBase(double position) {
         baseLeft.setPosition(position);
         baseRight.setPosition(1 - position);
@@ -120,6 +128,10 @@ public class Robot {
 
     public void setClawScoreOpen() {
         claw.setPosition(CLAW_SCORE_OPEN);
+    }
+
+    public void setClawWide() {
+        claw.setPosition(CLAW_WIDE);
     }
 
     public void powerDRFB(double power) {
@@ -149,6 +161,12 @@ public class Robot {
         moveWrist(RETRACTED_LOWERED_WRIST);
     }
 
+    public void setHolding() {
+        moveBase(HOLDING_BASE);
+        moveTop(HOLDING_TOP);
+        moveWrist(HOLDING_WRIST);
+    }
+
     public void setScoring() {
         moveBase(SCORING_BASE);
         moveTop(SCORING_TOP);
@@ -156,6 +174,18 @@ public class Robot {
     }
 
     public void setScoringIn() {
-        moveBase(0.5);
+        moveBase(SCORING_IN_BASE);
+        moveTop(SCORING_IN_TOP);
+        moveWrist(SCORING_IN_WRIST);
+    }
+
+    public void setIntakeUp() {
+        intakeLeft.setPosition(INTAKE_UP);
+        intakeRight.setPosition(1 - (INTAKE_UP - INTAKE_SERVO_OFFSET));
+    }
+
+    public void setIntakeDown() {
+        intakeLeft.setPosition(INTAKE_DOWN);
+        intakeRight.setPosition(1 - (INTAKE_DOWN - INTAKE_SERVO_OFFSET));
     }
 }

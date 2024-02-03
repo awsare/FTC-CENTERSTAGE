@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
 
-import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
@@ -13,13 +12,12 @@ import org.firstinspires.ftc.teamcode.common.Robot;
 import org.firstinspires.ftc.teamcode.common.vision.PropCamera;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
-@Config
-@Autonomous(name = "\uD83E\uDD91 Red Wing \uD83E\uDEBD", group = "red")
+@Autonomous(name = "Red Wing \uD83E\uDD91 ", group = "red")
 public class RedWing extends LinearOpMode {
 
     MecanumDrive drive;
     Robot robot;
-    //PropCamera camera;
+    PropCamera camera;
 
     int randomization = 2;
 
@@ -32,7 +30,7 @@ public class RedWing extends LinearOpMode {
         robot = new Robot();
         robot.init(hardwareMap, false);
 
-        //camera = new PropCamera(hardwareMap, telemetry, "Red", "Left");
+        camera = new PropCamera(hardwareMap, telemetry, "Red", "Left");
 
         Action act11 = drive.actionBuilder(drive.pose)
                 .strafeTo(new Vector2d(-47, -47))
@@ -63,14 +61,14 @@ public class RedWing extends LinearOpMode {
         robot.moveBase(0.5);
 
         while (opModeInInit()) {
-            //randomization = camera.getRandomization();
+            randomization = camera.getRandomization();
             telemetry.addData("Randomization", randomization);
             telemetry.update();
         }
 
         waitForStart();
 
-        //camera.stopStreaming();
+        camera.stopStreaming();
 
         telemetry.addData("Randomization", randomization);
         telemetry.update();
@@ -100,7 +98,7 @@ public class RedWing extends LinearOpMode {
         robot.setClawClosed();
         sleep(400);
         robot.setRetractedUp();
-        robot.setIntakeAngle(StandardTeleOp.up1, StandardTeleOp.up2);
+        robot.setIntakeUp();
         sleep(300);
 
         if (randomization == 2) {
@@ -111,7 +109,7 @@ public class RedWing extends LinearOpMode {
             Actions.runBlocking(act31);
         }
 
-        robot.setIntakeAngle(StandardTeleOp.down1, StandardTeleOp.down2);
+        robot.setIntakeDown();
         sleep(300);
         robot.moveBase(0.6);
         sleep(1500);

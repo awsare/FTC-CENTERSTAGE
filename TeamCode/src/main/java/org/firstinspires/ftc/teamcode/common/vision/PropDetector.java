@@ -10,7 +10,6 @@ import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 import org.openftc.easyopencv.OpenCvPipeline;
 
-@Config
 public class PropDetector extends OpenCvPipeline {
 
     public static int leftXRed = 30;
@@ -111,10 +110,9 @@ public class PropDetector extends OpenCvPipeline {
         center.release();
         right.release();
 
-        telemetry.addData("left %", leftAverage);
-        telemetry.addData("center %", centerAverage);
-        telemetry.addData("right %", rightAverage);
-        telemetry.update();
+        telemetry.addData("Left %", leftAverage);
+        telemetry.addData("Center %", centerAverage);
+        telemetry.addData("Right %", rightAverage);
 
         if (leftAverage > centerAverage && leftAverage > rightAverage) {
             randomization = 0;

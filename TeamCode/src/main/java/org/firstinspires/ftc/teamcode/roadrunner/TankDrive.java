@@ -56,7 +56,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-@Config
 public final class TankDrive {
     public static class Params {
         // IMU orientation

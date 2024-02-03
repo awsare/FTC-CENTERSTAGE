@@ -25,7 +25,7 @@ public class PropCamera {
             @Override
             public void onOpened()
             {
-                camera.startStreaming(640,360, OpenCvCameraRotation.UPRIGHT);
+                camera.startStreaming(640,480, OpenCvCameraRotation.UPRIGHT);
                 FtcDashboard.getInstance().startCameraStream(camera, 30);
             }
 
