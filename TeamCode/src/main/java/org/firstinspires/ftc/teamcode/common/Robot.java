@@ -42,8 +42,8 @@ public class Robot {
     public static double CLAW_WIDE = 0;
     public static double CLAW_CLOSED = 0.4;
 
-    public static double INTAKE_UP = 0.62;
-    public static double INTAKE_DOWN = 0.68;
+    public static double INTAKE_UP = 0.6375;
+    public static double INTAKE_DOWN = 0.6825;
     public static double INTAKE_SERVO_OFFSET = 0.18;
 
     public static double LAUNCHER_SET = 0.4;

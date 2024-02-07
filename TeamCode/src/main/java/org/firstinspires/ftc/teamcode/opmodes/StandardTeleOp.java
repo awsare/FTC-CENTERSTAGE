@@ -117,12 +117,10 @@ public class StandardTeleOp extends LinearOpMode {
             robot.shootLauncher();
         }
 
-        if (driver.circle) {
-            robot.setIntakeUp();
-        }
-
-        if (driver.cross) {
+        if (driver.left_bumper) {
             robot.setIntakeDown();
+        } else {
+            robot.setIntakeUp();
         }
     }
 
@@ -201,7 +199,7 @@ public class StandardTeleOp extends LinearOpMode {
 
                 break;
             case RETRACTED_LOWERED_STATE:
-                if (secondStateTime.time() < 0.1) {
+                if (secondStateTime.time() < 0.2) {
                     stateTime.reset();
                     break;
                 }
