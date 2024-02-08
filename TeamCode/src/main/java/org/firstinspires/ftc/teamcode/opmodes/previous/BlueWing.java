@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes.working;
+package org.firstinspires.ftc.teamcode.opmodes.previous;
 
 
 import com.acmerobotics.dashboard.config.Config;
@@ -16,8 +16,8 @@ import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
 @Config
 @Disabled
-@Autonomous(name = "New Red Wing \uD83E\uDD91", group = "red")
-public class RedWing extends LinearOpMode {
+@Autonomous(name = "New Blue Wing \uD83D\uDC0B", group = "blue")
+public class BlueWing extends LinearOpMode {
 
     MecanumDrive drive;
     Robot robot;
@@ -25,7 +25,7 @@ public class RedWing extends LinearOpMode {
 
     int randomization = 0;
 
-    Pose2d startPose = new Pose2d(13, 62, -Math.PI / 2.0);
+    Pose2d startPose = new Pose2d(13, -62, Math.PI / 2.0);
 
     @Override
     public void runOpMode() {
@@ -34,18 +34,18 @@ public class RedWing extends LinearOpMode {
         robot = new Robot();
         robot.init(hardwareMap, false);
 
-        camera = new PropCamera(hardwareMap, telemetry, "Red", "Left");
+        camera = new PropCamera(hardwareMap, telemetry, "Blue", "Right");
 
         Action act11 = drive.actionBuilder(drive.pose)
-                .strafeToLinearHeading(new Vector2d(12, 41), Math.toRadians(-150))
+                .strafeToLinearHeading(new Vector2d(10.5, -41), Math.toRadians(150))
                 .build();
 
         Action act21 = drive.actionBuilder(drive.pose)
-                .strafeTo(new Vector2d(17, 38))
+                .strafeTo(new Vector2d(15, -38))
                 .build();
 
         Action act31 = drive.actionBuilder(drive.pose)
-                .strafeTo(new Vector2d(23.5, 48))
+                .strafeTo(new Vector2d(22, -48))
                 .build();
 
         robot.setClawClosed();
@@ -65,7 +65,7 @@ public class RedWing extends LinearOpMode {
         telemetry.addData("Randomization", randomization);
         telemetry.update();
 
-        if (randomization == 2) {
+        if (randomization == 0) {
             Actions.runBlocking(act11);
         } else if (randomization == 1) {
             Actions.runBlocking(act21);

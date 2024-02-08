@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes;
+package org.firstinspires.ftc.teamcode.opmodes.current;
 
 
 import com.acmerobotics.roadrunner.Action;
@@ -12,8 +12,8 @@ import org.firstinspires.ftc.teamcode.common.Robot;
 import org.firstinspires.ftc.teamcode.common.vision.PropCamera;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
-@Autonomous(name = "Red Wing \uD83E\uDD91 Right Park", group = "red")
-public class RedWing extends LinearOpMode {
+@Autonomous(name = "Red WING \uD83E\uDD91 Right Park", group = "red")
+public class RedWingRightPark extends LinearOpMode {
 
     MecanumDrive drive;
     Robot robot;
@@ -30,37 +30,37 @@ public class RedWing extends LinearOpMode {
         robot = new Robot();
         robot.init(hardwareMap, false);
 
-        camera = new PropCamera(hardwareMap, telemetry, "Red", "Right");
+        camera = new PropCamera(hardwareMap, telemetry, "Red", "Left");
 
-        Action act11 = drive.actionBuilder(drive.pose)
-                .strafeTo(new Vector2d(-47, -47))
+        Action act01 = drive.actionBuilder(drive.pose)
+                .strafeTo(new Vector2d(-46, -48.5))
                 .build();
 
-        Action act12 = drive.actionBuilder(new Pose2d(-47, -47, Math.toRadians(90)))
-                .strafeTo(new Vector2d(-47,-50))
+        Action act02 = drive.actionBuilder(new Pose2d(-46, -48.5, Math.toRadians(90)))
+                .strafeTo(new Vector2d(-47, -51))
                 .turnTo(0)
                 .strafeTo(new Vector2d(-37, -60))
                 .strafeTo(new Vector2d(25, -60))
-                .strafeTo(new Vector2d(42, -29.5))
+                .strafeTo(new Vector2d(42, -27))
                 .build();
 
-        Action act13 = drive.actionBuilder(new Pose2d(42, -29.5, Math.toRadians(0)))
-                .strafeTo(new Vector2d(47.5, -29.5))
+        Action act03 = drive.actionBuilder(new Pose2d(42, -27, Math.toRadians(0)))
+                .strafeTo(new Vector2d(47.5, -27))
                 .build();
 
-        Action act14 = drive.actionBuilder(new Pose2d(47.5, -29.5, Math.toRadians(0)))
-                .strafeTo(new Vector2d(42, -29.5))
+        Action act04 = drive.actionBuilder(new Pose2d(47.5, -27, Math.toRadians(0)))
+                .strafeTo(new Vector2d(42, -27))
                 .build();
 
-        Action act15 = drive.actionBuilder(new Pose2d(42, -29.5, Math.toRadians(0)))
-                .strafeTo(new Vector2d(45, -61))
+        Action act05 = drive.actionBuilder(new Pose2d(42, -27, Math.toRadians(0)))
+                .strafeTo(new Vector2d(45, -63))
                 .build();
 
-        Action act21 = drive.actionBuilder(drive.pose)
-                .strafeTo(new Vector2d(-39, -37))
+        Action act11 = drive.actionBuilder(drive.pose)
+                .strafeTo(new Vector2d(-40, -38))
                 .build();
 
-        Action act22 = drive.actionBuilder(new Pose2d(-39, -37, Math.toRadians(90)))
+        Action act12 = drive.actionBuilder(new Pose2d(-40, -38, Math.toRadians(90)))
                 .strafeTo(new Vector2d(-47,-50))
                 .turnTo(0)
                 .strafeTo(new Vector2d(-37, -60))
@@ -68,39 +68,39 @@ public class RedWing extends LinearOpMode {
                 .strafeTo(new Vector2d(42, -36))
                 .build();
 
-        Action act23 = drive.actionBuilder(new Pose2d(42, -36, Math.toRadians(0)))
+        Action act13 = drive.actionBuilder(new Pose2d(42, -36, Math.toRadians(0)))
                 .strafeTo(new Vector2d(47.5, -36))
                 .build();
 
-        Action act24 = drive.actionBuilder(new Pose2d(47.5, -36, Math.toRadians(0)))
+        Action act14 = drive.actionBuilder(new Pose2d(47.5, -36, Math.toRadians(0)))
                 .strafeTo(new Vector2d(42, -36))
                 .build();
 
-        Action act25 = drive.actionBuilder(new Pose2d(42, -36, Math.toRadians(0)))
-                .strafeTo(new Vector2d(45, -61))
+        Action act15 = drive.actionBuilder(new Pose2d(42, -36, Math.toRadians(0)))
+                .strafeTo(new Vector2d(45, -63))
                 .build();
 
-        Action act31 = drive.actionBuilder(drive.pose)
-                .strafeToLinearHeading(new Vector2d(-34, -38), Math.toRadians(30))
+        Action act21 = drive.actionBuilder(drive.pose)
+                .strafeToLinearHeading(new Vector2d(-36, -37), Math.toRadians(10))
                 .build();
 
-        Action act32 = drive.actionBuilder(new Pose2d(-34, -38, Math.toRadians(-30)))
+        Action act22 = drive.actionBuilder(new Pose2d(-36, -37, Math.toRadians(10)))
                 .strafeToLinearHeading(new Vector2d(-47,-50), 0)
                 .strafeTo(new Vector2d(-37, -60))
                 .strafeTo(new Vector2d(25, -60))
                 .strafeTo(new Vector2d(42, -42.5))
                 .build();
 
-        Action act33 = drive.actionBuilder(new Pose2d(42, -42.5, Math.toRadians(0)))
+        Action act23 = drive.actionBuilder(new Pose2d(42, -42.5, Math.toRadians(0)))
                 .strafeTo(new Vector2d(47.5, -42.5))
                 .build();
 
-        Action act34 = drive.actionBuilder(new Pose2d(47.5, -42.5, Math.toRadians(0)))
+        Action act24 = drive.actionBuilder(new Pose2d(47.5, -42.5, Math.toRadians(0)))
                 .strafeTo(new Vector2d(42, -42.5))
                 .build();
 
-        Action act35 = drive.actionBuilder(new Pose2d(42, -36, Math.toRadians(0)))
-                .strafeTo(new Vector2d(45, -61))
+        Action act25 = drive.actionBuilder(new Pose2d(42, -36, Math.toRadians(0)))
+                .strafeTo(new Vector2d(45, -63))
                 .build();
 
         robot.setClawClosed();
@@ -116,26 +116,17 @@ public class RedWing extends LinearOpMode {
 
         waitForStart();
 
-        camera.stopStreaming();
-
-        // *** REMOVE ***
-        randomization = 2;
-        // *** REMOVE ***
-
-        telemetry.addData("Randomization", randomization);
-        telemetry.update();
-
         if (randomization == 0) {
-            Actions.runBlocking(act11);
+            Actions.runBlocking(act01);
         } else if (randomization == 1) {
-            Actions.runBlocking(act21);
+            Actions.runBlocking(act11);
         } else {
-            Actions.runBlocking(act31);
+            Actions.runBlocking(act21);
         }
 
         robot.setIntakeDown();
-        robot.moveBase(0.1);
-        robot.moveTop(0.45);
+        robot.moveBase(0);
+        robot.moveTop(0.5);
         robot.moveWrist(0.275);
         sleep(700);
         robot.setClawScoreOpen();
@@ -158,51 +149,53 @@ public class RedWing extends LinearOpMode {
         sleep(300);
 
         if (randomization == 0) {
-            Actions.runBlocking(act12);
+            Actions.runBlocking(act02);
         } else if (randomization == 1) {
-            Actions.runBlocking(act22);
+            Actions.runBlocking(act12);
         } else {
-            Actions.runBlocking(act32);
+            Actions.runBlocking(act22);
         }
 
         robot.setIntakeDown();
         sleep(600);
-        robot.moveBase(0.5);
+        robot.moveBase(0.4);
         sleep(800);
         robot.setIntakeUp();
-        robot.moveTop(0.7);
-        robot.moveWrist(0.25);
+        robot.moveTop(0.6);
+        robot.moveWrist(0.35);
         sleep(500);
         robot.moveBase(0.14);
         sleep(1000);
 
         if (randomization == 0) {
-            Actions.runBlocking(act13);
+            Actions.runBlocking(act03);
         } else if (randomization == 1) {
-            Actions.runBlocking(act23);
+            Actions.runBlocking(act13);
         } else {
-            Actions.runBlocking(act33);
+            Actions.runBlocking(act23);
         }
 
         robot.setClawScoreOpen();
-        sleep(1000);
+        sleep(500);
 
         if (randomization == 0) {
-            Actions.runBlocking(act14);
+            Actions.runBlocking(act04);
         } else if (randomization == 1) {
-            Actions.runBlocking(act24);
+            Actions.runBlocking(act14);
         } else {
-            Actions.runBlocking(act34);
+            Actions.runBlocking(act24);
         }
 
         robot.setRetracted();
 
         if (randomization == 0) {
-            Actions.runBlocking(act15);
+            Actions.runBlocking(act05);
         } else if (randomization == 1) {
-            Actions.runBlocking(act25);
+            Actions.runBlocking(act15);
         } else {
-            Actions.runBlocking(act35);
+            Actions.runBlocking(act25);
         }
+
+        camera.stopStreaming();
     }
 }
