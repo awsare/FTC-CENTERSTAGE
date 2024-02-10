@@ -25,6 +25,10 @@ public class Robot {
     public static double RETRACTED_LOWERED_TOP = 0.25;
     public static double RETRACTED_LOWERED_WRIST = 0;
 
+    public static double NEW_RETRACTED_LOWERED_BASE = 0.765;
+    public static double NEW_RETRACTED_LOWERED_TOP = 0.25;
+    public static double NEW_RETRACTED_LOWERED_WRIST = 0;
+
     public static double HOLDING_BASE = 0.79;
     public static double HOLDING_TOP = 0.25;
     public static double HOLDING_WRIST = 0;
@@ -37,8 +41,8 @@ public class Robot {
     public static double SCORING_IN_TOP = 1.0;
     public static double SCORING_IN_WRIST = 0.035;
 
-    public static double CLAW_OPEN = 0.3;
-    public static double CLAW_SCORE_OPEN = 0.25;
+    public static double CLAW_OPEN = 0.275;
+    public static double CLAW_SCORE_OPEN = 0.2;
     public static double CLAW_WIDE = 0;
     public static double CLAW_CLOSED = 0.4;
 
@@ -46,7 +50,7 @@ public class Robot {
     public static double INTAKE_DOWN = 0.6825;
     public static double INTAKE_SERVO_OFFSET = 0.18;
 
-    public static double LAUNCHER_SET = 0.4;
+    public static double LAUNCHER_SET = 1.0;
     public static double LAUNCHER_SHOOT = 0.0;
 
     public void init(HardwareMap hardwareMap, boolean teleop) {
@@ -159,6 +163,12 @@ public class Robot {
         moveBase(RETRACTED_LOWERED_BASE);
         moveTop(RETRACTED_LOWERED_TOP);
         moveWrist(RETRACTED_LOWERED_WRIST);
+    }
+
+    public void setNewRetractedLowered() {
+        moveBase(NEW_RETRACTED_LOWERED_BASE);
+        moveTop(NEW_RETRACTED_LOWERED_TOP);
+        moveWrist(NEW_RETRACTED_LOWERED_WRIST);
     }
 
     public void setHolding() {

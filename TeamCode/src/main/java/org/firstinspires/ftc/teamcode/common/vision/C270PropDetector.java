@@ -36,8 +36,8 @@ public class C270PropDetector extends OpenCvPipeline {
     public static int highRedV = 255;
 
     public static int lowBlueH = 0;
-    public static int lowBlueS = 100;
-    public static int lowBlueV = 0;
+    public static int lowBlueS = 40;
+    public static int lowBlueV = 100;
 
     public static int highBlueH = 255;
     public static int highBlueS = 255;

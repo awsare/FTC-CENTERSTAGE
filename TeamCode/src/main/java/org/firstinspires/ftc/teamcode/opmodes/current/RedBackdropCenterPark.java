@@ -12,8 +12,8 @@ import org.firstinspires.ftc.teamcode.common.Robot;
 import org.firstinspires.ftc.teamcode.common.vision.PropCamera;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
-@Autonomous(name = "Red BACKDROP \uD83E\uDD91 Right Park", group = "red")
-public class RedBackdropRightPark extends LinearOpMode {
+@Autonomous(name = "Red BACKDROP \uD83E\uDD91 Center Park", group = "red")
+public class RedBackdropCenterPark extends LinearOpMode {
 
     MecanumDrive drive;
     Robot robot;
@@ -49,7 +49,7 @@ public class RedBackdropRightPark extends LinearOpMode {
                 .build();
 
         Action act05 = drive.actionBuilder(new Pose2d(42, -30, 0))
-                .strafeTo(new Vector2d(46, -63))
+                .strafeTo(new Vector2d(47, -9))
                 .build();
 
         Action act11 = drive.actionBuilder(drive.pose)
@@ -69,7 +69,7 @@ public class RedBackdropRightPark extends LinearOpMode {
                 .build();
 
         Action act15 = drive.actionBuilder(new Pose2d(42, -37, 0))
-                .strafeTo(new Vector2d(46, -63))
+                .strafeTo(new Vector2d(47, -9))
                 .build();
 
         Action act21 = drive.actionBuilder(drive.pose)
@@ -90,7 +90,7 @@ public class RedBackdropRightPark extends LinearOpMode {
                 .build();
 
         Action act25 = drive.actionBuilder(new Pose2d(42, -43, 0))
-                .strafeTo(new Vector2d(46, -63))
+                .strafeTo(new Vector2d(47, -9))
                 .build();
 
         robot.setClawClosed();

@@ -210,5 +210,9 @@ public class OperatorOnly extends LinearOpMode {
                 robot.powerDRFB(DRFB_GRAVITY);
             }
         }
+
+        if (operator.left_bumper) {
+            robot.setIntakeDown();
+        }
     }
 }

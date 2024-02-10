@@ -11,7 +11,7 @@ import org.opencv.imgproc.Imgproc;
 import org.openftc.easyopencv.OpenCvPipeline;
 
 @Config
-public class PropDetector extends OpenCvPipeline {
+public class OldPropDetector extends OpenCvPipeline {
 
     public static int leftXRed = 30;
     public static int leftYRed = 180;
@@ -61,7 +61,7 @@ public class PropDetector extends OpenCvPipeline {
 
     int randomization;
 
-    public PropDetector(Telemetry telemetry, String alliance, String side) {
+    public OldPropDetector(Telemetry telemetry, String alliance, String side) {
         this.telemetry = telemetry;
         this.alliance = alliance;
         this.side = side;

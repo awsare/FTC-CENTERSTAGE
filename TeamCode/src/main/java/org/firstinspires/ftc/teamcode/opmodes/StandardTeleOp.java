@@ -17,8 +17,8 @@ public class StandardTeleOp extends LinearOpMode {
     public static double HIGH_SPEED = 1.0;
     public static double ROTATION_WEIGHT = 0.5;
 
-    public static double INTAKE_POWER = 0.7;
-    public static double OUTTAKE_POWER = 0.7;
+    public static double INTAKE_POWER = 0.8;
+    public static double OUTTAKE_POWER = 0.8;
 
     public static double DRFB_UP_REDUCTION = 0.7;
     public static double DRFB_DOWN_REDUCTION = 0.005;
@@ -160,8 +160,10 @@ public class StandardTeleOp extends LinearOpMode {
     private void intakeControl() {
         if (operator.right_trigger > 0.1) {
             robot.powerIntake(-INTAKE_POWER);
+            robot.setIntakeDown();
         } else if (operator.left_trigger > 0.1) {
             robot.powerIntake(OUTTAKE_POWER);
+            robot.setIntakeDown();
         } else {
             robot.powerIntake(0);
         }
