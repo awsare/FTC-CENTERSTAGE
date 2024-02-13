@@ -43,5 +43,6 @@ public class PropCamera {
 
     public void stopStreaming() {
         camera.stopStreaming();
+        camera.closeCameraDevice();
     }
 }

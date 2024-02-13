@@ -30,6 +30,11 @@ public class RedWingWallPark extends LinearOpMode {
         robot = new Robot();
         robot.init(hardwareMap, false);
 
+        robot.setClawClosed();
+        sleep(3000);
+        robot.setRetracted();
+        robot.moveBase(0.5);
+
         camera = new PropCamera(hardwareMap, telemetry, "Red", "Left");
 
         Action act01 = drive.actionBuilder(drive.pose)
@@ -102,11 +107,6 @@ public class RedWingWallPark extends LinearOpMode {
         Action act25 = drive.actionBuilder(new Pose2d(42, -36, Math.toRadians(0)))
                 .strafeTo(new Vector2d(45, -63))
                 .build();
-
-        robot.setClawClosed();
-        sleep(3000);
-        robot.setRetracted();
-        robot.moveBase(0.5);
 
         while (opModeInInit()) {
             randomization = camera.getRandomization();

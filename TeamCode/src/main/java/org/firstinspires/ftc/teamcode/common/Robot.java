@@ -25,10 +25,6 @@ public class Robot {
     public static double RETRACTED_LOWERED_TOP = 0.25;
     public static double RETRACTED_LOWERED_WRIST = 0;
 
-    public static double NEW_RETRACTED_LOWERED_BASE = 0.765;
-    public static double NEW_RETRACTED_LOWERED_TOP = 0.25;
-    public static double NEW_RETRACTED_LOWERED_WRIST = 0;
-
     public static double HOLDING_BASE = 0.79;
     public static double HOLDING_TOP = 0.25;
     public static double HOLDING_WRIST = 0;
@@ -163,12 +159,6 @@ public class Robot {
         moveBase(RETRACTED_LOWERED_BASE);
         moveTop(RETRACTED_LOWERED_TOP);
         moveWrist(RETRACTED_LOWERED_WRIST);
-    }
-
-    public void setNewRetractedLowered() {
-        moveBase(NEW_RETRACTED_LOWERED_BASE);
-        moveTop(NEW_RETRACTED_LOWERED_TOP);
-        moveWrist(NEW_RETRACTED_LOWERED_WRIST);
     }
 
     public void setHolding() {

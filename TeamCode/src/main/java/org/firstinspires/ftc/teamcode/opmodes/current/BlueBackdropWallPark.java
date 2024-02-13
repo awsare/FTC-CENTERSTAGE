@@ -30,6 +30,11 @@ public class BlueBackdropWallPark extends LinearOpMode {
         robot = new Robot();
         robot.init(hardwareMap, false);
 
+        robot.setClawClosed();
+        sleep(3000);
+        robot.setRetracted();
+        robot.moveBase(0.5);
+
         camera = new PropCamera(hardwareMap, telemetry, "Blue", "Left");
 
         Action act01 = drive.actionBuilder(drive.pose)
@@ -92,11 +97,6 @@ public class BlueBackdropWallPark extends LinearOpMode {
         Action act25 = drive.actionBuilder(new Pose2d(37, 33.5, 0))
                 .strafeTo(new Vector2d(40, 65))
                 .build();
-
-        robot.setClawClosed();
-        sleep(3000);
-        robot.setRetracted();
-        robot.moveBase(0.5);
 
         while (opModeInInit()) {
             randomization = camera.getRandomization();

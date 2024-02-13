@@ -160,10 +160,8 @@ public class StandardTeleOp extends LinearOpMode {
     private void intakeControl() {
         if (operator.right_trigger > 0.1) {
             robot.powerIntake(-INTAKE_POWER);
-            robot.setIntakeDown();
         } else if (operator.left_trigger > 0.1) {
             robot.powerIntake(OUTTAKE_POWER);
-            robot.setIntakeDown();
         } else {
             robot.powerIntake(0);
         }
