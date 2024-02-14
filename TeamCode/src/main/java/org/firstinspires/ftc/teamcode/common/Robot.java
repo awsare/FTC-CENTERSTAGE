@@ -21,9 +21,17 @@ public class Robot {
     public static double RETRACTED_UP_TOP = 0.19;
     public static double RETRACTED_UP_WRIST = 0.1;
 
-    public static double RETRACTED_LOWERED_BASE = 0.765;
-    public static double RETRACTED_LOWERED_TOP = 0.25;
-    public static double RETRACTED_LOWERED_WRIST = 0;
+    public static double RETRACTED_LOWERED_BASE = 0.72;
+    public static double RETRACTED_LOWERED_TOP = 0.12;
+    public static double RETRACTED_LOWERED_WRIST = 0.16;
+
+    public static double NEW_RETRACTED_LOWERED_BASE = 0.7;
+    public static double NEW_RETRACTED_LOWERED_TOP = 0.1;
+    public static double NEW_RETRACTED_LOWERED_WRIST = 0.15;
+
+    public static double NEW_RETRACTED_BASE = 0.65;
+    public static double NEW_RETRACTED_TOP = 0.19;
+    public static double NEW_RETRACTED_WRIST = 0.1;
 
     public static double HOLDING_BASE = 0.79;
     public static double HOLDING_TOP = 0.25;
@@ -43,7 +51,7 @@ public class Robot {
     public static double CLAW_CLOSED = 0.4;
 
     public static double INTAKE_UP = 0.6375;
-    public static double INTAKE_DOWN = 0.6825;
+    public static double INTAKE_DOWN = 0.65;
     public static double INTAKE_SERVO_OFFSET = 0.18;
 
     public static double LAUNCHER_SET = 1.0;
@@ -149,6 +157,12 @@ public class Robot {
         moveWrist(RETRACTED_WRIST);
     }
 
+    public void setNewRetracted() {
+        moveBase(NEW_RETRACTED_BASE);
+        moveTop(NEW_RETRACTED_TOP);
+        moveWrist(NEW_RETRACTED_WRIST);
+    }
+
     public void setRetractedUp() {
         moveBase(RETRACTED_UP_BASE);
         moveTop(RETRACTED_UP_TOP);
@@ -159,6 +173,12 @@ public class Robot {
         moveBase(RETRACTED_LOWERED_BASE);
         moveTop(RETRACTED_LOWERED_TOP);
         moveWrist(RETRACTED_LOWERED_WRIST);
+    }
+
+    public void setNewRetractedLowered() {
+        moveBase(NEW_RETRACTED_LOWERED_BASE);
+        moveTop(NEW_RETRACTED_LOWERED_TOP);
+        moveWrist(NEW_RETRACTED_LOWERED_WRIST);
     }
 
     public void setHolding() {
