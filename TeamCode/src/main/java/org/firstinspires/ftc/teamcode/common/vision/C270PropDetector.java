@@ -37,7 +37,7 @@ public class C270PropDetector extends OpenCvPipeline {
 
     public static int lowBlueH = 0;
     public static int lowBlueS = 40;
-    public static int lowBlueV = 100;
+    public static int lowBlueV = 70;
 
     public static int highBlueH = 255;
     public static int highBlueS = 255;
@@ -101,13 +101,13 @@ public class C270PropDetector extends OpenCvPipeline {
         telemetry.addData("Center %", centerAverage);
         telemetry.addData("Outer %", outerAverage);
 
-        if (outerAverage > 0.4) {
+        if (outerAverage > 0.5) {
             if (side.equals("Left")) {
                 randomization = 0;
             } else {
                 randomization = 2;
             }
-        } else if (centerAverage > 0.4) {
+        } else if (centerAverage > 0.5) {
             randomization = 1;
         } else {
             if (side.equals("Left")) {

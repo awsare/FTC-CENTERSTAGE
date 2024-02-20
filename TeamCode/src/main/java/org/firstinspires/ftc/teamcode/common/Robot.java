@@ -26,8 +26,8 @@ public class Robot {
     public static double RETRACTED_LOWERED_WRIST = 0.16;
 
     public static double NEW_RETRACTED_LOWERED_BASE = 0.7;
-    public static double NEW_RETRACTED_LOWERED_TOP = 0.1;
-    public static double NEW_RETRACTED_LOWERED_WRIST = 0.15;
+    public static double NEW_RETRACTED_LOWERED_TOP = 0.12;
+    public static double NEW_RETRACTED_LOWERED_WRIST = 0.16;
 
     public static double NEW_RETRACTED_BASE = 0.65;
     public static double NEW_RETRACTED_TOP = 0.19;
@@ -47,6 +47,7 @@ public class Robot {
 
     public static double CLAW_OPEN = 0.275;
     public static double CLAW_SCORE_OPEN = 0.2;
+    public static double CLAW_AUTO_OPEN = 0.3;
     public static double CLAW_WIDE = 0;
     public static double CLAW_CLOSED = 0.4;
 
@@ -136,6 +137,10 @@ public class Robot {
 
     public void setClawScoreOpen() {
         claw.setPosition(CLAW_SCORE_OPEN);
+    }
+
+    public void setClawAutoOpen() {
+        claw.setPosition(CLAW_AUTO_OPEN);
     }
 
     public void setClawWide() {

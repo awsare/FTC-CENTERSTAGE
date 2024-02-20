@@ -21,7 +21,7 @@ public class BlueWingWallPark extends LinearOpMode {
 
     int randomization = 0;
 
-    Pose2d startPose = new Pose2d(-37, -61, Math.toRadians(90));
+    Pose2d startPose = new Pose2d(-37, 61, Math.toRadians(-90));
 
     @Override
     public void runOpMode() {
@@ -43,8 +43,8 @@ public class BlueWingWallPark extends LinearOpMode {
 
         Action act02 = drive.actionBuilder(new Pose2d(-36, 37, Math.toRadians(10)))
                 .strafeToLinearHeading(new Vector2d(-47,50), 0)
-                .strafeTo(new Vector2d(-37, 60))
-                .strafeTo(new Vector2d(25, 60))
+                .strafeTo(new Vector2d(-37, 61))
+                .strafeTo(new Vector2d(25, 61))
                 .strafeTo(new Vector2d(42, 42.5))
                 .build();
 
@@ -67,8 +67,8 @@ public class BlueWingWallPark extends LinearOpMode {
         Action act12 = drive.actionBuilder(new Pose2d(-40, 38, Math.toRadians(90)))
                 .strafeTo(new Vector2d(-47,50))
                 .turnTo(0)
-                .strafeTo(new Vector2d(-37, 60))
-                .strafeTo(new Vector2d(25, 60))
+                .strafeTo(new Vector2d(-37, 61))
+                .strafeTo(new Vector2d(25, 61))
                 .strafeTo(new Vector2d(42, 36))
                 .build();
 
@@ -91,20 +91,20 @@ public class BlueWingWallPark extends LinearOpMode {
         Action act22 = drive.actionBuilder(new Pose2d(-46, 48.5, Math.toRadians(-90)))
                 .strafeTo(new Vector2d(-47, 51))
                 .turnTo(0)
-                .strafeTo(new Vector2d(-37, 60))
-                .strafeTo(new Vector2d(25, 60))
-                .strafeTo(new Vector2d(42, 27))
+                .strafeTo(new Vector2d(-37, 61))
+                .strafeTo(new Vector2d(25, 61))
+                .strafeTo(new Vector2d(42, 31))
                 .build();
 
-        Action act23 = drive.actionBuilder(new Pose2d(42, -27, Math.toRadians(0)))
-                .strafeTo(new Vector2d(47.5, 27))
+        Action act23 = drive.actionBuilder(new Pose2d(42, 31, Math.toRadians(0)))
+                .strafeTo(new Vector2d(47.5, 31))
                 .build();
 
-        Action act24 = drive.actionBuilder(new Pose2d(47.5, 27, Math.toRadians(0)))
-                .strafeTo(new Vector2d(42, 27))
+        Action act24 = drive.actionBuilder(new Pose2d(47.5, 31, Math.toRadians(0)))
+                .strafeTo(new Vector2d(42, 31))
                 .build();
 
-        Action act25 = drive.actionBuilder(new Pose2d(42, 27, Math.toRadians(0)))
+        Action act25 = drive.actionBuilder(new Pose2d(42, 31, Math.toRadians(0)))
                 .strafeTo(new Vector2d(45, 63))
                 .build();
 
@@ -116,6 +116,11 @@ public class BlueWingWallPark extends LinearOpMode {
 
         waitForStart();
 
+        robot.setIntakeDown();
+        robot.moveBase(0);
+        robot.moveTop(0.5);
+        robot.moveWrist(0.275);
+
         if (randomization == 0) {
             Actions.runBlocking(act01);
         } else if (randomization == 1) {
@@ -124,11 +129,6 @@ public class BlueWingWallPark extends LinearOpMode {
             Actions.runBlocking(act21);
         }
 
-        robot.setIntakeDown();
-        robot.moveBase(0);
-        robot.moveTop(0.5);
-        robot.moveWrist(0.275);
-        sleep(700);
         robot.setClawScoreOpen();
         sleep(400);
         robot.setClawClosed();
@@ -175,7 +175,7 @@ public class BlueWingWallPark extends LinearOpMode {
             Actions.runBlocking(act23);
         }
 
-        robot.setClawScoreOpen();
+        robot.setClawAutoOpen();
         sleep(500);
 
         if (randomization == 0) {

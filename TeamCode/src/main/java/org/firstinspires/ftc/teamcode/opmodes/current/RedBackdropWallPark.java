@@ -165,7 +165,7 @@ public class RedBackdropWallPark extends LinearOpMode {
             Actions.runBlocking(act23);
         }
 
-        robot.setClawScoreOpen();
+        robot.setClawAutoOpen();
         sleep(500);
 
         if (randomization == 0) {

@@ -106,6 +106,11 @@ public class BlueBackdropWallPark extends LinearOpMode {
 
         waitForStart();
 
+        robot.setIntakeDown();
+        robot.moveBase(0);
+        robot.moveTop(0.5);
+        robot.moveWrist(0.275);
+
         if (randomization == 0) {
             Actions.runBlocking(act01);
         } else if (randomization == 1) {
@@ -114,11 +119,6 @@ public class BlueBackdropWallPark extends LinearOpMode {
             Actions.runBlocking(act21);
         }
 
-        robot.setIntakeDown();
-        robot.moveBase(0);
-        robot.moveTop(0.5);
-        robot.moveWrist(0.275);
-        sleep(700);
         robot.setClawScoreOpen();
         sleep(400);
         robot.setClawClosed();
@@ -165,7 +165,7 @@ public class BlueBackdropWallPark extends LinearOpMode {
             Actions.runBlocking(act23);
         }
 
-        robot.setClawOpen();
+        robot.setClawAutoOpen();
         sleep(500);
 
         if (randomization == 0) {
