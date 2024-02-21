@@ -12,8 +12,8 @@ import org.firstinspires.ftc.teamcode.common.Robot;
 import org.firstinspires.ftc.teamcode.common.vision.PropCamera;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
-@Autonomous(name = "Blue WING \uD83D\uDC0B Wall Park", group = "blue")
-public class BlueWingWallPark extends LinearOpMode {
+@Autonomous(name = "Blue WING \uD83D\uDC0B Center Park", group = "blue")
+public class BlueWingCenterPark extends LinearOpMode {
 
     MecanumDrive drive;
     Robot robot;
@@ -57,7 +57,7 @@ public class BlueWingWallPark extends LinearOpMode {
                 .build();
 
         Action act05 = drive.actionBuilder(new Pose2d(42, 45, Math.toRadians(0)))
-                .strafeTo(new Vector2d(45, 63))
+                .strafeTo(new Vector2d(47, 9))
                 .build();
 
         Action act11 = drive.actionBuilder(drive.pose)
@@ -81,7 +81,7 @@ public class BlueWingWallPark extends LinearOpMode {
                 .build();
 
         Action act15 = drive.actionBuilder(new Pose2d(42, 38.5, Math.toRadians(0)))
-                .strafeTo(new Vector2d(45, 63))
+                .strafeTo(new Vector2d(47, 9))
                 .build();
 
         Action act21 = drive.actionBuilder(drive.pose)
@@ -105,7 +105,7 @@ public class BlueWingWallPark extends LinearOpMode {
                 .build();
 
         Action act25 = drive.actionBuilder(new Pose2d(42, 31, Math.toRadians(0)))
-                .strafeTo(new Vector2d(45, 63))
+                .strafeTo(new Vector2d(47, 9))
                 .build();
 
         while (opModeInInit()) {

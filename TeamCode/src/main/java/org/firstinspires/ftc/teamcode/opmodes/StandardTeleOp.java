@@ -22,7 +22,7 @@ public class StandardTeleOp extends LinearOpMode {
 
     public static double DRFB_UP_REDUCTION = 0.7;
     public static double DRFB_DOWN_REDUCTION = 0.005;
-    public static double DRFB_GRAVITY = 0.125;
+    public static double DRFB_GRAVITY = 0.15;
 
     enum ArmStates {
         RETRACTED_STATE,
