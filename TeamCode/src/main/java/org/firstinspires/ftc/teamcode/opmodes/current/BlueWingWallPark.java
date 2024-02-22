@@ -69,18 +69,18 @@ public class BlueWingWallPark extends LinearOpMode {
                 .turnTo(0)
                 .strafeTo(new Vector2d(-37, 61))
                 .strafeTo(new Vector2d(25, 61))
-                .strafeTo(new Vector2d(42, 38.5))
+                .strafeTo(new Vector2d(42, 40))
                 .build();
 
-        Action act13 = drive.actionBuilder(new Pose2d(42, 38.5, Math.toRadians(0)))
-                .strafeTo(new Vector2d(47.5, 38.5))
+        Action act13 = drive.actionBuilder(new Pose2d(42, 40, Math.toRadians(0)))
+                .strafeTo(new Vector2d(47.5, 40))
                 .build();
 
-        Action act14 = drive.actionBuilder(new Pose2d(47.5, 38.5, Math.toRadians(0)))
-                .strafeTo(new Vector2d(42, 38.5))
+        Action act14 = drive.actionBuilder(new Pose2d(47.5, 40, Math.toRadians(0)))
+                .strafeTo(new Vector2d(42, 40))
                 .build();
 
-        Action act15 = drive.actionBuilder(new Pose2d(42, 38.5, Math.toRadians(0)))
+        Action act15 = drive.actionBuilder(new Pose2d(42, 40, Math.toRadians(0)))
                 .strafeTo(new Vector2d(45, 63))
                 .build();
 
@@ -93,18 +93,18 @@ public class BlueWingWallPark extends LinearOpMode {
                 .turnTo(0)
                 .strafeTo(new Vector2d(-37, 61))
                 .strafeTo(new Vector2d(25, 61))
-                .strafeTo(new Vector2d(42, 31))
+                .strafeTo(new Vector2d(42, 33))
                 .build();
 
-        Action act23 = drive.actionBuilder(new Pose2d(42, 31, Math.toRadians(0)))
-                .strafeTo(new Vector2d(47.5, 31))
+        Action act23 = drive.actionBuilder(new Pose2d(42, 33, Math.toRadians(0)))
+                .strafeTo(new Vector2d(47.5, 33))
                 .build();
 
-        Action act24 = drive.actionBuilder(new Pose2d(47.5, 31, Math.toRadians(0)))
-                .strafeTo(new Vector2d(42, 31))
+        Action act24 = drive.actionBuilder(new Pose2d(47.5, 33, Math.toRadians(0)))
+                .strafeTo(new Vector2d(42, 33))
                 .build();
 
-        Action act25 = drive.actionBuilder(new Pose2d(42, 31, Math.toRadians(0)))
+        Action act25 = drive.actionBuilder(new Pose2d(42, 33, Math.toRadians(0)))
                 .strafeTo(new Vector2d(45, 63))
                 .build();
 

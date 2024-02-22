@@ -55,7 +55,7 @@ public class BlueBackdropCenterPark extends LinearOpMode {
                 .build();
 
         Action act05 = drive.actionBuilder(new Pose2d(37, 46, 0))
-                .strafeTo(new Vector2d(47, 9))
+                .strafeTo(new Vector2d(47, 11))
                 .build();
 
         Action act11 = drive.actionBuilder(drive.pose)
@@ -75,7 +75,7 @@ public class BlueBackdropCenterPark extends LinearOpMode {
                 .build();
 
         Action act15 = drive.actionBuilder(new Pose2d(41, 40, 0))
-                .strafeTo(new Vector2d(47, 9))
+                .strafeTo(new Vector2d(47, 11))
                 .build();
 
         Action act21 = drive.actionBuilder(drive.pose)
@@ -95,7 +95,7 @@ public class BlueBackdropCenterPark extends LinearOpMode {
                 .build();
 
         Action act25 = drive.actionBuilder(new Pose2d(37, 33.5, 0))
-                .strafeTo(new Vector2d(47, 9))
+                .strafeTo(new Vector2d(47, 11))
                 .build();
 
         while (opModeInInit()) {

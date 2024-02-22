@@ -13,25 +13,17 @@ public class Robot {
     DcMotorEx leftFront, leftBack, rightBack, rightFront, DRFBLeft, DRFBRight, intake;
     Servo baseLeft, baseRight, topLeft, topRight, wrist, claw, intakeLeft, intakeRight, launcher;
 
-    public static double RETRACTED_BASE = 0.7;
-    public static double RETRACTED_TOP = 0.25;
-    public static double RETRACTED_WRIST = 0.05;
+    public static double RETRACTED_BASE = 0.65;
+    public static double RETRACTED_TOP = 0.19;
+    public static double RETRACTED_WRIST = 0.1;
 
-    public static double RETRACTED_UP_BASE = 0.65;
+    public static double RETRACTED_UP_BASE = 0.6;
     public static double RETRACTED_UP_TOP = 0.19;
     public static double RETRACTED_UP_WRIST = 0.1;
 
-    public static double RETRACTED_LOWERED_BASE = 0.72;
+    public static double RETRACTED_LOWERED_BASE = 0.7;
     public static double RETRACTED_LOWERED_TOP = 0.12;
     public static double RETRACTED_LOWERED_WRIST = 0.16;
-
-    public static double NEW_RETRACTED_LOWERED_BASE = 0.7;
-    public static double NEW_RETRACTED_LOWERED_TOP = 0.12;
-    public static double NEW_RETRACTED_LOWERED_WRIST = 0.16;
-
-    public static double NEW_RETRACTED_BASE = 0.65;
-    public static double NEW_RETRACTED_TOP = 0.19;
-    public static double NEW_RETRACTED_WRIST = 0.1;
 
     public static double HOLDING_BASE = 0.79;
     public static double HOLDING_TOP = 0.25;
@@ -45,11 +37,11 @@ public class Robot {
     public static double SCORING_IN_TOP = 1.0;
     public static double SCORING_IN_WRIST = 0.035;
 
-    public static double CLAW_OPEN = 0.275;
-    public static double CLAW_SCORE_OPEN = 0.2;
-    public static double CLAW_AUTO_OPEN = 0.3;
+    public static double CLAW_OPEN = 0.385;
+    public static double CLAW_SCORE_OPEN = 0.34;
+    public static double CLAW_AUTO_OPEN = 0.39;
     public static double CLAW_WIDE = 0;
-    public static double CLAW_CLOSED = 0.4;
+    public static double CLAW_CLOSED = 0.5;
 
     public static double INTAKE_UP = 0.6375;
     public static double INTAKE_DOWN = 0.65;
@@ -162,12 +154,6 @@ public class Robot {
         moveWrist(RETRACTED_WRIST);
     }
 
-    public void setNewRetracted() {
-        moveBase(NEW_RETRACTED_BASE);
-        moveTop(NEW_RETRACTED_TOP);
-        moveWrist(NEW_RETRACTED_WRIST);
-    }
-
     public void setRetractedUp() {
         moveBase(RETRACTED_UP_BASE);
         moveTop(RETRACTED_UP_TOP);
@@ -178,12 +164,6 @@ public class Robot {
         moveBase(RETRACTED_LOWERED_BASE);
         moveTop(RETRACTED_LOWERED_TOP);
         moveWrist(RETRACTED_LOWERED_WRIST);
-    }
-
-    public void setNewRetractedLowered() {
-        moveBase(NEW_RETRACTED_LOWERED_BASE);
-        moveTop(NEW_RETRACTED_LOWERED_TOP);
-        moveWrist(NEW_RETRACTED_LOWERED_WRIST);
     }
 
     public void setHolding() {

@@ -174,7 +174,7 @@ public class StandardTeleOp extends LinearOpMode {
                     break;
                 }
 
-                robot.setNewRetracted();
+                robot.setRetracted();
 
                 if (operator.circle && !previousOperator.circle) {
                     armState = ArmStates.SCORING_STATE;
@@ -204,7 +204,7 @@ public class StandardTeleOp extends LinearOpMode {
                     break;
                 }
 
-                robot.setNewRetractedLowered();
+                robot.setRetractedLowered();
 
                 if (stateTime.time() > 0.3) {
                     robot.setClawClosed();

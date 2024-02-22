@@ -57,7 +57,7 @@ public class BlueWingCenterPark extends LinearOpMode {
                 .build();
 
         Action act05 = drive.actionBuilder(new Pose2d(42, 45, Math.toRadians(0)))
-                .strafeTo(new Vector2d(47, 9))
+                .strafeTo(new Vector2d(47, 11))
                 .build();
 
         Action act11 = drive.actionBuilder(drive.pose)
@@ -69,19 +69,19 @@ public class BlueWingCenterPark extends LinearOpMode {
                 .turnTo(0)
                 .strafeTo(new Vector2d(-37, 61))
                 .strafeTo(new Vector2d(25, 61))
-                .strafeTo(new Vector2d(42, 38.5))
+                .strafeTo(new Vector2d(42, 40))
                 .build();
 
-        Action act13 = drive.actionBuilder(new Pose2d(42, 38.5, Math.toRadians(0)))
-                .strafeTo(new Vector2d(47.5, 38.5))
+        Action act13 = drive.actionBuilder(new Pose2d(42, 40, Math.toRadians(0)))
+                .strafeTo(new Vector2d(47.5, 40))
                 .build();
 
-        Action act14 = drive.actionBuilder(new Pose2d(47.5, 38.5, Math.toRadians(0)))
-                .strafeTo(new Vector2d(42, 38.5))
+        Action act14 = drive.actionBuilder(new Pose2d(47.5, 40, Math.toRadians(0)))
+                .strafeTo(new Vector2d(42, 40))
                 .build();
 
-        Action act15 = drive.actionBuilder(new Pose2d(42, 38.5, Math.toRadians(0)))
-                .strafeTo(new Vector2d(47, 9))
+        Action act15 = drive.actionBuilder(new Pose2d(42, 40, Math.toRadians(0)))
+                .strafeTo(new Vector2d(47, 11))
                 .build();
 
         Action act21 = drive.actionBuilder(drive.pose)
@@ -93,19 +93,19 @@ public class BlueWingCenterPark extends LinearOpMode {
                 .turnTo(0)
                 .strafeTo(new Vector2d(-37, 61))
                 .strafeTo(new Vector2d(25, 61))
-                .strafeTo(new Vector2d(42, 31))
+                .strafeTo(new Vector2d(42, 33))
                 .build();
 
-        Action act23 = drive.actionBuilder(new Pose2d(42, 31, Math.toRadians(0)))
-                .strafeTo(new Vector2d(47.5, 31))
+        Action act23 = drive.actionBuilder(new Pose2d(42, 33, Math.toRadians(0)))
+                .strafeTo(new Vector2d(47.5, 33))
                 .build();
 
-        Action act24 = drive.actionBuilder(new Pose2d(47.5, 31, Math.toRadians(0)))
-                .strafeTo(new Vector2d(42, 31))
+        Action act24 = drive.actionBuilder(new Pose2d(47.5, 33, Math.toRadians(0)))
+                .strafeTo(new Vector2d(42, 33))
                 .build();
 
-        Action act25 = drive.actionBuilder(new Pose2d(42, 31, Math.toRadians(0)))
-                .strafeTo(new Vector2d(47, 9))
+        Action act25 = drive.actionBuilder(new Pose2d(42, 33, Math.toRadians(0)))
+                .strafeTo(new Vector2d(47, 11))
                 .build();
 
         while (opModeInInit()) {
