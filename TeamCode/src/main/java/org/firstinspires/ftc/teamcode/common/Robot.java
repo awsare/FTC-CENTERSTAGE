@@ -15,32 +15,26 @@ public class Robot {
 
     public static double RETRACTED_BASE = 0.65;
     public static double RETRACTED_TOP = 0.19;
-    public static double RETRACTED_WRIST = 0.1;
+    public static double RETRACTED_WRIST = 0.325;
 
     public static double RETRACTED_UP_BASE = 0.6;
     public static double RETRACTED_UP_TOP = 0.19;
-    public static double RETRACTED_UP_WRIST = 0.1;
+    public static double RETRACTED_UP_WRIST = 0.325;
 
     public static double RETRACTED_LOWERED_BASE = 0.7;
     public static double RETRACTED_LOWERED_TOP = 0.12;
-    public static double RETRACTED_LOWERED_WRIST = 0.16;
-
-    public static double HOLDING_BASE = 0.79;
-    public static double HOLDING_TOP = 0.25;
-    public static double HOLDING_WRIST = 0;
+    public static double RETRACTED_LOWERED_WRIST = 0.4;
 
     public static double SCORING_BASE = 0.0;
     public static double SCORING_TOP = 1.0;
-    public static double SCORING_WRIST = 0.035;
+    public static double SCORING_WRIST = 0.225;
 
     public static double SCORING_IN_BASE = 0.5;
     public static double SCORING_IN_TOP = 1.0;
-    public static double SCORING_IN_WRIST = 0.035;
+    public static double SCORING_IN_WRIST = 0.225;
 
-    public static double CLAW_OPEN = 0.385;
+    public static double CLAW_OPEN = 0.395;
     public static double CLAW_SCORE_OPEN = 0.34;
-    public static double CLAW_AUTO_OPEN = 0.39;
-    public static double CLAW_WIDE = 0;
     public static double CLAW_CLOSED = 0.5;
 
     public static double INTAKE_UP = 0.6375;
@@ -131,14 +125,6 @@ public class Robot {
         claw.setPosition(CLAW_SCORE_OPEN);
     }
 
-    public void setClawAutoOpen() {
-        claw.setPosition(CLAW_AUTO_OPEN);
-    }
-
-    public void setClawWide() {
-        claw.setPosition(CLAW_WIDE);
-    }
-
     public void powerDRFB(double power) {
         DRFBLeft.setPower(power);
         DRFBRight.setPower(power);
@@ -166,12 +152,6 @@ public class Robot {
         moveWrist(RETRACTED_LOWERED_WRIST);
     }
 
-    public void setHolding() {
-        moveBase(HOLDING_BASE);
-        moveTop(HOLDING_TOP);
-        moveWrist(HOLDING_WRIST);
-    }
-
     public void setScoring() {
         moveBase(SCORING_BASE);
         moveTop(SCORING_TOP);
@@ -192,5 +172,17 @@ public class Robot {
     public void setIntakeDown() {
         intakeLeft.setPosition(INTAKE_DOWN);
         intakeRight.setPosition(1 - (INTAKE_DOWN - INTAKE_SERVO_OFFSET));
+    }
+
+    public void liftToAutoHeight() {
+        while (getDRFBPosition() < 200) {
+            powerDRFB(0.7);
+        }
+    }
+
+    public void lower() {
+        while (getDRFBPosition() > 100) {
+            powerDRFB(-0.05);
+        }
     }
 }

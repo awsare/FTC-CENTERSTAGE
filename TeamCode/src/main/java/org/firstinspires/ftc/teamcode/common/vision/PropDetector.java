@@ -11,7 +11,7 @@ import org.opencv.imgproc.Imgproc;
 import org.openftc.easyopencv.OpenCvPipeline;
 
 @Config
-public class C270PropDetector extends OpenCvPipeline {
+public class PropDetector extends OpenCvPipeline {
 
     public static int centerXLeft = 350;
     public static int centerYLeft = 250;
@@ -37,7 +37,7 @@ public class C270PropDetector extends OpenCvPipeline {
 
     public static int lowBlueH = 0;
     public static int lowBlueS = 40;
-    public static int lowBlueV = 70;
+    public static int lowBlueV = 20;
 
     public static int highBlueH = 255;
     public static int highBlueS = 255;
@@ -54,7 +54,7 @@ public class C270PropDetector extends OpenCvPipeline {
 
     int randomization;
 
-    public C270PropDetector(Telemetry telemetry, String alliance, String side) {
+    public PropDetector(Telemetry telemetry, String alliance, String side) {
         this.telemetry = telemetry;
         this.alliance = alliance;
         this.side = side;
@@ -98,16 +98,13 @@ public class C270PropDetector extends OpenCvPipeline {
         center.release();
         outer.release();
 
-        telemetry.addData("Center %", centerAverage);
-        telemetry.addData("Outer %", outerAverage);
-
-        if (outerAverage > 0.5) {
+        if (outerAverage > 0.25) {
             if (side.equals("Left")) {
                 randomization = 0;
             } else {
                 randomization = 2;
             }
-        } else if (centerAverage > 0.5) {
+        } else if (centerAverage > 0.25) {
             randomization = 1;
         } else {
             if (side.equals("Left")) {
@@ -116,6 +113,11 @@ public class C270PropDetector extends OpenCvPipeline {
                 randomization = 0;
             }
         }
+
+        telemetry.addData("Center %", centerAverage);
+        telemetry.addData("Outer %", outerAverage);
+        telemetry.addData("Randomization", randomization);
+        telemetry.update();
 
         return mat;
     }

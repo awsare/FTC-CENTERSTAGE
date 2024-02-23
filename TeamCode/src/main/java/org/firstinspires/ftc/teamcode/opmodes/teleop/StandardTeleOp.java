@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes;
+package org.firstinspires.ftc.teamcode.opmodes.teleop;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -28,7 +28,6 @@ public class StandardTeleOp extends LinearOpMode {
         RETRACTED_STATE,
         RETRACTED_LOWERED_STATE,
         SCORING_STATE,
-        HOLDING
     }
 
     ArmStates armState;
@@ -65,10 +64,10 @@ public class StandardTeleOp extends LinearOpMode {
         secondStateTime = new ElapsedTime();
         loopTime = new ElapsedTime();
 
-        waitForStart();
-
         gamepad1.setLedColor(0, 0, 255, Gamepad.LED_DURATION_CONTINUOUS);
         gamepad2.setLedColor(255, 255, 255, Gamepad.LED_DURATION_CONTINUOUS);
+
+        waitForStart();
 
         stateTime.reset();
         secondStateTime.reset();
@@ -192,11 +191,6 @@ public class StandardTeleOp extends LinearOpMode {
                     stateTime.reset();
                 }
 
-                if (operator.triangle && !previousOperator.triangle) {
-                    stateTime.reset();
-                    armState = ArmStates.HOLDING;
-                }
-
                 break;
             case RETRACTED_LOWERED_STATE:
                 if (secondStateTime.time() < 0.2) {
@@ -233,19 +227,6 @@ public class StandardTeleOp extends LinearOpMode {
                 }
 
                 break;
-            case HOLDING:
-                robot.setClawWide();
-
-                if (stateTime.time() < 0.2) {
-                    break;
-                }
-
-                robot.setHolding();
-
-                if (operator.triangle && !previousOperator.triangle) {
-                    //robot.setClawOpen();
-                    armState = ArmStates.RETRACTED_STATE;
-                }
         }
     }
 

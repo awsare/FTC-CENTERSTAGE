@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes.current;
+package org.firstinspires.ftc.teamcode.opmodes.autonomous.blue;
 
 
 import com.acmerobotics.roadrunner.Action;
@@ -12,8 +12,8 @@ import org.firstinspires.ftc.teamcode.common.Robot;
 import org.firstinspires.ftc.teamcode.common.vision.PropCamera;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
-@Autonomous(name = "Red BACKDROP \uD83E\uDD91 Wall Park", group = "red")
-public class RedBackdropWallPark extends LinearOpMode {
+@Autonomous(name = "Blue BACKDROP \uD83D\uDC0B Center Park", group = "blue")
+public class BlueBackdropCenterPark extends LinearOpMode {
 
     MecanumDrive drive;
     Robot robot;
@@ -21,7 +21,7 @@ public class RedBackdropWallPark extends LinearOpMode {
 
     int randomization = 0;
 
-    Pose2d startPose = new Pose2d(13, -62, Math.PI / 2.0);
+    Pose2d startPose = new Pose2d(13, 62, -Math.PI / 2.0);
 
     @Override
     public void runOpMode() {
@@ -35,67 +35,67 @@ public class RedBackdropWallPark extends LinearOpMode {
         robot.setRetracted();
         robot.moveBase(0.5);
 
-        camera = new PropCamera(hardwareMap, telemetry, "Red", "Right");
+        camera = new PropCamera(hardwareMap, telemetry, "Blue", "Left");
 
         Action act01 = drive.actionBuilder(drive.pose)
-                .strafeToLinearHeading(new Vector2d(12, -38), Math.toRadians(170))
+                .strafeTo(new Vector2d(23.5, 49.5))
                 .build();
 
-        Action act02 = drive.actionBuilder(new Pose2d(12, -38, Math.toRadians(170)))
-                .strafeToLinearHeading(new Vector2d(40, -30), 0)
+        Action act02 = drive.actionBuilder(new Pose2d(23.5, 49.5, Math.toRadians(-90)))
+                .strafeTo(new Vector2d(30, 50))
+                .strafeToLinearHeading(new Vector2d(37, 46), 0)
                 .build();
 
-        Action act03 = drive.actionBuilder(new Pose2d(40, -30, 0))
-                .strafeTo(new Vector2d(45, -30))
+        Action act03 = drive.actionBuilder(new Pose2d(37, 46, 0))
+                .strafeTo(new Vector2d(45.5, 46))
                 .build();
 
-        Action act04 = drive.actionBuilder(new Pose2d(45, -30, 0))
-                .strafeTo(new Vector2d(42, -30))
+        Action act04 = drive.actionBuilder(new Pose2d(45.5, 46, 0))
+                .strafeTo(new Vector2d(37, 46))
                 .build();
 
-        Action act05 = drive.actionBuilder(new Pose2d(42, -30, 0))
-                .strafeTo(new Vector2d(46, -63))
+        Action act05 = drive.actionBuilder(new Pose2d(37, 46, 0))
+                .strafeTo(new Vector2d(47, 14))
                 .build();
 
         Action act11 = drive.actionBuilder(drive.pose)
-                .strafeTo(new Vector2d(15, -39))
+                .strafeTo(new Vector2d(17, 39))
                 .build();
 
-        Action act12 = drive.actionBuilder(new Pose2d(15, -39, Math.toRadians(90)))
-                .strafeToLinearHeading(new Vector2d(40, -37), 0)
+        Action act12 = drive.actionBuilder(new Pose2d(17, 39, Math.toRadians(-90)))
+                .strafeToLinearHeading(new Vector2d(41, 40), 0)
                 .build();
 
-        Action act13 = drive.actionBuilder(new Pose2d(40, -37, 0))
-                .strafeTo(new Vector2d(45, -37))
+        Action act13 = drive.actionBuilder(new Pose2d(41, 40, 0))
+                .strafeTo(new Vector2d(44.5, 40))
                 .build();
 
-        Action act14 = drive.actionBuilder(new Pose2d(45, -37, 0))
-                .strafeTo(new Vector2d(42, -37))
+        Action act14 = drive.actionBuilder(new Pose2d(44.5, 40, 0))
+                .strafeTo(new Vector2d(41, 40))
                 .build();
 
-        Action act15 = drive.actionBuilder(new Pose2d(42, -37, 0))
-                .strafeTo(new Vector2d(46, -63))
+        Action act15 = drive.actionBuilder(new Pose2d(41, 40, 0))
+                .strafeTo(new Vector2d(47, 14))
                 .build();
 
         Action act21 = drive.actionBuilder(drive.pose)
-                .strafeTo(new Vector2d(23, -49))
+                .strafeToLinearHeading(new Vector2d(12, 38), Math.toRadians(-170))
                 .build();
 
-        Action act22 = drive.actionBuilder(new Pose2d(23, -49, Math.toRadians(90)))
-                .strafeTo(new Vector2d(30, -49))
-                .strafeToLinearHeading(new Vector2d(40, -43), 0)
+        Action act22 = drive.actionBuilder(new Pose2d(12, 38, Math.toRadians(-170)))
+                .strafeToLinearHeading(new Vector2d(37, 32), 0)
                 .build();
 
-        Action act23 = drive.actionBuilder(new Pose2d(40, -43, 0))
-                .strafeTo(new Vector2d(45, -43))
+        Action act23 = drive.actionBuilder(new Pose2d(37, 32, 0))
+                .strafeTo(new Vector2d(44, 33.5))
                 .build();
 
-        Action act24 = drive.actionBuilder(new Pose2d(45, -43, 0))
-                .strafeTo(new Vector2d(42, -43))
+        Action act24 = drive.actionBuilder(new Pose2d(44, 33.5, 0))
+                .strafeTo(new Vector2d(37, 33.5))
                 .build();
 
-        Action act25 = drive.actionBuilder(new Pose2d(42, -43, 0))
-                .strafeTo(new Vector2d(46, -63))
+        Action act25 = drive.actionBuilder(new Pose2d(37, 33.5, 0))
+                .strafeTo(new Vector2d(47, 14))
                 .build();
 
         while (opModeInInit()) {
@@ -109,7 +109,7 @@ public class RedBackdropWallPark extends LinearOpMode {
         robot.setIntakeDown();
         robot.moveBase(0);
         robot.moveTop(0.5);
-        robot.moveWrist(0.275);
+        robot.moveWrist(0.485);
 
         if (randomization == 0) {
             Actions.runBlocking(act01);
@@ -151,8 +151,8 @@ public class RedBackdropWallPark extends LinearOpMode {
         robot.moveBase(0.4);
         sleep(800);
         robot.setIntakeUp();
-        robot.moveTop(0.6);
-        robot.moveWrist(0.35);
+        robot.moveTop(0.65);
+        robot.moveWrist(0.5);
         sleep(500);
         robot.moveBase(0.14);
         sleep(1000);
@@ -165,7 +165,7 @@ public class RedBackdropWallPark extends LinearOpMode {
             Actions.runBlocking(act23);
         }
 
-        robot.setClawAutoOpen();
+        robot.setClawOpen();
         sleep(500);
 
         if (randomization == 0) {
