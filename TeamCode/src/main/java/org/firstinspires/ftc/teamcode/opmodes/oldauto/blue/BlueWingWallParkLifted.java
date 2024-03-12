@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes.autonomous.blue;
+package org.firstinspires.ftc.teamcode.opmodes.oldauto.blue;
 
 
 import com.acmerobotics.roadrunner.Action;
@@ -6,14 +6,16 @@ import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.common.Robot;
 import org.firstinspires.ftc.teamcode.common.vision.PropCamera;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
-@Autonomous(name = "Blue WING \uD83D\uDC0B Wall Park", group = "blue")
-public class BlueWingWallPark extends LinearOpMode {
+@Disabled
+@Autonomous(name = "Blue WING LIFTED \uD83D\uDC0B Wall Park", group = "blue")
+public class BlueWingWallParkLifted extends LinearOpMode {
 
     MecanumDrive drive;
     Robot robot;
@@ -45,6 +47,7 @@ public class BlueWingWallPark extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(-47,50), 0)
                 .strafeTo(new Vector2d(-37, 61))
                 .strafeTo(new Vector2d(25, 61))
+                .waitSeconds(4)
                 .strafeTo(new Vector2d(42, 45))
                 .build();
 
@@ -69,6 +72,7 @@ public class BlueWingWallPark extends LinearOpMode {
                 .turnTo(0)
                 .strafeTo(new Vector2d(-37, 61))
                 .strafeTo(new Vector2d(25, 61))
+                .waitSeconds(4)
                 .strafeTo(new Vector2d(42, 40))
                 .build();
 
@@ -93,6 +97,7 @@ public class BlueWingWallPark extends LinearOpMode {
                 .turnTo(0)
                 .strafeTo(new Vector2d(-37, 61))
                 .strafeTo(new Vector2d(25, 61))
+                .waitSeconds(4)
                 .strafeTo(new Vector2d(42, 33))
                 .build();
 
@@ -166,6 +171,8 @@ public class BlueWingWallPark extends LinearOpMode {
         sleep(500);
         robot.moveBase(0.14);
         sleep(1000);
+        robot.liftToAutoHeight();
+        robot.powerDRFB(0.15);
 
         if (randomization == 0) {
             Actions.runBlocking(act03);
@@ -195,6 +202,9 @@ public class BlueWingWallPark extends LinearOpMode {
         } else {
             Actions.runBlocking(act25);
         }
+
+        robot.lower();
+        robot.powerDRFB(0);
 
         camera.stopStreaming();
     }

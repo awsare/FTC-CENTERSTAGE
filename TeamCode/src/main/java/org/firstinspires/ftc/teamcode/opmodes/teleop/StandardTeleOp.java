@@ -17,7 +17,7 @@ public class StandardTeleOp extends LinearOpMode {
     public static double HIGH_SPEED = 1.0;
     public static double ROTATION_WEIGHT = 0.5;
 
-    public static double INTAKE_POWER = 0.8;
+    public static double INTAKE_POWER = 0.6;
     public static double OUTTAKE_POWER = 0.8;
 
     public static double DRFB_UP_REDUCTION = 0.7;
@@ -66,6 +66,9 @@ public class StandardTeleOp extends LinearOpMode {
 
         gamepad1.setLedColor(0, 0, 255, Gamepad.LED_DURATION_CONTINUOUS);
         gamepad2.setLedColor(255, 255, 255, Gamepad.LED_DURATION_CONTINUOUS);
+
+        telemetry.addLine("lock in");
+        telemetry.update();
 
         waitForStart();
 
@@ -208,7 +211,7 @@ public class StandardTeleOp extends LinearOpMode {
 
                 break;
             case SCORING_STATE:
-                if (stateTime.time() < 0.2) {
+                if (stateTime.time() < 0.5) {
                     break;
                 }
 

@@ -1,14 +1,20 @@
 package org.firstinspires.ftc.teamcode.common;
 
+import androidx.annotation.NonNull;
+
 import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import com.acmerobotics.roadrunner.Action;
+import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Config
-public class Robot {
+public class ActionRobot {
 
     DcMotorEx leftFront, leftBack, rightBack, rightFront, DRFBLeft, DRFBRight, intake;
     Servo baseLeft, baseRight, topLeft, topRight, wrist, claw, intakeLeft, intakeRight, launcher;
@@ -99,6 +105,45 @@ public class Robot {
         intake.setPower(power);
     }
 
+    public void setIntakeUp() {
+        intakeLeft.setPosition(INTAKE_UP);
+        intakeRight.setPosition(1 - (INTAKE_UP - INTAKE_SERVO_OFFSET));
+    }
+
+    public void setIntakeDown() {
+        intakeLeft.setPosition(INTAKE_DOWN);
+        intakeRight.setPosition(1 - (INTAKE_DOWN - INTAKE_SERVO_OFFSET));
+    }
+
+    public void powerDRFB(double power) {
+        DRFBLeft.setPower(power);
+        DRFBRight.setPower(power);
+    }
+
+    public int getDRFBPosition() {
+        return DRFBRight.getCurrentPosition();
+    }
+
+    public void liftToAutoHeight() {
+        while (getDRFBPosition() < 200) {
+            powerDRFB(0.7);
+        }
+    }
+
+    public void lower() {
+        while (getDRFBPosition() > 100) {
+            powerDRFB(-0.05);
+        }
+    }
+
+    public void setClawClosed() {
+        claw.setPosition(CLAW_CLOSED);
+    }
+
+    public void setClawOpen() {
+        claw.setPosition(CLAW_OPEN);
+    }
+
     public void moveBase(double position) {
         baseLeft.setPosition(position);
         baseRight.setPosition(1 - position);
@@ -113,25 +158,8 @@ public class Robot {
         wrist.setPosition(position);
     }
 
-    public void setClawClosed() {
-        claw.setPosition(CLAW_CLOSED);
-    }
-
-    public void setClawOpen() {
-        claw.setPosition(CLAW_OPEN);
-    }
-
     public void setClawScoreOpen() {
         claw.setPosition(CLAW_SCORE_OPEN);
-    }
-
-    public void powerDRFB(double power) {
-        DRFBLeft.setPower(power);
-        DRFBRight.setPower(power);
-    }
-
-    public int getDRFBPosition() {
-        return DRFBRight.getCurrentPosition();
     }
 
     public void setRetracted() {
@@ -164,25 +192,82 @@ public class Robot {
         moveWrist(SCORING_IN_WRIST);
     }
 
-    public void setIntakeUp() {
-        intakeLeft.setPosition(INTAKE_UP);
-        intakeRight.setPosition(1 - (INTAKE_UP - INTAKE_SERVO_OFFSET));
-    }
+    private class Transfer implements Action {
+        boolean init = false;
 
-    public void setIntakeDown() {
-        intakeLeft.setPosition(INTAKE_DOWN);
-        intakeRight.setPosition(1 - (INTAKE_DOWN - INTAKE_SERVO_OFFSET));
-    }
+        int state = 0;
+        ElapsedTime timer = new ElapsedTime();
 
-    public void liftToAutoHeight() {
-        while (getDRFBPosition() < 200) {
-            powerDRFB(0.7);
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (!init) {
+                timer.reset();
+                init = true;
+            }
+
+            switch (state) {
+                case 0:
+                    setClawOpen();
+
+                    if (timer.time() < 0.225) {
+                        break;
+                    }
+
+                    setRetractedLowered();
+
+                    timer.reset();
+                    state = 1;
+
+                    break;
+                case 1:
+                    if (timer.time() < 0.45) {
+                        break;
+                    }
+
+                    setClawClosed();
+                    timer.reset();
+                    state = 2;
+                case 2:
+                    if (timer.time() < 0.2) {
+                        break;
+                    }
+
+                    setRetracted();
+                    return false;
+            }
+
+            return true;
         }
     }
+    public Action transfer() {
+        return new Transfer();
+    }
 
-    public void lower() {
-        while (getDRFBPosition() > 100) {
-            powerDRFB(-0.05);
+    private class Deposit implements Action {
+        boolean init = false;
+
+        ElapsedTime timer = new ElapsedTime();
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (!init) {
+                timer.reset();
+                init = true;
+            }
+
+            if (timer.time() < 0.5) {
+                setRetractedUp();
+            } else {
+                moveTop(0.65);
+                moveWrist(0.5);
+                moveBase(0.14);
+                return false;
+            }
+
+            return true;
         }
+    }
+    public Action deposit() {
+        return new Deposit();
     }
 }

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes.autonomous.red;
+package org.firstinspires.ftc.teamcode.opmodes.oldauto.red;
 
 
 import com.acmerobotics.roadrunner.Action;
@@ -6,14 +6,16 @@ import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.common.Robot;
 import org.firstinspires.ftc.teamcode.common.vision.PropCamera;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 
-@Autonomous(name = "Red WING LIFTED \uD83E\uDD91 Center Park", group = "red")
-public class RedWingCenterParkLifted extends LinearOpMode {
+@Disabled
+@Autonomous(name = "Red WING \uD83E\uDD91 Center Park", group = "red")
+public class RedWingCenterPark extends LinearOpMode {
 
     MecanumDrive drive;
     Robot robot;
@@ -50,10 +52,10 @@ public class RedWingCenterParkLifted extends LinearOpMode {
                 .build();
 
         Action act03 = drive.actionBuilder(new Pose2d(42, -29, Math.toRadians(0)))
-                .strafeTo(new Vector2d(48.5, -29))
+                .strafeTo(new Vector2d(47.5, -29))
                 .build();
 
-        Action act04 = drive.actionBuilder(new Pose2d(48.5, -29, Math.toRadians(0)))
+        Action act04 = drive.actionBuilder(new Pose2d(47.5, -29, Math.toRadians(0)))
                 .strafeTo(new Vector2d(42, -29))
                 .build();
 
@@ -74,10 +76,10 @@ public class RedWingCenterParkLifted extends LinearOpMode {
                 .build();
 
         Action act13 = drive.actionBuilder(new Pose2d(42, -36, Math.toRadians(0)))
-                .strafeTo(new Vector2d(48.5, -36))
+                .strafeTo(new Vector2d(47.5, -36))
                 .build();
 
-        Action act14 = drive.actionBuilder(new Pose2d(48.5, -36, Math.toRadians(0)))
+        Action act14 = drive.actionBuilder(new Pose2d(47.5, -36, Math.toRadians(0)))
                 .strafeTo(new Vector2d(42, -36))
                 .build();
 
@@ -93,15 +95,15 @@ public class RedWingCenterParkLifted extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(-47,-50), 0)
                 .strafeTo(new Vector2d(-37, -60))
                 .strafeTo(new Vector2d(25, -60))
-                .strafeTo(new Vector2d(42, -41))
+                .strafeTo(new Vector2d(42, -42.5))
                 .build();
 
-        Action act23 = drive.actionBuilder(new Pose2d(42, -41, Math.toRadians(0)))
-                .strafeTo(new Vector2d(48.5, -41))
+        Action act23 = drive.actionBuilder(new Pose2d(42, -42.5, Math.toRadians(0)))
+                .strafeTo(new Vector2d(47.5, -42.5))
                 .build();
 
-        Action act24 = drive.actionBuilder(new Pose2d(48.5, -41, Math.toRadians(0)))
-                .strafeTo(new Vector2d(42, -41))
+        Action act24 = drive.actionBuilder(new Pose2d(47.5, -42.5, Math.toRadians(0)))
+                .strafeTo(new Vector2d(42, -42.5))
                 .build();
 
         Action act25 = drive.actionBuilder(new Pose2d(42, -36, Math.toRadians(0)))
@@ -166,8 +168,6 @@ public class RedWingCenterParkLifted extends LinearOpMode {
         sleep(500);
         robot.moveBase(0.14);
         sleep(1000);
-        robot.liftToAutoHeight();
-        robot.powerDRFB(0.15);
 
         if (randomization == 0) {
             Actions.runBlocking(act03);
@@ -197,9 +197,6 @@ public class RedWingCenterParkLifted extends LinearOpMode {
         } else {
             Actions.runBlocking(act25);
         }
-
-        robot.lower();
-        robot.powerDRFB(0);
 
         camera.stopStreaming();
     }
