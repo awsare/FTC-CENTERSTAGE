@@ -39,11 +39,11 @@ public class BlueBackdrop extends LinearOpMode {
         driver = new Gamepad();
         operator = new Gamepad();
 
-        gamepad1.setLedColor(0, 0, 255, Gamepad.LED_DURATION_CONTINUOUS);
-        gamepad2.setLedColor(255, 255, 255, Gamepad.LED_DURATION_CONTINUOUS);
+        setDefault();
 
         robot.setClawClosed();
-        sleep(3000);
+        robot.setIntakeUp();
+        sleep(2000);
         robot.setRetracted();
         robot.moveBase(0.5);
 
@@ -151,7 +151,8 @@ public class BlueBackdrop extends LinearOpMode {
 
         waitForStart();
 
-        robot.setIntakeDown();
+        setPurple();
+
         robot.moveBase(0);
         robot.moveTop(0.5);
         robot.moveWrist(0.485);
@@ -169,6 +170,8 @@ public class BlueBackdrop extends LinearOpMode {
         robot.setClawClosed();
         robot.setRetracted();
 
+        setDefault();
+
         if (randomization == 0) {
             Actions.runBlocking(act02);
         } else if (randomization == 1) {
@@ -176,6 +179,8 @@ public class BlueBackdrop extends LinearOpMode {
         } else {
             Actions.runBlocking(act22);
         }
+
+        setYellow();
 
         if (randomization == 0) {
             Actions.runBlocking(act03);
@@ -195,6 +200,8 @@ public class BlueBackdrop extends LinearOpMode {
         } else {
             Actions.runBlocking(act24);
         }
+
+        setDefault();
 
         robot.setRetracted();
 
@@ -217,5 +224,19 @@ public class BlueBackdrop extends LinearOpMode {
         }
 
         camera.stopStreaming();
+    }
+
+    void setDefault() {
+        gamepad1.setLedColor(0, 0, 255, Gamepad.LED_DURATION_CONTINUOUS);
+        gamepad2.setLedColor(255, 255, 255, Gamepad.LED_DURATION_CONTINUOUS);
+    }
+
+    void setPurple() {
+        gamepad1.setLedColor(120, 0, 120, Gamepad.LED_DURATION_CONTINUOUS);
+        gamepad2.setLedColor(120, 0, 120, Gamepad.LED_DURATION_CONTINUOUS);
+    }
+    void setYellow() {
+        gamepad1.setLedColor(255, 255, 0, Gamepad.LED_DURATION_CONTINUOUS);
+        gamepad2.setLedColor(255, 255, 0, Gamepad.LED_DURATION_CONTINUOUS);
     }
 }
