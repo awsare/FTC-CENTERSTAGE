@@ -20,7 +20,7 @@ public class ActionRobot {
     Servo baseLeft, baseRight, topLeft, topRight, wrist, claw, intakeLeft, intakeRight, launcher;
 
     public static double RETRACTED_BASE = 0.65;
-    public static double RETRACTED_TOP = 0.19;
+    public static double RETRACTED_TOP = 0.17;
     public static double RETRACTED_WRIST = 0.325;
 
     public static double RETRACTED_UP_BASE = 0.5;
@@ -28,8 +28,8 @@ public class ActionRobot {
     public static double RETRACTED_UP_WRIST = 0.325;
 
     public static double RETRACTED_LOWERED_BASE = 0.7;
-    public static double RETRACTED_LOWERED_TOP = 0.12;
-    public static double RETRACTED_LOWERED_WRIST = 0.4;
+    public static double RETRACTED_LOWERED_TOP = 0.11;
+    public static double RETRACTED_LOWERED_WRIST = 0.41;
 
     public static double SCORING_BASE = 0.0;
     public static double SCORING_TOP = 0.99;
@@ -43,8 +43,8 @@ public class ActionRobot {
     public static double CLAW_SCORE_OPEN = 0.34;
     public static double CLAW_CLOSED = 0.485;
 
-    public static double INTAKE_UP = 0.6375;
-    public static double INTAKE_DOWN = 0.65;
+    public static double INTAKE_UP = 0.64;
+    public static double INTAKE_DOWN = 0.6625;
     public static double INTAKE_SERVO_OFFSET = 0.18;
 
     public static double LAUNCHER_SET = 1.0;

@@ -42,7 +42,7 @@ public class BlueBackdrop extends LinearOpMode {
         setDefault();
 
         robot.setClawClosed();
-        robot.setIntakeUp();
+        robot.setIntakeDown();
         sleep(2000);
         robot.setRetracted();
         robot.moveBase(0.5);
@@ -85,23 +85,23 @@ public class BlueBackdrop extends LinearOpMode {
         Action act12 = drive.actionBuilder(new Pose2d(17, 39, Math.toRadians(-90)))
                 .afterTime(0.45, robot.transfer())
                 .afterTime(1.5, robot.deposit())
-                .strafeToLinearHeading(new Vector2d(41, 40), 0)
+                .strafeToLinearHeading(new Vector2d(41, 41), 0)
                 .build();
 
-        Action act13 = drive.actionBuilder(new Pose2d(41, 40, 0))
-                .strafeTo(new Vector2d(44, 40))
+        Action act13 = drive.actionBuilder(new Pose2d(41, 41, 0))
+                .strafeTo(new Vector2d(44, 41))
                 .build();
 
-        Action act14 = drive.actionBuilder(new Pose2d(44, 40, 0))
-                .strafeTo(new Vector2d(41, 40))
+        Action act14 = drive.actionBuilder(new Pose2d(44, 41, 0))
+                .strafeTo(new Vector2d(41, 41))
                 .build();
 
-        Action act151 = drive.actionBuilder(new Pose2d(41, 40, 0))
+        Action act151 = drive.actionBuilder(new Pose2d(41, 41, 0))
                 .strafeTo(new Vector2d(42, 65))
                 .strafeTo(new Vector2d(55, 65))
                 .build();
 
-        Action act152 = drive.actionBuilder(new Pose2d(41, 40, 0))
+        Action act152 = drive.actionBuilder(new Pose2d(41, 41, 0))
                 .strafeTo(new Vector2d(42, 14))
                 .strafeTo(new Vector2d(55, 14))
                 .build();
@@ -135,17 +135,16 @@ public class BlueBackdrop extends LinearOpMode {
                 .build();
 
         while (opModeInInit()) {
-            if (driver.cross) {
+            if (gamepad1.cross) {
                 park = "center";
             }
-            if (driver.circle) {
+            if (gamepad1.circle) {
                 park = "wall";
             }
 
             randomization = camera.getRandomization();
             telemetry.addData("Randomization", randomization);
             telemetry.addData("Park Side", park);
-            telemetry.addData("Input", driver.left_stick_x);
             telemetry.update();
         }
 
@@ -227,7 +226,7 @@ public class BlueBackdrop extends LinearOpMode {
     }
 
     void setDefault() {
-        gamepad1.setLedColor(0, 0, 255, Gamepad.LED_DURATION_CONTINUOUS);
+        gamepad1.setLedColor(255, 255, 255, Gamepad.LED_DURATION_CONTINUOUS);
         gamepad2.setLedColor(255, 255, 255, Gamepad.LED_DURATION_CONTINUOUS);
     }
 

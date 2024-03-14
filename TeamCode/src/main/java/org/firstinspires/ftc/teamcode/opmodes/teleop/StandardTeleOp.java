@@ -12,12 +12,12 @@ import org.firstinspires.ftc.teamcode.common.Robot;
 @TeleOp(name = "TeleOp \uD83C\uDFAE")
 public class StandardTeleOp extends LinearOpMode {
 
-    public static double LOW_SPEED = 0.375;
+    public static double LOW_SPEED = 0.35;
     public static double MEDIUM_SPEED = 0.7;
     public static double HIGH_SPEED = 1.0;
     public static double ROTATION_WEIGHT = 0.5;
 
-    public static double INTAKE_POWER = 0.6;
+    public static double INTAKE_POWER = 0.675;
     public static double OUTTAKE_POWER = 0.8;
 
     public static double DRFB_UP_REDUCTION = 0.7;
@@ -64,7 +64,7 @@ public class StandardTeleOp extends LinearOpMode {
         secondStateTime = new ElapsedTime();
         loopTime = new ElapsedTime();
 
-        gamepad1.setLedColor(0, 0, 255, Gamepad.LED_DURATION_CONTINUOUS);
+        gamepad1.setLedColor(255, 255, 255, Gamepad.LED_DURATION_CONTINUOUS);
         gamepad2.setLedColor(255, 255, 255, Gamepad.LED_DURATION_CONTINUOUS);
 
         telemetry.addLine("lock in");
@@ -149,6 +149,9 @@ public class StandardTeleOp extends LinearOpMode {
         previousOperator.copy(operator);
         driver.copy(gamepad1);
         operator.copy(gamepad2);
+
+        gamepad1.setLedColor(255, 255, 255, Gamepad.LED_DURATION_CONTINUOUS);
+        gamepad2.setLedColor(255, 255, 255, Gamepad.LED_DURATION_CONTINUOUS);
     }
 
     private void updateTelemetry() {

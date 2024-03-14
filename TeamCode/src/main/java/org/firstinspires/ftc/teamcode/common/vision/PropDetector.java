@@ -13,8 +13,8 @@ import org.openftc.easyopencv.OpenCvPipeline;
 @Config
 public class PropDetector extends OpenCvPipeline {
 
-    public static int centerXLeft = 350;
-    public static int centerYLeft = 250;
+    public static int centerXLeft = 310;
+    public static int centerYLeft = 260;
 
     public static int centerXRight = 170;
     public static int centerYRight = 280;
@@ -28,7 +28,7 @@ public class PropDetector extends OpenCvPipeline {
     public static int boxSize = 65;
 
     public static int lowRedH = 0;
-    public static int lowRedS = 120;
+    public static int lowRedS = 100;
     public static int lowRedV = 50;
 
     public static int highRedH = 255;

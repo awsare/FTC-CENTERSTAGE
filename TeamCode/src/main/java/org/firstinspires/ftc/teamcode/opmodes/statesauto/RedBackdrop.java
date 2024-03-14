@@ -68,13 +68,13 @@ public class RedBackdrop extends LinearOpMode {
                 .build();
 
         Action act051 = drive.actionBuilder(new Pose2d(42, -30, 0))
-                .strafeTo(new Vector2d(47, -14))
-                .strafeTo(new Vector2d(55, -14))
+                .strafeTo(new Vector2d(47, -11))
+                .strafeTo(new Vector2d(58, -11))
                 .build();
 
         Action act052 = drive.actionBuilder(new Pose2d(42, -30, 0))
-                .strafeTo(new Vector2d(47, -63))
-                .strafeTo(new Vector2d(55, -63))
+                .strafeTo(new Vector2d(47, -61.5))
+                .strafeTo(new Vector2d(58, -61.5))
                 .build();
 
         Action act11 = drive.actionBuilder(drive.pose)
@@ -96,13 +96,13 @@ public class RedBackdrop extends LinearOpMode {
                 .build();
 
         Action act151 = drive.actionBuilder(new Pose2d(42, -37.5, 0))
-                .strafeTo(new Vector2d(47, -14))
-                .strafeTo(new Vector2d(55, -14))
+                .strafeTo(new Vector2d(47, -11))
+                .strafeTo(new Vector2d(58, -11))
                 .build();
 
         Action act152 = drive.actionBuilder(new Pose2d(42, -37.5, 0))
-                .strafeTo(new Vector2d(47, -63))
-                .strafeTo(new Vector2d(55, -63))
+                .strafeTo(new Vector2d(47, -61.5))
+                .strafeTo(new Vector2d(58, -61.5))
                 .build();
 
         Action act21 = drive.actionBuilder(drive.pose)
@@ -125,27 +125,26 @@ public class RedBackdrop extends LinearOpMode {
                 .build();
 
         Action act251 = drive.actionBuilder(new Pose2d(42, -43, 0))
-                .strafeTo(new Vector2d(47, -14))
-                .strafeTo(new Vector2d(55, -14))
+                .strafeTo(new Vector2d(47, -11))
+                .strafeTo(new Vector2d(58, -11))
                 .build();
 
         Action act252 = drive.actionBuilder(new Pose2d(42, -43, 0))
-                .strafeTo(new Vector2d(47, -63))
-                .strafeTo(new Vector2d(55, -63))
+                .strafeTo(new Vector2d(47, -61.5))
+                .strafeTo(new Vector2d(58, -61.5))
                 .build();
 
         while (opModeInInit()) {
-            if (driver.cross) {
+            if (gamepad1.cross) {
                 park = "center";
             }
-            if (driver.circle) {
+            if (gamepad1.circle) {
                 park = "wall";
             }
 
             randomization = camera.getRandomization();
             telemetry.addData("Randomization", randomization);
             telemetry.addData("Park Side", park);
-            telemetry.addData("Input", driver.left_stick_x);
             telemetry.update();
         }
 
@@ -226,7 +225,7 @@ public class RedBackdrop extends LinearOpMode {
     }
 
     void setDefault() {
-        gamepad1.setLedColor(0, 0, 255, Gamepad.LED_DURATION_CONTINUOUS);
+        gamepad1.setLedColor(255, 255, 255, Gamepad.LED_DURATION_CONTINUOUS);
         gamepad2.setLedColor(255, 255, 255, Gamepad.LED_DURATION_CONTINUOUS);
     }
 
