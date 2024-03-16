@@ -17,7 +17,7 @@ public class StandardTeleOp extends LinearOpMode {
     public static double HIGH_SPEED = 1.0;
     public static double ROTATION_WEIGHT = 0.5;
 
-    public static double INTAKE_POWER = 0.675;
+    public static double INTAKE_POWER = 0.7;
     public static double OUTTAKE_POWER = 0.8;
 
     public static double DRFB_UP_REDUCTION = 0.7;
