@@ -36,7 +36,7 @@ public class PropDetector extends OpenCvPipeline {
     public static int highRedV = 255;
 
     public static int lowBlueH = 0;
-    public static int lowBlueS = 40;
+    public static int lowBlueS = 120;
     public static int lowBlueV = 20;
 
     public static int highBlueH = 255;

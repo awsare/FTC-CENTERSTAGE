@@ -50,23 +50,23 @@ public class RedWing extends LinearOpMode {
                 .turnTo(0)
                 .strafeTo(new Vector2d(-37, -60))
                 .strafeTo(new Vector2d(25, -60))
-                .strafeTo(new Vector2d(42, -28))
+                .strafeTo(new Vector2d(42, -29))
                 .build();
 
-        Action act03 = drive.actionBuilder(new Pose2d(42, -28, Math.toRadians(0)))
-                .strafeTo(new Vector2d(47.5, -28))
+        Action act03 = drive.actionBuilder(new Pose2d(42, -29, Math.toRadians(0)))
+                .strafeTo(new Vector2d(47.5, -29))
                 .build();
 
-        Action act04 = drive.actionBuilder(new Pose2d(47.5, -28, Math.toRadians(0)))
-                .strafeTo(new Vector2d(42, -28))
+        Action act04 = drive.actionBuilder(new Pose2d(47.5, -29, Math.toRadians(0)))
+                .strafeTo(new Vector2d(42, -29))
                 .build();
 
-        Action act051 = drive.actionBuilder(new Pose2d(42, -28, Math.toRadians(0)))
+        Action act051 = drive.actionBuilder(new Pose2d(42, -29, Math.toRadians(0)))
                 .strafeTo(new Vector2d(47, -11))
                 .strafeTo(new Vector2d(58, -11))
                 .build();
 
-        Action act052 = drive.actionBuilder(new Pose2d(42, -28, Math.toRadians(0)))
+        Action act052 = drive.actionBuilder(new Pose2d(42, -29, Math.toRadians(0)))
                 .strafeTo(new Vector2d(47, -61.5))
                 .strafeTo(new Vector2d(58, -61.5))
                 .build();
@@ -80,23 +80,23 @@ public class RedWing extends LinearOpMode {
                 .turnTo(0)
                 .strafeTo(new Vector2d(-37, -60))
                 .strafeTo(new Vector2d(25, -60))
-                .strafeTo(new Vector2d(42, -36.5))
+                .strafeTo(new Vector2d(42, -36.75))
                 .build();
 
-        Action act13 = drive.actionBuilder(new Pose2d(42, -36.5, Math.toRadians(0)))
-                .strafeTo(new Vector2d(47.5, -36.5))
+        Action act13 = drive.actionBuilder(new Pose2d(42, -36.75, Math.toRadians(0)))
+                .strafeTo(new Vector2d(47.5, -36.75))
                 .build();
 
-        Action act14 = drive.actionBuilder(new Pose2d(47.5, -36.5, Math.toRadians(0)))
-                .strafeTo(new Vector2d(42, -36.5))
+        Action act14 = drive.actionBuilder(new Pose2d(47.5, -36.75, Math.toRadians(0)))
+                .strafeTo(new Vector2d(42, -36.75))
                 .build();
 
-        Action act151 = drive.actionBuilder(new Pose2d(42, -36.5, Math.toRadians(0)))
+        Action act151 = drive.actionBuilder(new Pose2d(42, -36.75, Math.toRadians(0)))
                 .strafeTo(new Vector2d(47, -11))
                 .strafeTo(new Vector2d(58, -11))
                 .build();
 
-        Action act152 = drive.actionBuilder(new Pose2d(42, -36.5, Math.toRadians(0)))
+        Action act152 = drive.actionBuilder(new Pose2d(42, -36.75, Math.toRadians(0)))
                 .strafeTo(new Vector2d(47, -61.5))
                 .strafeTo(new Vector2d(58, -61.5))
                 .build();

@@ -57,23 +57,23 @@ public class BlueBackdrop extends LinearOpMode {
                 .afterTime(0.45, robot.transfer())
                 .afterTime(1.5, robot.deposit())
                 .strafeTo(new Vector2d(30, 50))
-                .strafeToLinearHeading(new Vector2d(37, 47), 0)
+                .strafeToLinearHeading(new Vector2d(37, 46), 0)
                 .build();
 
-        Action act03 = drive.actionBuilder(new Pose2d(37, 47, 0))
-                .strafeTo(new Vector2d(44, 47))
+        Action act03 = drive.actionBuilder(new Pose2d(37, 46, 0))
+                .strafeTo(new Vector2d(44, 46))
                 .build();
 
-        Action act04 = drive.actionBuilder(new Pose2d(44, 47, 0))
-                .strafeTo(new Vector2d(37, 47))
+        Action act04 = drive.actionBuilder(new Pose2d(44, 46, 0))
+                .strafeTo(new Vector2d(37, 46))
                 .build();
 
-        Action act051 = drive.actionBuilder(new Pose2d(37, 47, 0))
+        Action act051 = drive.actionBuilder(new Pose2d(37, 46, 0))
                 .strafeTo(new Vector2d(42, 65))
                 .strafeTo(new Vector2d(55, 65))
                 .build();
 
-        Action act052 = drive.actionBuilder(new Pose2d(37, 47, 0))
+        Action act052 = drive.actionBuilder(new Pose2d(37, 46, 0))
                 .strafeTo(new Vector2d(42, 14))
                 .strafeTo(new Vector2d(55, 14))
                 .build();
